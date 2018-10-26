@@ -1,0 +1,26 @@
+﻿@model WIShipwrecks.Models.PropulsionType
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Propulsion Type</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PropulsionType1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PropulsionType1)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

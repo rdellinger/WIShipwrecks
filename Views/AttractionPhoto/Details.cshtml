@@ -1,0 +1,58 @@
+﻿@model WIShipwrecks.Models.AttractionPhoto
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Attraction Photo</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Image)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Image)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Thumb)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Thumb)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Caption)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Caption)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PhotoSource)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PhotoSource)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Attraction.AttractionName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Attraction.AttractionName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

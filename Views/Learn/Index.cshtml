@@ -1,0 +1,178 @@
+﻿@{
+    Layout = "~/Views/Shared/_Topic.cshtml";
+    ViewBag.Title = "Learn";
+}
+
+
+<article id=anchor3 class="content light">
+    <header class="title one">Learn</header>
+    <div class="spacer"></div>
+    <div class="title two">Wisconsin's shipwrecks and maritime attractions are tangible reminders of how important water has been in shaping the state's history and culture.  Discover more about how underwater archaeologists unearth this lost history and learn about the research that is currently underway.</div>
+
+    <section class="team-box">
+        <div class="s-container team-grid">
+            <div class="t-list">
+
+                @*Underwater Archaeology*@
+                <div class="t-element hidden-xs hidden-sm">
+
+                    <div class="t-photo">
+                        <div class="image-hover-overlay"></div>
+                        <a class="f-category" href="#"></a>
+                        <div class="portfolio-meta">
+                            <span class="learnlink">
+                                @Html.ActionLink("Searching for Wrecks", "SearchingForShipwrecks") <br />
+                                @Html.ActionLink("Documenting Shipwrecks", "DocumentingShipwrecks") <br />
+                                @Html.ActionLink("Working Underwater", "WorkingUnderwater") <br />
+                                @Html.ActionLink("Shipwreck Conservation", "ShipwreckConservation")
+                            </span>
+                        </div>
+                        <img src="~/Images/Learn/learn_archaeology.jpg" alt='img'>
+                    </div>
+
+                    <div class="t-data">
+                        <div class="t-name">Underwater Archaeology</div>
+                    </div>
+
+                </div>
+
+
+
+                @*About Shipwrecks*@
+                <div class="t-element hidden-xs hidden-sm">
+
+                    <div class="t-photo">
+                        <div class="image-hover-overlay"></div>
+                        <a class="f-category" href="#"></a>
+                        <div class="portfolio-meta">
+                            <span class="learnlink">
+                                @Html.ActionLink("Exploring Shipwrecks", "ExploringShipwrecks") <br />
+                                @Html.ActionLink("Shipwrecks Everywhere", "ShipwrecksEverywhere") <br />
+                                @Html.ActionLink("Lighthouses and Lifesaving", "LighthousesAndLifesaving") <br />
+                                @Html.ActionLink("Death's Door", "DeathsDoor") <br />
+                                @Html.ActionLink("Info for Divers", "InfoForDivers")
+                            </span>
+                        </div>
+                        <img src="~/Images/Learn/learn_about.jpg" alt='img'>
+                    </div>
+
+                    <div class="t-data">
+                        <div class="t-name">About Shipwrecks</div>
+                    </div>
+
+                </div>
+
+
+
+
+                @*Research*@
+                <div class="t-element hidden-xs hidden-sm">
+
+                    <div class="t-photo">
+                        <div class="image-hover-overlay"></div>
+                        <a class="f-category" href="#"></a>
+                        <div class="portfolio-meta">
+                            <span class="learnlink">
+                                @Html.ActionLink("Current Research", "CurrentResearch") <br />
+                                @Html.ActionLink("Technical Field Reports", "TechnicalFieldReports") <br />
+                                @Html.ActionLink("Calendar", "Calendar")
+                            </span>
+                        </div>
+                        <img src="~/Images/Learn/learn_research.jpg" alt='img'>
+                    </div>
+
+                    <div class="t-data">
+                        <div class="t-name">Research</div>
+                    </div>
+
+                </div>
+
+
+
+                @*More Resources*@
+                <div class="t-element hidden-xs hidden-sm">
+
+                    <div class="t-photo">
+                        <div class="image-hover-overlay"></div>
+                        <a class="f-category" href="#"></a>
+                        <div class="portfolio-meta">
+                            <span class="learnlink">
+                                @Html.ActionLink("Dive Guides", "DiveGuides") <br />
+                                @Html.ActionLink("Glossary", "Index", "Glossary") <br />
+                                @Html.ActionLink("Links to Other Sites", "LinksToOtherSites") <br />
+                                <a href="http://www.geocaching.com/seek/nearest.aspx?u=WiscMaritime&submit4=Go">Maritime Geocaches</a> <br />
+                                @Html.ActionLink("Newspaper Search", "Index", "NewsArticle")
+                            </span>
+                        </div>
+                        <img src="~/Images/Learn/learn_resources.jpg" alt='img'>
+                    </div>
+
+                    <div class="t-data">
+                        <div class="t-name">More Resources</div>
+                    </div>
+
+                </div>
+
+
+
+
+                @*Mobile Version*@
+                <div class="hidden-md hidden-lg">
+
+
+                    <div class="caption" style="margin-bottom: 20px;">
+                        <div class="t-name">Underwater Archaeology</div>
+                        @Html.ActionLink("Searching for Wrecks", "SearchingForShipwrecks") <br />
+                        @Html.ActionLink("Documenting Shipwrecks", "DocumentingShipwrecks") <br />
+                        @Html.ActionLink("Working Underwater", "WorkingUnderwater") <br />
+                        @Html.ActionLink("Shipwreck Conservation", "ShipwreckConservation")
+                    </div>
+
+
+                    <div class="caption hidden-lg" style="margin-bottom: 20px;">
+                        <div class="t-name">About Shipwrecks</div>
+                        @Html.ActionLink("Exploring Shipwrecks", "ExploringShipwrecks") <br />
+                        @Html.ActionLink("Shipwrecks Everywhere", "ShipwrecksEverywhere") <br />
+                        @Html.ActionLink("Lighthouses and Lifesaving", "LighthousesAndLifesaving") <br />
+                        @Html.ActionLink("Death's Door", "DeathsDoor") <br />
+                        @Html.ActionLink("Info for Divers", "InfoForDivers")
+                    </div>
+
+                    <div class="caption hidden-lg" style="margin-bottom: 20px;">
+                        <div class="t-name">Research</div>
+                        @Html.ActionLink("Current Research", "CurrentResearch") <br />
+                        @Html.ActionLink("Technical Field Reports", "TechnicalFieldReports") <br />
+                        @Html.ActionLink("Calendar", "Calendar")
+                    </div>
+
+                    <div class="caption hidden-lg" style="margin-bottom: 20px;">
+                        <div class="t-name">More Resources</div>
+                        @Html.ActionLink("Dive Guides", "DiveGuides") <br />
+                        @Html.ActionLink("Glossary", "Index", "Glossary") <br />
+                        @Html.ActionLink("Links to Other Sites", "LinksToOtherSites") <br />
+                        <a href="http://www.geocaching.com/seek/nearest.aspx?u=WiscMaritime&ex=0&cFilter=9a79e6ce-3344-409c-bbe9-496530baf758&children=n">Maritime Geocaches</a> <br />
+                        @Html.ActionLink("Newspaper Search", "Index", "NewsArticle")
+                    </div>
+
+                </div>
+
+
+
+
+
+            </div>
+        </div>
+    </section>
+
+    <div class="clearfix"></div>
+
+</article>
+
+
+
+
+@*@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/solido")*@
+
+@Scripts.Render("~/bundles/bootstrap")
+@Styles.Render("~/Content/bootstrapcss")

@@ -1,0 +1,110 @@
+﻿@model IEnumerable<WIShipwrecks.Models.Vessel>
+
+@{
+    Layout = "~/Views/Shared/_List.cshtml";
+    ViewBag.Title = "Shipwrecks - Mid Lake Michigan";
+}
+
+<header class="title one"><span style="color:#fd853f;">Shipwrecks</span> Mid Lake Michigan</header>
+<div class="spacer"></div>
+
+<div style="margin-top:30px; text-align: center;"><a href="@Url.Action("MidLakeMichigan", "Map")" style="text-decoration: underline; color: #4CDDF3;">View Map<span class="glyphicon glyphicon-map-marker" style="margin-left: 5px;"></span></a></div>
+
+<p>
+
+    <br />
+
+    @using (Html.BeginForm("MidLakeMichigan", "Vessel", FormMethod.Get, new { @class = "form-inline", role = "form" }))
+    {
+        <div class="form-group col-lg-4 col-md-4 col-sm-4">
+            <label class="sr-only" for="SearchString">Vessel Name</label>
+            @Html.TextBox("SearchString", "", new { @class = "form-control", placeholder = "Vessel name", type = "text" })
+        </div>
+
+        <div class="form-group col-lg-2 col-md-2 col-sm-2">
+            <label class="sr-only" for="county">County</label>
+            @Html.DropDownList("county", null, "All Counties", new { @class = "form-control" })
+        </div>
+
+        <div class="form-group col-lg-2 col-md-2 col-sm-2">
+            <label class="sr-only" for="nearestCity">Nearest City</label>
+            @Html.DropDownList("nearestCity", null, "All Cities", new { @class = "form-control" })
+        </div>
+
+        <div class="form-group col-lg-1 col-md-1 col-sm-2">
+            <button type="submit" value="Search" id="vesselSearchButton" class="btn btn-default btn-sm btn-info">
+                <span class="glyphicon glyphicon-search"></span> Search
+            </button>
+        </div>
+
+        <div class="form-group col-lg-2 col-md-2 col-sm-2">
+            @Html.ActionLink("View All", "MidLakeMichigan")
+        </div>
+    }
+
+    <br />
+    <br />
+
+</p>
+
+
+    @*If there are any results, then show them*@
+    @if (Model.Count() > 0)
+    {
+
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.VesselName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.VesselTypeID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.BodyOfWaterID)
+                </th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td width="60%">
+                        <a href="@Url.Action("Details", "Vessel", new { id = item.ID, region = "MidLakeMichigan" })">
+                            @Html.DisplayFor(modelItem => item.VesselName)
+                        </a>
+
+                    </td>
+                    <td width="20%">
+                        @Html.DisplayFor(modelItem => item.VesselType.VesselType1)
+                    </td>
+                    <td width="20%">
+                        @Html.DisplayFor(modelItem => item.BodiesOfWater.BodyOfWater)
+                    </td>
+                </tr>
+            }
+
+        </table>
+
+    }
+
+    @*Otherwise, show the 'no records' message*@
+    else
+    {
+        <div style="margin: 40px 0 0 0;">Sorry, we couldn't find a vessel called <em>@Request.QueryString["SearchString"]</em> in <strong>Mid Lake Michigan</strong> that matches your search criteria.  Do you want to search <a href="~/vessel?SearchString=@Request.QueryString["SearchString"]">all of the shipwrecks</a>?</div>
+    }
+
+
+
+
+<div class="nav-pill">
+    <a href="@Url.Action("MidLakeMichigan", "Attraction")" style="text-decoration: none;">
+        <div class="btn-featured">View Attractions in this Region</div>
+    </a>
+</div>
+
+
+
+
+@section Scripts {
+    @Scripts.Render("~/Scripts/vessel.js")
+}

@@ -1,0 +1,713 @@
+﻿@model WIShipwrecks.Models.Vessel
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+
+<h4>@Html.DisplayTextFor(model => model.VesselName)</h4>
+<hr />
+
+@Html.ActionLink("< Back to List", "Index")
+
+<br /><br />
+
+@* --- Nav tabs --- *@
+<ul class="nav nav-tabs">
+    <li class="active"><a href="#description" data-toggle="tab">Description</a></li>
+    <li><a href="#location" data-toggle="tab">Location</a></li>
+    <li><a href="#history" data-toggle="tab">History</a></li>
+    <li><a href="#images" data-toggle="tab">Images</a></li>
+</ul>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+
+    @* --- Content --- *@
+    <div class="tab-content">
+
+
+        @* --- Description --- *@
+        <div class="tab-pane active" id="description">
+
+            <div class="form-horizontal">
+                <br /><br />
+                @Html.ValidationSummary(true)
+
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.VesselName, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(model => model.VesselName, new { @class = "smalltextarea" })
+                        @Html.ValidationMessageFor(model => model.VesselName)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.VesselTypeID, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("VesselTypeID", "-- Select --")
+                        @Html.ValidationMessageFor(model => model.VesselTypeID)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Length, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Length)
+                        @Html.ValidationMessageFor(model => model.Length)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Breadth, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Breadth)
+                        @Html.ValidationMessageFor(model => model.Breadth)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.DepthOfHold, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.DepthOfHold)
+                        @Html.ValidationMessageFor(model => model.DepthOfHold)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.GrossTonnage, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.GrossTonnage)
+                        @Html.ValidationMessageFor(model => model.GrossTonnage)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.NetTonnage, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.NetTonnage)
+                        @Html.ValidationMessageFor(model => model.NetTonnage)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.OMTonnage, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.OMTonnage)
+                        @Html.ValidationMessageFor(model => model.OMTonnage)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.HullMaterialID, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("HullMaterialID", "-- Select --")
+                        @Html.ValidationMessageFor(model => model.HullMaterialID)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.PropulsionTypeID, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("PropulsionTypeID", "-- Select --")
+                        @Html.ValidationMessageFor(model => model.PropulsionTypeID)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.NumberOfMasts, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.NumberOfMasts)
+                        @Html.ValidationMessageFor(model => model.NumberOfMasts)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.RigTypeID, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("RigTypeID", "-- Select --")
+                        @Html.ValidationMessageFor(model => model.RigTypeID)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Engines, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(model => model.Engines, new { @class = "smalltextarea" })
+                        @Html.ValidationMessageFor(model => model.Engines)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Boilers, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(model => model.Boilers, new { @class = "smalltextarea" })
+                        @Html.ValidationMessageFor(model => model.Boilers)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ASINumber, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.ASINumber)
+                        @Html.ValidationMessageFor(model => model.ASINumber)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CodeNumber, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.CodeNumber)
+                        @Html.ValidationMessageFor(model => model.CodeNumber)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.RegistryNumber, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.RegistryNumber)
+                        @Html.ValidationMessageFor(model => model.RegistryNumber)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.NationalRegisterStatus, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("NationalRegisterStatusID", "-- Select --")
+                        @Html.ValidationMessageFor(model => model.NationalRegisterStatus)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.NationalRegisterStatusNotes, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(model => model.NationalRegisterStatusNotes, new { @class = "mediumtextarea" })
+                        @Html.ValidationMessageFor(model => model.NationalRegisterStatusNotes)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.YearListedNationalRegister, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.YearListedNationalRegister)
+                        @Html.ValidationMessageFor(model => model.YearListedNationalRegister)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ConditionDescription, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(model => model.ConditionDescription, new { @class = "mediumtextarea" })
+                        @Html.ValidationMessageFor(model => model.ConditionDescription)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.PercentVesselPresent, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("PercentVesselPresent", "-- Select --")
+                        @Html.ValidationMessageFor(model => model.PercentVesselPresent)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.IDAccuracy, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("IDAccuracy", "-- Select --")
+                        @Html.ValidationMessageFor(model => model.IDAccuracy)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.OwnerManagerAgencyID, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("OwnerManagerAgencyID", "-- Select --")
+                        @Html.ValidationMessageFor(model => model.OwnerManagerAgencyID)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.SturgeonBayStone, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("SturgeonBayStone", "-- Select --")
+                        @Html.ValidationMessageFor(model => model.SturgeonBayStone)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.LastModifiedBy, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DisplayTextFor(model => model.LastModifiedBy)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.LastModifiedDate, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DisplayTextFor(model => model.LastModifiedDate)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.HideRecord, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.HideRecord)
+                        @Html.ValidationMessageFor(model => model.HideRecord)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Save" class="btn btn-default" /> &nbsp;&nbsp; @Html.ActionLink("Cancel", "Index")
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+
+
+        @* --- Location --- *@
+        <div class="tab-pane" id="location">
+
+            <div class="form-horizontal">
+                <br /><br />
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.SiteName, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(model => model.SiteName, new { @class = "smalltextarea" })
+                        @Html.ValidationMessageFor(model => model.SiteName)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.HomePort, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(model => model.HomePort, new { @class = "smalltextarea" })
+                        @Html.ValidationMessageFor(model => model.HomePort)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.BodyOfWaterID, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("BodyOfWaterID", "-- Select --")
+                        @Html.ValidationMessageFor(model => model.BodyOfWaterID)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.TrailID, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("TrailID", "-- Select --")
+                        @Html.ValidationMessageFor(model => model.TrailID)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.County, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.County)
+                        @Html.ValidationMessageFor(model => model.County)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.NearestCity, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.NearestCity)
+                        @Html.ValidationMessageFor(model => model.NearestCity)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Submerged, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Submerged)
+                        @Html.ValidationMessageFor(model => model.Submerged)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.OnShoreline, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.OnShoreline)
+                        @Html.ValidationMessageFor(model => model.OnShoreline)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.DiveAccessible, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.DiveAccessible)
+                        @Html.ValidationMessageFor(model => model.DiveAccessible)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.HasWHSMooringBuoy, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.HasWHSMooringBuoy)
+                        @Html.ValidationMessageFor(model => model.HasWHSMooringBuoy)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.MooringBuoyInPlace, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.MooringBuoyInPlace)
+                        @Html.ValidationMessageFor(model => model.MooringBuoyInPlace)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.HasWHSDiveGuide, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.HasWHSDiveGuide)
+                        @Html.ValidationMessageFor(model => model.HasWHSDiveGuide)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.WreckThreatened, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.WreckThreatened)
+                        @Html.ValidationMessageFor(model => model.WreckThreatened)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.WaterDepth, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.WaterDepth)
+                        @Html.ValidationMessageFor(model => model.WaterDepth)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.PACNumber, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.PACNumber)
+                        @Html.ValidationMessageFor(model => model.PACNumber)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.LocationPotential, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("LocationPotential", "-- Select --")
+                        @Html.ValidationMessageFor(model => model.LocationPotential)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.TRS, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.TRS)
+                        @Html.ValidationMessageFor(model => model.TRS)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.AccessDirections, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(model => model.AccessDirections, new { @class = "mediumtextarea" })
+                        @Html.ValidationMessageFor(model => model.AccessDirections)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Latitude, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Latitude)
+                        @Html.ValidationMessageFor(model => model.Latitude)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Longitude, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Longitude)
+                        @Html.ValidationMessageFor(model => model.Longitude)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.HideLocationalInfo, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.HideLocationalInfo)
+                        @Html.ValidationMessageFor(model => model.HideLocationalInfo)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Save" class="btn btn-default" /> &nbsp;&nbsp; @Html.ActionLink("Cancel", "Index")
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+
+        @* --- History --- *@
+        <div class="tab-pane" id="history">
+
+            <div class="form-horizontal">
+                <br /><br />
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CasualtyDate, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.CasualtyDate)
+                        @Html.ValidationMessageFor(model => model.CasualtyDate)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.VesselAge, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.VesselAge)
+                        @Html.ValidationMessageFor(model => model.VesselAge)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Owners, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(model => model.Owners, new { @class = "smalltextarea" })
+                        @Html.ValidationMessageFor(model => model.Owners)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Master, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(model => model.Master, new { @class = "smalltextarea" })
+                        @Html.ValidationMessageFor(model => model.Master)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CargoDescription, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(model => model.CargoDescription, new { @class = "mediumtextarea" })
+                        @Html.ValidationMessageFor(model => model.CargoDescription)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.LivesLost, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.LivesLost)
+                        @Html.ValidationMessageFor(model => model.LivesLost)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.FormerNames, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(model => model.FormerNames, new { @class = "smalltextarea" })
+                        @Html.ValidationMessageFor(model => model.FormerNames)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.WhereBuilt, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(model => model.WhereBuilt, new { @class = "smalltextarea" })
+                        @Html.ValidationMessageFor(model => model.WhereBuilt)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Builder, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(model => model.Builder, new { @class = "smalltextarea" })
+                        @Html.ValidationMessageFor(model => model.Builder)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ContructionYear, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.ContructionYear)
+                        @Html.ValidationMessageFor(model => model.ContructionYear)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Culture, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("Culture", "-- Select --")
+                        @Html.ValidationMessageFor(model => model.Culture)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CulturalMaterial, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.CulturalMaterial)
+                        @Html.ValidationMessageFor(model => model.CulturalMaterial)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.DatingMethods, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("DatingMethods", "-- Select --")
+                        @Html.ValidationMessageFor(model => model.DatingMethods)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.SurveyDate, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.SurveyDate)
+                        @Html.ValidationMessageFor(model => model.SurveyDate)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.SurveyPrincipleInvestigator, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.SurveyPrincipleInvestigator)
+                        @Html.ValidationMessageFor(model => model.SurveyPrincipleInvestigator)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ExcavatedDate, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.ExcavatedDate)
+                        @Html.ValidationMessageFor(model => model.ExcavatedDate)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ExcavationPrincipleInvestigator, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.ExcavationPrincipleInvestigator)
+                        @Html.ValidationMessageFor(model => model.ExcavationPrincipleInvestigator)
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Save" class="btn btn-default" /> &nbsp;&nbsp; @Html.ActionLink("Cancel", "Index")
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+        @* --- Images --- *@
+        <div class="tab-pane" id="images">
+            <br /><br />
+
+            @Html.ActionLink(
+                            linkText: "Upload New Image",
+                            actionName: "Create",
+                            controllerName: "VesselPhoto",
+                            routeValues: new
+                            {
+                                vesselId = Model.ID
+                            },
+                            htmlAttributes: null
+                            )
+            <br /><br />
+
+            @*If there are any results, then show them*@
+            @if (Model.VesselPhotos.Count() > 0)
+            {
+
+                <table class="table">
+
+                    <tr>
+                        <th>
+                            Image
+                        </th>
+                        <th>
+                            Caption
+                        </th>
+                        <th>
+                            Source
+                        </th>
+                        <th></th>
+                    </tr>
+
+                    @foreach (var item in Model.VesselPhotos)
+                    {
+                        <tr>
+                            <td>
+                                <a href="~/Images/@Html.DisplayFor(modelItem => item.Image)">
+                                    <img src="~/Images/@Html.DisplayFor(modelItem => item.Image)" width="150px" />
+                                </a>
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Caption)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.PhotoSource.Source)
+                            </td>
+                            <td>
+                                @Html.ActionLink(
+                                            linkText: "Edit",
+                                            actionName: "Edit",
+                                            controllerName: "VesselPhoto",
+                                            routeValues: new
+                                            {
+                                                id = item.ID,
+                                                vesselId = item.Vessel.ID
+                                            },
+                                            htmlAttributes: null
+                                            )
+
+                                &nbsp;|&nbsp;
+
+                                @Html.ActionLink(
+                                            linkText: "Delete",
+                                            actionName: "Delete",
+                                            controllerName: "VesselPhoto",
+                                            routeValues: new
+                                            {
+                                                id = item.ID,
+                                                vesselId = item.Vessel.ID
+                                            },
+                                            htmlAttributes: null
+                                            )
+                            </td>
+                        </tr>
+                    }
+                </table>
+            }
+
+            else
+            {
+                <div>There are no images for this vessel.</div>
+            }
+        </div>
+
+
+    </div>
+
+
+}
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/WIShipwrecks")
+}

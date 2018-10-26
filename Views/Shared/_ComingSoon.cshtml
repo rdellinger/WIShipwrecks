@@ -1,0 +1,82 @@
+﻿<!DOCTYPE html>
+
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - WI Shipwrecks</title>
+    @Styles.Render("~/Content/solidocss")
+    @Scripts.Render("~/bundles/modernizr")
+
+    <script src="http://fast.fonts.net/jsapi/3dca1e78-579f-4502-8da9-3eb91453e0dc.js"></script>
+
+</head>
+
+
+<body>
+    <div id="mask">
+        <div class="loader">
+            <img src="~/Content/solido/img/loading.gif" alt='loading'>
+        </div>
+    </div>
+
+
+    <div id="anchor1"></div>
+
+    <div id="slides-1">
+        <div class="overlay"></div>
+        <div class="slides-container">
+            <img src="~/Content/solido/img/slider/01.jpg" alt="">
+            <img src="~/Content/solido/img/slider/02.jpg" alt="">
+            <img src="~/Content/solido/img/slider/03.jpg" alt="">
+        </div>
+        @*<nav class="slides-navigation">
+            <a href="#" class="next"></a>
+            <a href="#" class="prev"></a>
+        </nav>*@
+    </div>
+
+    <!--<section id="home" class="clear">-->
+    <!--<div id="anchor1">-->
+    <!--<div>
+            <ul class="slider-controls">
+                <li><a id="vegas-next" class="s-next" href="#"></a></li>
+                <li><a id="vegas-prev" class="s-prev" href="#"></a></li>
+            </ul>
+        </div>
+    </section>-->
+
+    <div class="main-title">
+        <div class="title-container">
+            <div class="welcome">Wisconsin's Great Lakes</div>
+            <ul>
+                <li class="t-current">Shipwrecks</li>
+                <li>Coming Soon...</li>
+            </ul>
+            @*<div class="spacer"></div>*@
+            <!--<a href="#anchor2"><div class="slider-logo">Get Started</div></a>-->
+            @*<div class="second-title">Explore Wisconsin's Great Lakes shipwrecks through underwater video, historic photographs and archaeological discoveries!</div>
+            <a href="#anchor3"><div class="buy-logo">Dive in!<span></span></div></a>*@
+        </div>
+    </div>
+    
+
+
+    <div class="container body-content">
+        @RenderBody()
+    </div>
+
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/solido")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

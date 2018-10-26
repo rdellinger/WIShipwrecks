@@ -1,0 +1,38 @@
+﻿@model IEnumerable<WIShipwrecks.Models.VideoType>
+
+@{
+    ViewBag.Title = "Video Types";
+}
+
+<h2>Video Types</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.VideoType1)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+			<a href="@Url.Action("Details", "VideoType", new { id = item.ID })">
+				@Html.DisplayFor(modelItem => item.VideoType1)
+			</a>
+        </td>
+        <td width="70px">
+			<a href="@Url.Action("Edit", "VideoType", new { id = item.ID })" class="btn btn-info btn-xs">
+				<span class="glyphicon glyphicon-pencil"></span>
+            </a>
+            <a href="@Url.Action("Delete", "VideoType", new { id = item.ID })" class="btn btn-danger btn-xs">
+				<span class="glyphicon glyphicon-trash"></span>
+            </a>
+        </td>
+    </tr>
+}
+
+</table>

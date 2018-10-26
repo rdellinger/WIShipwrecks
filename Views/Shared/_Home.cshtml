@@ -1,0 +1,246 @@
+﻿<!DOCTYPE html>
+
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - WI Shipwrecks</title>
+    @Styles.Render("~/Content/solidocss")
+    @Scripts.Render("~/bundles/modernizr")
+
+    @Styles.Render("~/Content/bootstrapcss")
+    @Scripts.Render("~/bundles/bootstrap")
+
+    <script src="http://fast.fonts.net/jsapi/3dca1e78-579f-4502-8da9-3eb91453e0dc.js"></script>
+
+</head>
+
+
+<body>
+    <div id="mask">
+        <div class="loader">
+            <img src="~/Content/solido/img/loading.gif" alt='loading'>
+        </div>
+    </div>
+
+
+    <div id="anchor1"></div>
+
+    <div id="slides-1">
+        <div class="overlay"></div>
+        <div class="slides-container">
+            <img src="~/Content/solido/img/slider/01.jpg" alt="">
+            <img src="~/Content/solido/img/slider/02.jpg" alt="">
+            <img src="~/Content/solido/img/slider/03.jpg" alt="">
+        </div>
+        <nav class="slides-navigation hidden-xs hidden-sm">
+            <a href="#" class="next"></a>
+            <a href="#" class="prev"></a>
+        </nav>
+    </div>
+
+    <!--<section id="home" class="clear">-->
+    <!--<div id="anchor1">-->
+    <!--<div>
+            <ul class="slider-controls">
+                <li><a id="vegas-next" class="s-next" href="#"></a></li>
+                <li><a id="vegas-prev" class="s-prev" href="#"></a></li>
+            </ul>
+        </div>
+    </section>-->
+
+    <div class="main-title">
+        <div class="title-container">
+            <div class="welcome">Wisconsin's Great Lakes</div>
+            <ul>
+                <li class="t-current">Shipwrecks</li>
+                <li>Come explore...</li>
+            </ul>
+            <div class="spacer"></div>
+            <!--<a href="#anchor2"><div class="slider-logo">Get Started</div></a>-->
+            <div class="second-title">Explore Wisconsin's Great Lakes shipwrecks through underwater video, historic photographs and archaeological discoveries!</div>
+            <a href="#anchor3"><div class="buy-logo">Dive in!<span></span></div></a>
+        </div>
+    </div>
+    <div id="logx"></div>
+    <header class="header">
+        <div class="logo">
+            <a href="#anchor1">
+                <img src="~/Content/solido/img/ws_masthead-small.png" class="img-responsive" />
+            </a>
+        </div>
+        <nav id="nav2" role="navigation">
+            <a class="jump-menu" title="Show navigation">Show navigation</a>
+            <ul>
+                <li class="current"><a href="#anchor1">home</a></li>
+                <li>@Html.ActionLink("Shipwrecks", "Index", "Shipwrecks")</li>
+                <li>@Html.ActionLink("Attractions", "Index", "Attractions")</li>
+                <li>@Html.ActionLink("Learn", "Index", "Learn")</li>
+                <li>@Html.ActionLink("Contact Us", "Index", "Contact")</li>
+                @if (User.IsInRole("Administrator") || User.IsInRole("Shipwrecks Administrator"))
+                {
+                    <li>@Html.ActionLink("Admin", "Index", "Admin")</li>
+                }
+                @*<li><a href="#anchor6">contact</a></li>*@
+            </ul>
+        </nav>
+        <nav class="menu">
+            <ul id="nav">
+                <li class="current"><a href="#anchor1">home</a></li>
+                <li>@Html.ActionLink("Shipwrecks", "Index", "Shipwrecks")</li>
+                <li>@Html.ActionLink("Attractions", "Index", "Attractions")</li>
+                <li>@Html.ActionLink("Learn", "Index", "Learn")</li>
+                <li>@Html.ActionLink("Contact Us", "Index", "Contact")</li>
+                @if (User.IsInRole("Administrator") || User.IsInRole("Shipwrecks Administrator"))
+                {
+                    <li>@Html.ActionLink("Admin", "Index", "Admin")</li>
+                }
+                <!--<li><a href="#">blog</a></li>-->
+                @*<li><a href="#anchor6">contact</a></li>*@
+            </ul>
+        </nav>
+    </header>
+
+    <article id=anchor3 class="content light">
+        <header class="title one">Dive in!</header>
+        <div class="spacer"></div>
+        <div class="title two">Centuries of exploration, travel, commerce, and recreation on the Great Lakes have left an impressive trail of maritime cultural resources along Wisconsin's Great Lakes shorelines.</div>
+
+        <section class="team-box">
+            <div class="s-container team-grid">
+                <div class="t-list">
+
+                    <div class="t-element hideme dontHide">
+                        <a href="~/shipwrecks">
+                            <div class="t-photo">
+                                <div class="image-hover-overlay"></div>
+                                <div class="portfolio-meta">
+                                    <div>Let's go</div>
+                                </div>
+                                <img src="~/Images/Home/home_shipwrecks.jpg" alt='Shipwrecks'>
+                            </div>
+                        </a>
+                        <a href="~/shipwrecks" style="text-decoration: none;">
+                            <div class="t-data">
+                                <div class="t-name">Shipwrecks</div>
+                                <div class="t-info">Videos, photos, history and more</div>
+                                <div class="t-spacer"></div>
+                            </div>
+                        </a>
+                    </div>
+
+
+                    <div class="t-element hideme dontHide">
+                        <a href="~/attractions">
+                            <div class="t-photo">
+                                <div class="image-hover-overlay"></div>
+                                <div class="portfolio-meta">
+                                    <div>Let's go</div>
+                                </div>
+                                <img src="~/Images/Home/home_attractions.jpg" alt='Attractions'>
+                            </div>
+                        </a>
+                        <a href="~/attractions" style="text-decoration: none;">
+                            <div class="t-data">
+                                <div class="t-name">Attractions</div>
+                                <div class="t-info">Lighthouses, museums, parks and more</div>
+                                <div class="t-spacer"></div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="t-element hideme dontHide">
+                        <a href="~/learn">
+                            <div class="t-photo">
+                                <div class="image-hover-overlay"></div>
+                                <div class="portfolio-meta">
+                                    <div>Let's go</div>
+                                </div>
+                                <img src="~/Images/Home/home_learn.jpg" alt='Learn'>
+                            </div>
+                        </a>
+                        <a href="~/learn" style="text-decoration: none;">
+                            <div class="t-data">
+                                <div class="t-name">Learn</div>
+                                <div class="t-info">About underwater archaeology and more</div>
+                                <div class="t-spacer"></div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="t-element hideme dontHide">
+                        <a href="~/contact">
+                            <div class="t-photo">
+                                <div class="image-hover-overlay"></div>
+                                <div class="portfolio-meta">
+                                    <div>Let's go</div>
+                                </div>
+                                <img src="~/Images/Home/home_contact.jpg" alt='Contact'>
+                            </div>
+                        </a>
+                        <a href="~/contact" style="text-decoration: none;">
+                            <div class="t-data">
+                                <div class="t-name">Contact Us</div>
+                                <div class="t-info">Online, email or phone &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                                <div class="t-spacer"></div>
+                            </div>
+                        </a>
+                    </div>
+
+
+                </div>
+            </div>
+        </section>
+        <div class="clearfix"></div>
+    </article>
+
+
+    <a href="#" class="scrollup">^</a>
+
+
+
+    @*GLIN Site of the Month logo*@
+    @*<div style="text-align: center; margin-top: 200px; margin-bottom: -300px;">
+        <a href="http://www.great-lakes.net"><img src="~/Images/logo_GLIN.png" /></a>
+    </div>*@
+
+
+
+
+    <div class="socialFooter" style="margin: 300px 0 0 0;">
+        <div class="social-icons">
+            <div class="social">
+                <a href="https://www.facebook.com/sharer/sharer.php?u=@Request.Url.ToString()">
+                    <div class="face"></div>
+                </a>
+                <a href="https://twitter.com/home?status=@Request.Url.ToString()">
+                    <div class="twitt"></div>
+                </a>
+                <a href="https://plus.google.com/share?url=@Request.Url.ToString()">
+                    <div class="plus"></div>
+                </a>
+            </div>
+        </div>
+        <div class="clear"></div>
+        <div class="copy">&copy; @DateTime.Now.Year - Wisconsin Sea Grant, Wisconsin Historical Society</div>
+    </div>
+
+
+    <div class="container body-content">
+        @RenderBody()
+    </div>
+
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/solido")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

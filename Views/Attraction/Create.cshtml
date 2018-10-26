@@ -1,0 +1,218 @@
+﻿@model WIShipwrecks.Models.Attraction
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>Attraction</h4>
+        <hr />
+
+        @Html.ActionLink("< Back to List", "Index")
+
+        <br /><br />
+
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.AttractionName, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.AttractionName, new { @class = "smalltextarea" })
+                @Html.ValidationMessageFor(model => model.AttractionName)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.AttractionTypeID, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("AttractionTypeID", "-- Select --")
+                @Html.ValidationMessageFor(model => model.AttractionTypeID)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.BodyOfWaterID, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("BodyOfWaterID", "-- Select --")
+                @Html.ValidationMessageFor(model => model.BodyOfWaterID)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TrailID, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("TrailID", "-- Select --")
+                @Html.ValidationMessageFor(model => model.TrailID)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.YearBuilt, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.YearBuilt)
+                @Html.ValidationMessageFor(model => model.YearBuilt)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Description, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.Description, new { @class = "largetextarea" })
+                @Html.ValidationMessageFor(model => model.Description)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.NearestAddress, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.NearestAddress)
+                @Html.ValidationMessageFor(model => model.NearestAddress)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.City, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.City)
+                @Html.ValidationMessageFor(model => model.City)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.County, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.County)
+                @Html.ValidationMessageFor(model => model.County)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ZipCode, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ZipCode)
+                @Html.ValidationMessageFor(model => model.ZipCode)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.OpenToPublic, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.OpenToPublic)
+                @Html.ValidationMessageFor(model => model.OpenToPublic)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.HasWHSMooringBuoy, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.HasWHSMooringBuoy)
+                @Html.ValidationMessageFor(model => model.HasWHSMooringBuoy)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MooringBuoyInPlace, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.MooringBuoyInPlace)
+                @Html.ValidationMessageFor(model => model.MooringBuoyInPlace)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.IsSnorkelable, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.IsSnorkelable)
+                @Html.ValidationMessageFor(model => model.IsSnorkelable)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.HasWHSDiveGuide, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.HasWHSDiveGuide)
+                @Html.ValidationMessageFor(model => model.HasWHSDiveGuide)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.HasTrailsSign, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.HasTrailsSign)
+                @Html.ValidationMessageFor(model => model.HasTrailsSign)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.HasTrailsExhibit, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.HasTrailsExhibit)
+                @Html.ValidationMessageFor(model => model.HasTrailsExhibit)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.IsNationalRegisterListed, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.IsNationalRegisterListed)
+                @Html.ValidationMessageFor(model => model.IsNationalRegisterListed)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Latitude, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Latitude)
+                @Html.ValidationMessageFor(model => model.Latitude)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.LatitudeDecimal, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.LatitudeDecimal)
+                @Html.ValidationMessageFor(model => model.LatitudeDecimal)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Longitude, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Longitude)
+                @Html.ValidationMessageFor(model => model.Longitude)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.LongitudeDecimal, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.LongitudeDecimal)
+                @Html.ValidationMessageFor(model => model.LongitudeDecimal)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.HideRecord, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.HideRecord)
+                @Html.ValidationMessageFor(model => model.HideRecord)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" /> &nbsp;&nbsp; @Html.ActionLink("Cancel", "Index")
+            </div>
+        </div>
+    </div>
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

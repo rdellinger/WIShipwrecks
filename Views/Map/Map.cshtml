@@ -1,0 +1,251 @@
+﻿@{
+    Layout = "~/Views/Shared/_Map.cshtml";
+}
+
+
+@**************************************** Google Map *****************************************************@
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="http://maps.google.com/maps/api/js?sensor=true" type="text/javascript"></script>
+
+<style>
+    #map_canvas img {
+        max-width: none;
+    }
+</style>
+<!-- This css is to create a popup "info window" when a marker is clicked on the map -->
+<style>
+    .infoDiv {
+        height: 120px;
+        width: 220px;
+        -webkit-user-select: none;
+        background-color: white;
+    }
+</style>
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        Initialize();
+    });
+
+    // Where all the fun happens
+    function Initialize() {
+
+        // Google has tweaked their interface somewhat - this tells the api to use that new UI
+        google.maps.visualRefresh = true;
+        var centerMapOnCoords = new google.maps.LatLng(@ViewBag.CenterOnLat, @ViewBag.CenterOnLong);
+
+        var blue = "#00D6FF"
+        var color = blue
+        var saturation = 100
+
+        var styles = [
+			{
+			    "featureType": "landscape",
+			    "stylers": [
+					{ "hue": "#000" },
+					{ "saturation": -100 },
+					{ "lightness": 40 },
+					{ "gamma": 1 }
+			    ]
+			},
+			{
+			    "featureType": "road.highway",
+			    "stylers": [
+					{ "hue": color },
+					{ "saturation": saturation },
+					{ "lightness": 20 },
+					{ "gamma": 1 }
+			    ]
+			},
+			{
+			    "featureType": "road.arterial",
+			    "stylers": [
+					{ "hue": color },
+					{ "saturation": saturation },
+					{ "lightness": 20 },
+					{ "gamma": 1 }
+			    ]
+			},
+			{
+			    "featureType": "road.local",
+			    "stylers": [
+					{ "hue": color },
+					{ "saturation": saturation },
+					{ "lightness": 50 },
+					{ "gamma": 1 }
+			    ]
+			},
+			{
+			    "featureType": "water",
+			    "stylers": [
+					{ "hue": color },
+					{ "saturation": 100 },
+					{ "lightness": 15 },
+					{ "gamma": 1 }
+			    ]
+			},
+			{
+			    "featureType": "poi",
+			    "stylers": [
+					{ "hue": "#000" },
+					{ "saturation": -100 },
+					{ "lightness": 25 },
+					{ "gamma": 1 }
+			    ]
+			}
+        ];
+
+        // These are options that set initial zoom level, where the map is centered globally to start, and the type of map to show
+        var mapOptions = {
+            zoom: @ViewBag.Zoom,
+            scrollwheel: false,
+            center: centerMapOnCoords,
+            mapTypeId: google.maps.MapTypeId.ROADMAP,
+            zoomControl: true,
+            mapTypeControl: false,
+            scaleControl: false,
+            streetViewControl: false,
+            panControl: false,
+            styles: styles
+        };
+
+        // This makes the div with id "map_canvas" a google map
+        var map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+
+        // Create JSON data to display the nearby vessels
+        var data = [
+
+             @foreach (var item in ViewBag.AllVessels)
+             {
+                 if (item.LatitudeDecimal != null && item.LongitudeDecimal != null)
+                 {
+                     var vesselId = item.ID;
+                     var vesselName = "";
+                     var vesselType = "";
+                     var casualtyType = "";
+                     var casualtyDate = "";
+                     var geoLat = item.LatitudeDecimal;
+                     var geoLong = item.LongitudeDecimal;
+                     var icon = "";
+
+                     if (item.VesselName != null)
+                     {
+                         vesselName = item.VesselName.Replace("'","\\'"); //This escapes all the single quotes in the vessel names so they won't break the JSON string
+                     }
+                     else
+                     {
+                         vesselName = "";
+                     }
+
+                     if (item.VesselType != null)
+                     {
+                         vesselType = item.VesselType.VesselType1;
+                     }
+                     else
+                     {
+                         vesselType = "";
+                     }
+
+                     if (item.CasualtyType != null)
+                     {
+                         casualtyType = item.CasualtyType.CasualtyType1 + " ";
+                     }
+                     else
+                     {
+                         casualtyType = "";
+                     }
+
+                     if (item.CasualtyDate != null)
+                     {
+                         casualtyDate = item.CasualtyDate.ToShortDateString();
+                     }
+                     else
+                     {
+                         casualtyDate = "";
+                     }
+
+                     if (item.LocationKnown == true)
+                     {
+                         icon = "../../Content/solido/img/map/pointer-green-small.png";
+                     }
+                     else
+                     {
+                         icon = "../../Content/solido/img/map/pointer-red-small.png";
+                     }
+
+
+                     //@Html.Raw("{'Id': '" + vesselId + "', 'Name': '" + vesselName + "', 'VesselType': '" +  vesselType + "', 'CasualtyType': '" + casualtyType + "', 'CasualtyDate': '" + casualtyDate + "', 'GeoLat': '" + geoLat + "', 'GeoLong': '" + geoLong + "'},");
+                     @Html.Raw("{'Id': '" + vesselId + "', 'Name': '" + vesselName + "', 'VesselType': '" + vesselType + "', 'CasualtyType': '" + casualtyType + "', 'CasualtyDate': '" + casualtyDate + "', 'GeoLat': '" + geoLat + "', 'GeoLong': '" + geoLong + "', 'icon': '" + icon + "'},");
+
+                }
+
+             }
+        ];
+
+
+        // Create pins for nearby vessels
+        $.each(data, function (i, item) {
+
+            var marker = new google.maps.Marker({
+                'position': new google.maps.LatLng(item.GeoLat, item.GeoLong),
+                'map': map,
+                'title': item.Name
+            });
+
+            // Make the pins for nearby vessels all a different color than the selected vessel
+            //marker.setIcon('../../Content/solido/img/map/pointer-black-small.png')
+            marker.setIcon(item.icon)
+
+            // Display some information about each vessel in the popup window
+            var infowindow = new google.maps.InfoWindow({
+                content: "<div class='infoDiv'><span style='font-size: 18px; font-weight: bold;'>" + item.Name + "</span><br />" + item.VesselType + "<br />" + item.CasualtyType + item.CasualtyDate + "<br /><br /><a href='../Vessel/Details/" + item.Id + "'>Learn more...</a>" + "</div>"
+            });
+
+            // Hook up an "OnClick" listener to the map to create the popup window when the pin is clicked
+            google.maps.event.addListener(marker, 'click', function () {
+                infowindow.open(map, marker);
+            });
+
+        });
+    }
+</script>
+
+@**************************************** End Google Map *****************************************************@
+
+
+
+@*Map*@
+
+<article class="content">
+
+    <div class="title one"><span style="color:#fd853f;">Shipwrecks</span> @ViewBag.Title</div>
+    <div class="spacer"></div>
+
+    <div style="margin-top:30px; text-align: center;"><a href="~/Vessel/@ViewBag.ControllerName" style="text-decoration: underline; color: #4CDDF3;">View List<span class="glyphicon glyphicon-list" style="margin-left: 8px;"></span></a></div>
+
+    <div style="margin-left: 20px;">
+        <img src="~/Content/solido/img/map/pointer-green-small.png" /> Confirmed Location &nbsp;&nbsp;&nbsp;
+        <img src="~/Content/solido/img/map/pointer-red-small.png" /> Unconfirmed location
+    </div>
+
+    <div style="margin-top: 20px;">
+        <div id="map_canvas" style="height: 800px;">
+        </div>
+    </div>
+
+</article>
+
+@*<div class="clear" style="margin-bottom: -150px;"></div>
+
+<div class="clear" style="margin-bottom: 500px;"></div>*@
+
+<a href="#" class="scrollup">^</a>
+
+
+
+@section Scripts {
+    @Scripts.Render("~/Scripts/vessel.js")
+}

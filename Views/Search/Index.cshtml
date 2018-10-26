@@ -1,0 +1,151 @@
+﻿@model WIShipwrecks.Models.Vessel
+
+@{
+    Layout = "~/Views/Shared/_Topic.cshtml";
+    ViewBag.Title = "Shipwrecks";
+}
+
+
+<article class="content menu-top dark dontHide">
+    <div class="full" style="width: 500px;">
+
+        <section>
+            <br /><br />
+            <header class="title-one">Advanced Search</header>
+            <div class="title-two">SHIPWRECKS</div>
+
+            <div class="half-content dontHide">
+
+                <div class="row">
+
+                    @using (Html.BeginForm("SearchResults", "Vessel", FormMethod.Get, new { role = "form" }))
+                    {
+                        <div class="form-horizontal">
+
+                            @Html.ValidationSummary(true)
+                            @Html.HiddenFor(model => model.ID)
+
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.VesselName, new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.TextBoxFor(model => model.VesselName, new { @class = "largetextbox" })
+                                    @Html.ValidationMessageFor(model => model.VesselName)
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.VesselTypeID, new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.DropDownList("VesselTypeID", "-- Select --")
+                                    @Html.ValidationMessageFor(model => model.VesselTypeID)
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.CasualtyTypeID, new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.DropDownList("CasualtyTypeID", "-- Select --")
+                                    @Html.ValidationMessageFor(model => model.CasualtyTypeID)
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.HullMaterialID, new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.DropDownList("HullMaterialID", "-- Select --")
+                                    @Html.ValidationMessageFor(model => model.HullMaterialID)
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.PropulsionTypeID, new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.DropDownList("PropulsionTypeID", "-- Select --")
+                                    @Html.ValidationMessageFor(model => model.PropulsionTypeID)
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.RigTypeID, new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.DropDownList("RigTypeID", "-- Select --")
+                                    @Html.ValidationMessageFor(model => model.RigTypeID)
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.BodyOfWaterID, new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.DropDownList("BodyOfWaterID", "-- Select --")
+                                    @Html.ValidationMessageFor(model => model.BodyOfWaterID)
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.OwnerManagerAgencyID, new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.DropDownList("OwnerManagerAgencyID", "-- Select --")
+                                    @Html.ValidationMessageFor(model => model.OwnerManagerAgencyID)
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.NumberOfMasts, new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.NumberOfMasts)
+                                    @Html.ValidationMessageFor(model => model.NumberOfMasts)
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.RegistryNumber, new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.RegistryNumber)
+                                    @Html.ValidationMessageFor(model => model.RegistryNumber)
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.LocationKnown, new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.RadioButtonFor(model => model.LocationKnown, "true") Yes  &nbsp;
+                                    @Html.RadioButtonFor(model => model.LocationKnown, "false") No
+                                    @Html.ValidationMessageFor(model => model.LocationKnown)
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <input type="submit" value="Search" class="btn btn-default" />&nbsp;&nbsp;
+                                    <a href="@Url.Action("Index", "Search")" style="text-decoration: underline;">Reset Form</a>
+                                </div>
+                            </div>
+
+                            <br /><br />
+
+                        </div>
+
+                    }
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+
+    </div>
+    <div class="clear"></div>
+</article>
+
+
+
+
+
+
+
+<a href="#" class="scrollup">^</a>

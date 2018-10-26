@@ -1,0 +1,157 @@
+﻿@{
+    Layout = "~/Views/Shared/_Topic.cshtml";
+    ViewBag.Title = "Shipwrecks";
+}
+
+
+<article class="content menu-top dark dontHide">
+    <div class="full">
+
+        <section class="half">
+            <header class="title-one">Search</header>
+            <div class="title-two">SHIPWRECKS</div>
+
+            <div class="half-content dontHide">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12" style="text-align: center;">
+
+                        @using (Html.BeginForm("Index", "Vessel", FormMethod.Get, new { @class = "form-inline", role = "form" }))
+                        {
+                            <div class="form-group col-lg-12 col-md-12 col-sm-12">
+                                <label class="sr-only" for="SearchString">Vessel Name</label>
+                                @Html.TextBox("SearchString", "", new { @class = "form-control searchbox", placeholder = "Vessel name", type = "text", style = "width: 300px;" })
+                            </div>
+
+                            <div class="form-group col-lg-1 col-md-1 col-sm-2">
+                                <button type="submit" value="Search" id="vesselSearchButton" class="btn btn-default btn-sm btn-info">
+                                    <span class="glyphicon glyphicon-search"></span> Search
+                                </button>
+                            </div>
+                        }
+
+                    </div>
+                </div>
+
+                <p style="margin-top:30px;">
+                    Looking for a specific Wisconsin shipwreck?  We have over 700 shipwrecks in our database!  And, we are adding more all the time.  Enter the name of the vessel in the field above and we'll dig through the archives for you.
+                </p>
+
+                <p style="text-align:center;">
+                    <a href="@Url.Action("Index", "Search")" style="text-decoration: underline;">Advanced Search<span class="glyphicon glyphicon-search" style="margin-left: 5px;"></span></a>
+                </p>
+
+                <div style="margin-left: 70px; margin-top: 50px;">
+                    <img src="~/Images/Shipwrecks/icon_large_shipwrecks.png" />
+                </div>
+
+            </div>
+
+        </section>
+
+        <section class="half car-show-1">
+            <header class="title-one">Browse</header>
+            <div class="title-two">BY REGION</div>
+            <div class="show dontHide">
+                <div class="caroussel">
+                    <div class="caroussel-list">
+                        <a href="vessel">
+                            <div class="car-img"><img src="~/Content/solido/img/caroussel/map_allregions.jpg" alt='All Regions'></div>
+                        </a>
+                        <a href="vessel/LowerLakeMichigan">
+                            <div class="car-img"><img src="~/Content/solido/img/caroussel/map_lowerlakemichigan.jpg" alt='Lower Lake Michigan'></div>
+                        </a>
+                        <a href="vessel/MidLakeMichigan">
+                            <div class="car-img"><img src="~/Content/solido/img/caroussel/map_midlakemichigan.jpg" alt='Mid Lake Michigan'></div>
+                        </a>
+                        <a href="vessel/UpprLakeMichigan">
+                            <div class="car-img"><img src="~/Content/solido/img/caroussel/map_upprlakemichigan.jpg" alt='Upper Lake Michigan'></div>
+                        </a>
+                        <a href="vessel/LakeSuperior">
+                            <div class="car-img"><img src="~/Content/solido/img/caroussel/map_lakesuperior.jpg" alt='Lake Superior'></div>
+                        </a>
+                        <a href="vessel/InlandWaterways">
+                            <div class="car-img"><img src="~/Content/solido/img/caroussel/map_inlandwaterways.jpg" alt='Inland Waterways'></div>
+                        </a>
+                    </div>
+                </div>
+                <div class="car-prev"></div>
+                <div class="car-next"></div>
+            </div>
+            <div class="controller">
+                <ul></ul>
+            </div>
+        </section>
+
+
+    </div>
+    <div class="clear"></div>
+</article>
+
+
+
+
+<article id="anchor2" class="content light">
+
+    <header class="title one">Featured Shipwrecks</header>
+    <div class="spacer"></div>
+
+    <div style="margin-top:30px; text-align: center;"><a href="@Url.Action("Featured", "Map")" style="text-decoration: underline; color: #4CDDF3;">View Map<span class="glyphicon glyphicon-map-marker" style="margin-left: 5px;"></span></a></div>
+
+    <div class="title two">Here are some of our favorite shipwrecks.  Read about each vessel's service history, final voyage, and where it is today.</div>
+    <section class="featured-slider">
+        <div id="ca-container" class="ca-container">
+
+            <div class="nav-featured">
+                <div style="float: none; margin-right: auto; margin-left: auto; width: 410px;">
+                    <div class="prev-featured"></div>
+                    <a href="vessel/Featured"><div class="btn-featured">View List</div></a>
+                    <div class="next-featured"></div>
+                </div>
+            </div>
+
+            <div class="main-carousel hideme dontHide">
+                <div class="ca-wrapper">
+
+                    @foreach (var item in ViewBag.FeaturedShipwrecks)
+                    {
+                        <div class="ca-item ca-item-@item.ID">
+                            <div class="f-single">
+
+                                @*The "featuredURL" class for the link below is handled in the main.js file.
+                                    It overrides the default gallery popup to go to a shipwreck details page instead*@
+
+                                <a href="~/Vessel/Details/@item.ID?region=Shipwrecks" class="featuredURL">
+                                    <div class="f-image">
+
+                                        <img src="~/Images/Featured/@item.FeaturedPhoto" alt='img'>
+
+                                        <div class="image-hover-overlay"></div>
+                                        <span class="f-category"></span>
+
+                                        <div class="portfolio-meta">
+                                            <div>@item.VesselType.VesselType1</div>
+                                            <div class="clear"></div>
+                                            <div>
+                                                Sank @item.CasualtyYear <br />
+                                                Depth @item.WaterDepth'
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="f-info">@item.VesselName</div>
+                                </a>
+                            </div>
+                        </div>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </section>
+</article>
+
+
+
+
+
+<a href="#" class="scrollup">^</a>

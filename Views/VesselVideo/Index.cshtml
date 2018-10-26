@@ -1,0 +1,86 @@
+﻿@model IEnumerable<WIShipwrecks.Models.VesselVideo>
+
+@{
+    ViewBag.Title = "Vessel Videos";
+}
+
+<h2>Vessel Videos</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.YouTubeCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Thumb)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Caption)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateOfVideo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Vessel.VesselName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VideoSource.Source)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VideoType.VideoType1)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+			<a href="@Url.Action("Details", "VesselVideo", new { id = item.ID })">
+				@Html.DisplayFor(modelItem => item.YouTubeCode)
+			</a>
+        </td>
+        <td>
+			<a href="@Url.Action("Details", "VesselVideo", new { id = item.ID })">
+				@Html.DisplayFor(modelItem => item.Thumb)
+			</a>
+        </td>
+        <td>
+			<a href="@Url.Action("Details", "VesselVideo", new { id = item.ID })">
+				@Html.DisplayFor(modelItem => item.Caption)
+			</a>
+        </td>
+        <td>
+			<a href="@Url.Action("Details", "VesselVideo", new { id = item.ID })">
+				@Html.DisplayFor(modelItem => item.DateOfVideo)
+			</a>
+        </td>
+        <td>
+			<a href="@Url.Action("Details", "VesselVideo", new { id = item.ID })">
+				@Html.DisplayFor(modelItem => item.Vessel.VesselName)
+			</a>
+        </td>
+        <td>
+			<a href="@Url.Action("Details", "VesselVideo", new { id = item.ID })">
+				@Html.DisplayFor(modelItem => item.VideoSource.Source)
+			</a>
+        </td>
+        <td>
+			<a href="@Url.Action("Details", "VesselVideo", new { id = item.ID })">
+				@Html.DisplayFor(modelItem => item.VideoType.VideoType1)
+			</a>
+        </td>
+        <td width="70px">
+			<a href="@Url.Action("Edit", "VesselVideo", new { id = item.ID })" class="btn btn-info btn-xs">
+				<span class="glyphicon glyphicon-pencil"></span>
+            </a>
+            <a href="@Url.Action("Delete", "VesselVideo", new { id = item.ID })" class="btn btn-danger btn-xs">
+				<span class="glyphicon glyphicon-trash"></span>
+            </a>
+        </td>
+    </tr>
+}
+
+</table>

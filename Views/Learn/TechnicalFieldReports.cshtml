@@ -1,0 +1,25 @@
+﻿@{
+    Layout = "~/Views/Shared/_Topic.cshtml";
+    ViewBag.Title = "Technical Field Reports";
+}
+
+
+<article class="content">
+
+    <div class="title one">@ViewBag.Title</div>
+    <div class="spacer-orange"></div>
+    <br /><br />
+
+    <div class="content full" style="max-width: 800px;">
+
+        @foreach (var item in ViewBag.TechnicalFieldReports)
+        {
+            <div style="margin-bottom: 30px;">
+                <a href="~/Files/@item.Filename">@item.Title</a>
+            </div>
+        }
+
+    </div>
+
+</article>
+

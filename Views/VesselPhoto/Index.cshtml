@@ -1,0 +1,62 @@
+﻿@model IEnumerable<WIShipwrecks.Models.VesselPhoto>
+
+@{
+    ViewBag.Title = "All Vessel Photos";
+}
+
+<h2>All Vessel Photos</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Image)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Caption)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateOfPhoto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PhotoSource.Source)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PhotoType.PhotoType1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Vessel.VesselName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            <img src="~/Images/@Html.DisplayFor(modelItem => item.Image)" width="300px" />   
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Caption)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateOfPhoto)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PhotoSource.Source)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PhotoType.PhotoType1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Vessel.VesselName)
+        </td>
+        <td width="100px">
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,90 @@
+﻿@model WIShipwrecks.Models.VesselPhoto
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+
+@using (Html.BeginForm("Edit", "VesselPhoto", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Vessel Image</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.ID)
+        @Html.HiddenFor(model => model.Image)
+        @Html.HiddenFor(model => model.VesselID)
+
+
+        <div class="form-group currentImage">
+            @Html.LabelFor(model => model.Image, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <img src="~/Images/@Html.DisplayFor(model => model.Image)" width="150" />
+            </div>
+        </div>
+
+        <div class="form-group imageUpload">
+            <label class="control-label col-md-2" for="Image"></label>
+            <div class="col-md-10">
+                <input type="file" name="file" />
+                @Html.ValidationMessage("uploadError")
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Caption, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.Caption, new { @class = "mediumtextarea" })
+                @Html.ValidationMessageFor(model => model.Caption)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PhotoSourceID, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("PhotoSourceID", "-- Select --")
+                @Html.ValidationMessageFor(model => model.PhotoSourceID)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PhotoTypeID, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("PhotoTypeID", "-- Select --")
+                @Html.ValidationMessageFor(model => model.PhotoTypeID)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DateOfPhoto, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DateOfPhoto)
+                @Html.ValidationMessageFor(model => model.DateOfPhoto)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />&nbsp; |
+                @if (Request.QueryString["vesselId"] != null)
+                {
+                    @Html.ActionLink("Cancel", "Edit", "Vessel", null, null, "images", new { id = Request.QueryString["vesselId"] }, null)
+                }
+                else
+                {
+                    @Html.ActionLink("Cancel", "Edit", "Vessel", null, null, "images", new { id = ViewBag.VesselID }, null)
+                }
+            </div>
+        </div>
+    </div>
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/Scripts/vessel.js")
+}

@@ -1,0 +1,45 @@
+﻿@{
+    Layout = "~/Views/Shared/_Topic.cshtml";
+    ViewBag.Title = "Current Research";
+}
+
+
+<article class="content">
+
+    <div class="title one">@ViewBag.Title</div>
+    <div class="spacer-orange"></div>
+    <br /><br />
+
+    <div class="content full" style="max-width: 800px;">
+
+        @foreach (var item in ViewBag.CurrentResearch)
+        {
+            <div style="margin-bottom: 50px;">
+
+                <div style="font-weight:bold; margin-bottom: 10px;">@item.Title</div>
+
+                @if (item.Image != null)
+                {
+
+                    <div style="float: right;  margin: 7px 10px 10px 20px;" class="caption">
+                        <img src="~/Images/CurrentResearch/@item.Image" /><br />
+                        @*<div style="font-style: italic; margin-top: 15px;">
+                            The schooner crew's clothing and other personal items are among the things that can be found on a shipwreck. <br />
+                            <span style="font-size: 12px;">
+                                Historical Collections of the Great Lakes, Bowling Green State University
+                            </span>
+                        </div>*@
+                    </div>
+
+                }
+                
+
+                @Html.Raw(Html.Encode(item.Description).Replace("\n", "<br />"))
+
+            </div>
+            
+        }
+
+    </div>
+
+</article>

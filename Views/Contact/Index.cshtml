@@ -1,0 +1,115 @@
+﻿@model WIShipwrecks.Models.Feedback
+
+@{
+    Layout = "~/Views/Shared/_Topic.cshtml";
+    ViewBag.Title = "Contact";
+}
+
+
+<article class="content dark dontHide">
+    <div class="full">
+
+        <section class="half">
+            <header class="title-one">How To</header>
+            <div class="title-two">CONTACT US</div>
+
+            <div class="half-content dontHide" style="margin-top: -30px;">
+                <div class="row">
+                    <hr />
+
+                    <div class="col-lg-12 col-md-12">
+                        <p style="font-size: 16px;">
+                            <strong>Maritime Preservation Program</strong><br />
+                            Wisconsin Historical Society<br />
+                            816 State Street<br />
+                            Madison, WI 53706<br /><br />
+
+                            (608) 221-5909<br />
+                            <a href="mailto:tamara.thomsen@wisconsinhistory.org">Tamara Thomsen</a>
+                            <br />
+                            <a href="mailto:Caitlin.zant@wisconsinhistory.org">Caitlin Zant</a>
+                            <br /><br /><br />
+                        </p>
+                    </div>
+
+
+                    <div class="col-lg-12 col-md-12">
+                        <p style="font-size: 16px;">
+                            <strong>University of Wisconsin Sea Grant Institute</strong><br />
+                            1975 Willow Drive, 2nd Floor<br />
+                            Madison, WI 53706-1103<br /><br />
+
+                            (608) 262-0905<br />
+                            <a href="mailto:jkarl@aqua.wisc.edu">John Karl</a>
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <section class="half">
+            <header class="title-one">We Welcome Your</header>
+            <div class="title-two">FEEDBACK</div>
+
+            <div class="half-content dontHide" style="margin-top: -30px;">
+                <div class="row">
+                    <hr />
+                    <div class="col-lg-12 col-md-12">
+
+                        @using (Html.BeginForm("Create", "Contact"))
+                        {
+                            @Html.AntiForgeryToken()
+
+                            <div class="form-horizontal">
+
+                                @Html.ValidationSummary(true)
+
+                                @if (ViewBag.Success == true)
+                                {
+                                    @: <div class="alert alert-success">Thank you for your feedback!</div>
+                    }
+
+                                else
+                                {
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.Comments, new { @class = "control-label col-md-2" })
+                                        <div class="col-md-10">
+                                            @Html.TextAreaFor(model => model.Comments, new { @class = "mediumtextarea" })
+                                            @Html.ValidationMessageFor(model => model.Comments)
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.Email, new { @class = "control-label col-md-2" })
+                                        <div class="col-md-10">
+                                            @Html.TextBoxFor(model => model.Email, new { @class = "mediumtextbox" })
+                                            @Html.ValidationMessageFor(model => model.Email)
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="col-md-offset-2 col-md-10">
+                                            <input type="submit" value="Send" class="btn btn-default" />
+                                        </div>
+                                    </div>
+                                }
+
+                            </div>
+                        }
+
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+
+    </div>
+    <div class="clear"></div>
+</article>
+
+

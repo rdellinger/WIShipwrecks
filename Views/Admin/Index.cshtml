@@ -1,0 +1,58 @@
+﻿@{
+    ViewBag.Title = "Admin - Wisconsin Shipwrecks";
+}
+
+<div class="jumbotron">
+    <h1>Administration</h1>
+    <p class="lead">The administrative tool for the Wisconsin Shipwrecks website.</p>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <h2>Manage Content</h2>
+        <p>Use these forms to manage the vessels, attractions and news article databases.  Attractions include historical markers, lighthouse, museums, etc.</p>
+        <p>
+            @Html.ActionLink("Shipwrecks","Index","Vessel") <br />
+            @Html.ActionLink("Attractions", "Index", "Attraction") <br />
+            @Html.ActionLink("News Articles", "Index", "NewsArticle") <br />
+            @Html.ActionLink("Current Research", "Index", "CurrentResearch") <br />
+            @Html.ActionLink("Technical Field Reports", "Index", "TechnicalFieldReports") <br />
+            @Html.ActionLink("Calendar", "Index", "Calendar") <br />
+            @Html.ActionLink("Links to Other Sites", "Index", "Link") <br /><br />
+            @Html.ActionLink("Vessels that haven't been assigned to a region (trail)", "NoRegion", "Vessel")<br />
+            @Html.ActionLink("List of All Vessel Photos", "Index", "VesselPhoto")<br />
+            @Html.ActionLink("List of All Attraction Photos", "Index", "AttractionPhoto")
+        </p>
+
+        <br /><br />
+
+        <h2>Feedback</h2>
+        <p>View a list of feedback, or edit who receives an email when feedback is submitted.</p>
+        <p>
+            @Html.ActionLink("Feedback", "Index", "Feedback") <br />
+            @Html.ActionLink("Feedback Email Recipients", "Index", "FeedbackRecipient") <br />
+        </p>
+    </div>
+    <div class="col-md-6">
+        <h2>Settings</h2>
+        <p>Use these forms to manage the options that appear in the dropdown menu items.</p>
+        <p>
+            @Html.ActionLink("Attraction Types", "Index", "AttractionType") <br />
+            @Html.ActionLink("Bodies of Water", "Index", "BodiesOfWater") <br />
+            @Html.ActionLink("Casualty Types", "Index", "CasualtyType") <br />
+            @Html.ActionLink("Hull Materials", "Index", "HullMaterial") <br />
+            @Html.ActionLink("Newspapers", "Index", "Newspaper") <br />
+            @Html.ActionLink("Owner/Manager Agencies", "Index", "OwnerManagerAgency") <br />
+            @Html.ActionLink("Percentage of Vessel Present", "Index", "PercentVesselPresent") <br />
+            @Html.ActionLink("Photo Sources", "Index", "PhotoSource") <br />
+            @Html.ActionLink("Photo Types", "Index", "PhotoType") <br />
+            @Html.ActionLink("Propulsion Types", "Index", "PropulsionType") <br />
+            @Html.ActionLink("Rig Types", "Index", "RigType") <br />
+            @Html.ActionLink("Sturgeon Bay Stone", "Index", "SturgeonBayStone") <br />
+            @Html.ActionLink("Trails", "Index", "Trail") <br />
+            @Html.ActionLink("Vessel Types", "Index", "VesselType") <br />
+            @Html.ActionLink("Video Sources", "Index", "VideoSource") <br />
+            @Html.ActionLink("Video Types", "Index", "VideoType") <br />
+        </p>
+    </div>
+</div>

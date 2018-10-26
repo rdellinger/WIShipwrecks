@@ -1,0 +1,105 @@
+﻿@model WIShipwrecks.Models.Vessel
+
+<!DOCTYPE html>
+
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - WI Shipwrecks</title>
+    @Styles.Render("~/Content/detailscss")
+    @Styles.Render("~/Content/solidocss")
+    @*@Styles.Render("~/Content/css")*@
+    @Scripts.Render("~/bundles/modernizr")
+
+    <script src="http://fast.fonts.net/jsapi/3dca1e78-579f-4502-8da9-3eb91453e0dc.js"></script>
+
+</head>
+
+
+<body>
+
+    <div id="logx"></div>
+    <header class="header">
+        <div class="logo">
+            <a href="~/Home#anchor3">
+                <img src="~/Content/solido/img/ws_masthead-small.png" class="img-responsive" />
+            </a>
+        </div>
+        <nav id="nav2" role="navigation">
+            <a class="jump-menu" title="Show navigation">Show navigation</a>
+            <ul>
+                <li><a href="~/Home#anchor3">Home</a></li>
+                <li class="current">@Html.ActionLink("Shipwrecks", "Index", "Shipwrecks")</li>
+                <li>@Html.ActionLink("Attractions", "Index", "Attractions")</li>
+                <li>@Html.ActionLink("Learn", "Index", "Learn")</li>
+                <li>@Html.ActionLink("Contact Us", "Index", "Contact")</li>
+                @if (User.IsInRole("Administrator") || User.IsInRole("Shipwrecks Administrator"))
+                {
+                    <li>@Html.ActionLink("Admin", "Index", "Admin")</li>
+                }
+            </ul>
+        </nav>
+        <nav class="menu">
+            <ul id="nav">
+                <li><a href="~/Home#anchor3">Home</a></li>
+                <li class="current">@Html.ActionLink("Shipwrecks", "Index", "Shipwrecks")</li>
+                <li>@Html.ActionLink("Attractions", "Index", "Attractions")</li>
+                <li>@Html.ActionLink("Learn", "Index", "Learn")</li>
+                <li>@Html.ActionLink("Contact Us", "Index", "Contact")</li>
+                @if (User.IsInRole("Administrator") || User.IsInRole("Shipwrecks Administrator"))
+                {
+                    <li>@Html.ActionLink("Admin", "Index", "Admin")</li>
+                }
+            </ul>
+        </nav>
+
+    </header>
+
+
+
+
+    <div class="container-fluid body-content">
+        @RenderBody()
+    </div>
+
+
+
+    <div class="socialFooter">
+        <div class="social-icons">
+            <div class="social">
+                <a href="https://www.facebook.com/sharer/sharer.php?u=@Request.Url.ToString()">
+                    <div class="face"></div>
+                </a>
+                <a href="https://twitter.com/home?status=@Request.Url.ToString()">
+                    <div class="twitt"></div>
+                </a>
+                <a href="https://plus.google.com/share?url=@Request.Url.ToString()">
+                    <div class="plus"></div>
+                </a>
+            </div>
+        </div>
+        <div class="clear"></div>
+        <div class="copy">&copy; @DateTime.Now.Year - Wisconsin Sea Grant, Wisconsin Historical Society</div>
+    </div>
+
+
+
+
+
+    <script>window.jQuery || document.write('<script src="../../Content/solido/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+    <script src="http://fast.fonts.net/jsapi/3dca1e78-579f-4502-8da9-3eb91453e0dc.js"></script>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/solido")
+    @RenderSection("scripts", required: false)
+
+</body>
+</html>

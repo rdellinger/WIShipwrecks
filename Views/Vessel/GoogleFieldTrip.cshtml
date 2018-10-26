@@ -1,0 +1,63 @@
+﻿@model IEnumerable<WIShipwrecks.Models.Vessel>
+@{
+    Layout = "~/Views/Shared/_GoogleFieldTrip.cshtml";
+}
+<rss version="2.0" xmlns:georss="http://www.georss.org/georss" xmlns:fieldtrip="http://www.fieldtripper.com/fieldtrip_rss">
+    <channel>
+        <title>Wisconsin Shipwrecks</title>
+        <link>http://www.wisconsinshipwrecks.org</link>
+        <description>Explore Wisconsin's Great Lakes shipwrecks through underwater video, historic photographs, and archaeological discoveries!</description>
+        <image>
+            <url>http://www.wisconsinshipwrecks.org/images/icon_shipwreck.png</url>
+        </image>
+        <language>en</language>
+        @foreach (var item in Model)
+        {
+            @:<item>
+                <title>@item.VesselName</title>
+                <guid>http://www.wisconsinshipwrecks.org/Vessel/Details/@item.ID</guid>
+                <description>
+                    <![CDATA[
+                    @foreach (var history in item.VesselHistories)
+                    {
+                        if (history.TimeFrame1.TimeFrame1 != null)
+                        {
+                            <div>@Html.DisplayFor(modelItem => history.TimeFrame1.TimeFrame1)</div>
+                        }
+
+                        if (history.Title != null)
+                        {
+                            <br /><br />@Html.DisplayFor(modelItem => history.Title)
+
+                            if (history.Subtitle != null)
+                            {
+                                <br />@Html.DisplayFor(modelItem => history.Subtitle)
+                            }
+                        }
+
+                        if (history.Description != null)
+                        {
+                            <br /><br />@Html.Raw(Html.Encode(history.Description).Replace("\n", "<br />"))
+                        }
+                    }
+
+                    ]]>
+                </description>
+                <link></link>
+                <pubdate>@item.LastModifiedDate</pubdate>
+                <georss:point>@item.LatitudeDecimal @item.LongitudeDecimal</georss:point>
+                <fieldtrip:address>@item.NearestCity</fieldtrip:address>
+            foreach (var image in item.VesselPhotos)
+            {
+                <fieldtrip:image>
+                    <url>http://www.wisconsinshipwrecks.org/Images/@image.Image</url>
+                    <title>@image.Caption</title>
+                    @if(image.PhotoSource != null){
+                    <attribution>Photo by @image.PhotoSource.Source</attribution>
+                    }
+                </fieldtrip:image>
+            }
+            @:</item>
+        }
+    </channel>
+</rss>

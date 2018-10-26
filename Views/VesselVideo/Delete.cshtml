@@ -1,0 +1,80 @@
+﻿@model WIShipwrecks.Models.VesselVideo
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Delete this Vessel Video?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.YouTubeCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.YouTubeCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Thumb)
+        </dt>
+
+        <dd style="margin-bottom:10px;">
+            <img src="~/Images/@Html.DisplayFor(model => model.Thumb)" width="150px" />
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Caption)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Caption)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateOfVideo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateOfVideo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Vessel.VesselName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Vessel.VesselName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VideoSource.Source)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VideoSource.Source)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VideoType.VideoType1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VideoType.VideoType1)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" />&nbsp; |
+            @Html.ActionLink("Cancel", "Edit", "Vessel", null, null, "videos", new { id = Request.QueryString["VesselId"] }, null)
+        </div>
+    }
+</div>

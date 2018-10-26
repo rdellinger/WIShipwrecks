@@ -1,0 +1,69 @@
+﻿@model IEnumerable<WIShipwrecks.Models.Vessel>
+
+@{
+    Layout = "~/Views/Shared/_List.cshtml";
+    ViewBag.Title = "Shipwrecks - Featured";
+}
+
+
+<header class="title one"><span style="color:#fd853f;">Shipwrecks</span> Featured</header>
+<div class="spacer"></div>
+
+<div style="margin-top:30px; text-align: center;"><a href="@Url.Action("Featured", "Map")" style="text-decoration: underline; color: #4CDDF3;">View Map<span class="glyphicon glyphicon-map-marker" style="margin-left: 5px;"></span></a></div>
+
+
+<br /><br />
+
+
+@*If there are any results, then show them*@
+@if (Model.Count() > 0)
+{
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.VesselName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VesselTypeID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BodyOfWaterID)
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td width="60%">
+                    <a href="@Url.Action("Details", "Vessel", new { id = item.ID, region = "Featured" })">
+                        @Html.DisplayFor(modelItem => item.VesselName)
+                    </a>
+
+                </td>
+                <td width="20%">
+                    @Html.DisplayFor(modelItem => item.VesselType.VesselType1)
+                </td>
+                <td width="20%">
+                    @Html.DisplayFor(modelItem => item.BodiesOfWater.BodyOfWater)
+                </td>
+            </tr>
+        }
+
+    </table>
+
+}
+
+    @*Otherwise, show the 'no records' message*@
+else
+{
+    <div>There are no vessels that match your search criteria.</div>
+}
+
+
+
+
+
+@section Scripts {
+    @Scripts.Render("~/Scripts/vessel.js")
+}

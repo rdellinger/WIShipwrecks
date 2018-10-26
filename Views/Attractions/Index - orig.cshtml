@@ -1,0 +1,148 @@
+﻿@{
+    Layout = "~/Views/Shared/_Topic.cshtml";
+    ViewBag.Title = "Attractions";
+}
+
+
+<article class="content menu-top dark dontHide">
+    <div class="full">
+
+        <section class="half">
+            <header class="title-one">Search</header>
+            <div class="title-two">ATTRACTIONS</div>
+
+            <div class="half-content dontHide">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12" style="text-align: center;">
+
+                        @using (Html.BeginForm("Index", "Attraction", FormMethod.Get, new { @class = "form-inline", role = "form" }))
+                        {
+                            <div class="form-group col-lg-12 col-md-12 col-sm-12">
+                                <label class="sr-only" for="SearchString">Attraction Name</label>
+                                @Html.TextBox("SearchString", "", new { @class = "form-control searchbox", placeholder = "Attraction name", type = "text", style = "width: 300px;" })
+                            </div>
+
+                            <div class="form-group col-lg-1 col-md-1 col-sm-2">
+                                <button type="submit" value="Search" id="attractionSearchButton" class="btn btn-default btn-sm btn-info">
+                                    <span class="glyphicon glyphicon-search"></span> Search
+                                </button>
+                            </div>
+                        }
+
+                    </div>
+                </div>
+
+                <p style="margin-top:30px;">
+                    Looking for a specific Wisconsin attraction?  Enter the name above and we'll dive into the database and take a look around.
+                </p>
+
+                <div style="margin-left: 70px; margin-top: 50px;">
+                    <img src="~/Images/Attractions/icon_large_attractions.png" />
+                </div>
+
+
+            </div>
+
+        </section>
+
+        <section class="half car-show-1">
+            <header class="title-one">Browse</header>
+            <div class="title-two">BY REGION</div>
+            <div class="show dontHide">
+                <div class="caroussel">
+                    <div class="caroussel-list">
+                        <a href="attraction">
+                            <div class="car-img"><img src="~/Content/solido/img/caroussel/map_allregions.jpg" alt='img'></div>
+                        </a>
+                        <a href="attraction/LowerLakeMichigan">
+                            <div class="car-img"><img src="~/Content/solido/img/caroussel/map_lowerlakemichigan.jpg" alt='img'></div>
+                        </a>
+                        <a href="attraction/MidLakeMichigan">
+                            <div class="car-img"><img src="~/Content/solido/img/caroussel/map_midlakemichigan.jpg" alt='img'></div>
+                        </a>
+                        <a href="attraction/UpprLakeMichigan">
+                            <div class="car-img"><img src="~/Content/solido/img/caroussel/map_upprlakemichigan.jpg" alt='img'></div>
+                        </a>
+                        <a href="attraction/LakeSuperior">
+                            <div class="car-img"><img src="~/Content/solido/img/caroussel/map_lakesuperior.jpg" alt='img'></div>
+                        </a>
+                        <a href="attraction/InlandWaterways">
+                            <div class="car-img"><img src="~/Content/solido/img/caroussel/map_inlandwaterways.jpg" alt='img'></div>
+                        </a>
+                    </div>
+                </div>
+                <div class="car-prev"></div>
+                <div class="car-next"></div>
+            </div>
+            <div class="controller">
+                <ul></ul>
+            </div>
+        </section>
+
+
+    </div>
+    <div class="clear"></div>
+</article>
+
+
+
+
+<article id="anchor2" class="content light">
+
+    <header class="title one">Types of Attractions</header>
+    <div class="spacer"></div>
+    <div class="title two">From lighthouses to historic waterfronts, Wisconsin has hundreds of maritime attractions for you to discover!</div>
+    <section class="featured-slider">
+        <div id="ca-container" class="ca-container">
+
+
+            <div class="nav-featured">
+                <div style="float: none; margin-right: auto; margin-left: auto; width: 410px;">
+                    <div class="prev-featured"></div>
+                    <a href="AttractionTypes"><div class="btn-featured">View List</div></a>
+                    <div class="next-featured"></div>
+                </div>
+            </div>
+            
+            
+            <div class="main-carousel hideme dontHide">
+                <div class="ca-wrapper">
+
+                    @foreach (var item in ViewBag.AttractionTypes)
+                    {
+                        <div class="ca-item ca-item-@item.ID">
+                            <div class="f-single">
+
+                                @*The "featuredURL" class for the link below is handled in the main.js file.
+                                    It overrides the default gallery popup to go to a shipwreck details page instead*@
+
+                                <a href="Attraction/ByAttractionType?attractionType=@item.AttractionType1" class="featuredURL">
+                                    <div class="f-image">
+
+                                        <img src="~/Content/solido/img/attractiontypes/@item.Image" alt='img'>
+
+                                        <div class="image-hover-overlay"></div>
+                                        <span class="f-category"></span>
+
+                                        <div class="portfolio-meta">
+                                            <div>Let's go</div>
+                                        </div>
+
+                                    </div>
+                                    <div class="f-info">@item.AttractionType1</div>
+                                </a>
+                            </div>
+                        </div>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </section>
+</article>
+
+
+
+
+
+<a href="#" class="scrollup">^</a>

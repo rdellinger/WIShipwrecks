@@ -1,0 +1,46 @@
+﻿@model IEnumerable<WIShipwrecks.Models.VideoSource>
+
+@{
+    ViewBag.Title = "Video Sources";
+}
+
+<h2>Video Sources</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Source)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.URL)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+			<a href="@Url.Action("Details", "VideoSource", new { id = item.ID })">
+				@Html.DisplayFor(modelItem => item.Source)
+			</a>
+        </td>
+        <td>
+			<a href="@Url.Action("Details", "VideoSource", new { id = item.ID })">
+				@Html.DisplayFor(modelItem => item.URL)
+			</a>
+        </td>
+        <td width="70px">
+			<a href="@Url.Action("Edit", "VideoSource", new { id = item.ID })" class="btn btn-info btn-xs">
+				<span class="glyphicon glyphicon-pencil"></span>
+            </a>
+            <a href="@Url.Action("Delete", "VideoSource", new { id = item.ID })" class="btn btn-danger btn-xs">
+				<span class="glyphicon glyphicon-trash"></span>
+            </a>
+        </td>
+    </tr>
+}
+
+</table>

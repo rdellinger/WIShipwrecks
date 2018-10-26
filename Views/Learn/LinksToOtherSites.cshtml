@@ -1,0 +1,24 @@
+﻿@{
+    Layout = "~/Views/Shared/_Topic.cshtml";
+    ViewBag.Title = "Links to Other Sites";
+}
+
+
+<article class="content">
+
+    <div class="title one">@ViewBag.Title</div>
+    <div class="spacer-orange"></div>
+    <br /><br />
+
+    <div class="content full" style="max-width: 800px;">
+
+        @foreach (var item in ViewBag.Links)
+        {
+            <div style="margin-bottom: 10px;">
+                <a href="@item.URL">@item.Title</a>
+            </div>
+        }
+
+    </div>
+
+</article>

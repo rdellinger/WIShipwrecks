@@ -1,0 +1,2080 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="WIShipwrecksModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AttractionContacts">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AttractionID" Type="int" Nullable="false" />
+          <Property Name="ContactName" Type="nvarchar" MaxLength="500" />
+          <Property Name="ContactPhone" Type="nvarchar" MaxLength="500" />
+          <Property Name="ContactPhoneAlt" Type="nvarchar" MaxLength="500" />
+          <Property Name="Email" Type="nvarchar" MaxLength="500" />
+          <Property Name="Website" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="AttractionLinks">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AttractionID" Type="int" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="500" />
+          <Property Name="Link" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="AttractionPhotos">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AttractionID" Type="int" Nullable="false" />
+          <Property Name="Image" Type="nvarchar" MaxLength="500" />
+          <Property Name="Thumb" Type="nvarchar" MaxLength="500" />
+          <Property Name="Caption" Type="nvarchar(max)" />
+          <Property Name="PhotoSourceID" Type="int" />
+          <Property Name="PhotoTypeID" Type="int" />
+          <Property Name="DateOfPhoto" Type="date" />
+        </EntityType>
+        <EntityType Name="Attractions">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AttractionName" Type="nvarchar" MaxLength="500" />
+          <Property Name="AttractionTypeID" Type="int" />
+          <Property Name="BodyOfWaterID" Type="int" />
+          <Property Name="TrailID" Type="int" />
+          <Property Name="YearBuilt" Type="int" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="NearestAddress" Type="nvarchar" MaxLength="500" />
+          <Property Name="City" Type="nvarchar" MaxLength="500" />
+          <Property Name="County" Type="nvarchar" MaxLength="500" />
+          <Property Name="ZipCode" Type="int" />
+          <Property Name="OpenToPublic" Type="bit" Nullable="false" />
+          <Property Name="HasWHSMooringBuoy" Type="bit" Nullable="false" />
+          <Property Name="MooringBuoyInPlace" Type="bit" Nullable="false" />
+          <Property Name="IsSnorkelable" Type="bit" Nullable="false" />
+          <Property Name="HasWHSDiveGuide" Type="bit" Nullable="false" />
+          <Property Name="HasTrailsSign" Type="bit" Nullable="false" />
+          <Property Name="HasTrailsExhibit" Type="bit" Nullable="false" />
+          <Property Name="IsNationalRegisterListed" Type="bit" Nullable="false" />
+          <Property Name="Latitude" Type="nvarchar" MaxLength="500" />
+          <Property Name="LatitudeDecimal" Type="float" />
+          <Property Name="Longitude" Type="nvarchar" MaxLength="500" />
+          <Property Name="LongitudeDecimal" Type="float" />
+          <Property Name="HideRecord" Type="bit" Nullable="false" />
+          <Property Name="LastModifiedBy" Type="nvarchar" MaxLength="500" />
+          <Property Name="LastModifiedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="AttractionTypes">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AttractionType" Type="nvarchar" MaxLength="500" />
+          <Property Name="Image" Type="nvarchar" MaxLength="500" />
+          <Property Name="DisplayOrder" Type="int" />
+        </EntityType>
+        <EntityType Name="BodiesOfWater">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BodyOfWater" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="Calendar">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="2000" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Date" Type="date" />
+          <Property Name="URL" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="CasualtyTypes">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CasualtyType" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="Contributors">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Contributor" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="Counties">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="County" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Culture">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Culture" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="CurrentResearch">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="2000" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Image" Type="nvarchar" MaxLength="500" />
+          <Property Name="DisplayOrder" Type="int" />
+        </EntityType>
+        <EntityType Name="DatingMethods">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DatingMethods" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Feedback">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Comments" Type="nvarchar(max)" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="Date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="FeedbackRecipients">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Glossary">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Term" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="Definition" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="HullMaterials">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HullMaterial" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="IDAccuracy">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Accuracy" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Links">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="2000" />
+          <Property Name="URL" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="LocationPotential">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LocationPotential" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="NationalRegisterStatus">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="NewsArticles">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NewspaperID" Type="int" />
+          <Property Name="Object" Type="nvarchar" MaxLength="100" />
+          <Property Name="Name" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Date" Type="datetime" />
+          <Property Name="Page" Type="nvarchar" MaxLength="50" />
+          <Property Name="Notes" Type="nvarchar(max)" />
+          <Property Name="OtherSpelling" Type="nvarchar" MaxLength="1000" />
+        </EntityType>
+        <EntityType Name="Newspapers">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Newspaper" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="OwnerManagerAgencies">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OwnerManagerAgency" Type="nvarchar" MaxLength="500" />
+          <Property Name="Address" Type="nvarchar" MaxLength="500" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="PercentVesselPresent">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Range" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="PhotoSources">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Source" Type="nvarchar" MaxLength="500" />
+          <Property Name="URL" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="PhotoTypes">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PhotoType" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="PropulsionTypes">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PropulsionType" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="RigTypes">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RigType" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="SturgeonBayStone">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SturgeonBayStone" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="TechnicalFieldReports">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="2000" />
+          <Property Name="Filename" Type="nvarchar" MaxLength="50" />
+          <Property Name="DisplayOrder" Type="int" />
+        </EntityType>
+        <EntityType Name="TimeFrames">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TimeFrame" Type="nvarchar" MaxLength="100" />
+          <Property Name="DisplayOrder" Type="int" />
+        </EntityType>
+        <EntityType Name="Trails">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TrailName" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="Vessel_Contributors">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VesselID" Type="int" Nullable="false" />
+          <Property Name="ContributorID" Type="int" />
+        </EntityType>
+        <EntityType Name="VesselHistory">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VesselID" Type="int" />
+          <Property Name="TimeFrame" Type="int" />
+          <Property Name="Title" Type="nvarchar" MaxLength="100" />
+          <Property Name="Subtitle" Type="nvarchar" MaxLength="100" />
+          <Property Name="Description" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="VesselPhotos">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VesselID" Type="int" Nullable="false" />
+          <Property Name="Image" Type="nvarchar" MaxLength="500" />
+          <Property Name="Thumb" Type="nvarchar" MaxLength="500" />
+          <Property Name="Caption" Type="nvarchar(max)" />
+          <Property Name="PhotoSourceID" Type="int" />
+          <Property Name="PhotoTypeID" Type="int" />
+          <Property Name="DateOfPhoto" Type="date" />
+        </EntityType>
+        <EntityType Name="Vessels">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VesselTypeID" Type="int" />
+          <Property Name="VesselName" Type="nvarchar" MaxLength="500" />
+          <Property Name="ASINumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="CasualtyTypeID" Type="int" />
+          <Property Name="CasualtyDate" Type="date" />
+          <Property Name="VesselAge" Type="int" />
+          <Property Name="Owners" Type="nvarchar(max)" />
+          <Property Name="HomePort" Type="nvarchar" MaxLength="255" />
+          <Property Name="Master" Type="nvarchar" MaxLength="255" />
+          <Property Name="CargoDescription" Type="nvarchar(max)" />
+          <Property Name="LivesLost" Type="nvarchar" MaxLength="50" />
+          <Property Name="FormerNames" Type="nvarchar(max)" />
+          <Property Name="RegistryNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="WhereBuilt" Type="nvarchar" MaxLength="500" />
+          <Property Name="Builder" Type="nvarchar" MaxLength="500" />
+          <Property Name="ContructionYear" Type="nvarchar" MaxLength="50" />
+          <Property Name="Length" Type="decimal" Precision="18" Scale="8" />
+          <Property Name="Breadth" Type="decimal" Precision="18" Scale="8" />
+          <Property Name="DepthOfHold" Type="decimal" Precision="18" Scale="8" />
+          <Property Name="GrossTonnage" Type="decimal" Precision="18" Scale="8" />
+          <Property Name="NetTonnage" Type="decimal" Precision="18" Scale="8" />
+          <Property Name="OMTonnage" Type="nvarchar" MaxLength="50" />
+          <Property Name="HullMaterialID" Type="int" />
+          <Property Name="PropulsionTypeID" Type="int" />
+          <Property Name="NumberOfMasts" Type="int" />
+          <Property Name="RigTypeID" Type="int" />
+          <Property Name="Engines" Type="nvarchar" MaxLength="500" />
+          <Property Name="Boilers" Type="nvarchar" MaxLength="500" />
+          <Property Name="Culture" Type="int" />
+          <Property Name="CulturalMaterial" Type="bit" Nullable="false" />
+          <Property Name="DatingMethods" Type="int" />
+          <Property Name="SurveyDate" Type="nvarchar" MaxLength="50" />
+          <Property Name="SurveyPrincipleInvestigator" Type="nvarchar" MaxLength="500" />
+          <Property Name="ExcavatedDate" Type="nvarchar" MaxLength="500" />
+          <Property Name="ExcavationPrincipleInvestigator" Type="nvarchar" MaxLength="500" />
+          <Property Name="NationalRegisterStatusID" Type="int" />
+          <Property Name="NationalRegisterStatusNotes" Type="nvarchar(max)" />
+          <Property Name="YearListedNationalRegister" Type="int" />
+          <Property Name="Submerged" Type="bit" Nullable="false" />
+          <Property Name="WaterDepth" Type="int" />
+          <Property Name="OnShoreline" Type="bit" Nullable="false" />
+          <Property Name="ConditionDescription" Type="nvarchar(max)" />
+          <Property Name="PercentVesselPresent" Type="int" />
+          <Property Name="WreckThreatened" Type="bit" Nullable="false" />
+          <Property Name="SiteName" Type="nvarchar" MaxLength="500" />
+          <Property Name="IDAccuracy" Type="int" />
+          <Property Name="CodeNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="BodyOfWaterID" Type="int" />
+          <Property Name="TrailID" Type="int" />
+          <Property Name="County" Type="nvarchar" MaxLength="50" />
+          <Property Name="NearestCity" Type="nvarchar" MaxLength="50" />
+          <Property Name="PACNumber" Type="int" />
+          <Property Name="LocationPotential" Type="int" />
+          <Property Name="DiveAccessible" Type="bit" Nullable="false" />
+          <Property Name="NOAAChart" Type="int" />
+          <Property Name="TRS" Type="nvarchar" MaxLength="50" />
+          <Property Name="QuarterSections" Type="nvarchar" MaxLength="500" />
+          <Property Name="USGSQuad" Type="nvarchar" MaxLength="500" />
+          <Property Name="OwnerManagerAgencyID" Type="int" />
+          <Property Name="SturgeonBayStone" Type="int" />
+          <Property Name="HasWHSMooringBuoy" Type="bit" Nullable="false" />
+          <Property Name="MooringBuoyInPlace" Type="bit" Nullable="false" />
+          <Property Name="HideLocationalInfo" Type="bit" Nullable="false" />
+          <Property Name="AccessDirections" Type="nvarchar(max)" />
+          <Property Name="HasWHSDiveGuide" Type="bit" Nullable="false" />
+          <Property Name="ChartImageFileName" Type="nvarchar" MaxLength="500" />
+          <Property Name="LocationKnown" Type="bit" Nullable="false" />
+          <Property Name="Latitude" Type="nvarchar" MaxLength="50" />
+          <Property Name="LatitudeDecimal" Type="float" />
+          <Property Name="Longitude" Type="nvarchar" MaxLength="50" />
+          <Property Name="LongitudeDecimal" Type="float" />
+          <Property Name="Featured" Type="bit" Nullable="false" />
+          <Property Name="FeaturedPhoto" Type="nvarchar" MaxLength="50" />
+          <Property Name="HideRecord" Type="bit" Nullable="false" />
+          <Property Name="LastModifiedBy" Type="nvarchar" MaxLength="500" />
+          <Property Name="LastModifiedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="VesselTypes">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VesselType" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="VesselVideos">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VesselID" Type="int" Nullable="false" />
+          <Property Name="YouTubeCode" Type="nvarchar" MaxLength="500" />
+          <Property Name="Thumb" Type="nvarchar" MaxLength="500" />
+          <Property Name="Caption" Type="nvarchar(max)" />
+          <Property Name="VideoSourceID" Type="int" />
+          <Property Name="VideoTypeID" Type="int" />
+          <Property Name="DateOfVideo" Type="date" />
+        </EntityType>
+        <EntityType Name="VideoSources">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Source" Type="nvarchar" MaxLength="500" />
+          <Property Name="URL" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="VideoTypes">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VideoType" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_NewsArticles_Newspapers">
+          <End Role="Newspapers" Type="Self.Newspapers" Multiplicity="0..1" />
+          <End Role="NewsArticles" Type="Self.NewsArticles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Newspapers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="NewsArticles">
+              <PropertyRef Name="NewspaperID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="WIShipwrecksModelStoreContainer">
+          <EntitySet Name="AttractionContacts" EntityType="Self.AttractionContacts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AttractionLinks" EntityType="Self.AttractionLinks" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AttractionPhotos" EntityType="Self.AttractionPhotos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Attractions" EntityType="Self.Attractions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AttractionTypes" EntityType="Self.AttractionTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BodiesOfWater" EntityType="Self.BodiesOfWater" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Calendar" EntityType="Self.Calendar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CasualtyTypes" EntityType="Self.CasualtyTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Contributors" EntityType="Self.Contributors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Counties" EntityType="Self.Counties" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Culture" EntityType="Self.Culture" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CurrentResearch" EntityType="Self.CurrentResearch" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DatingMethods" EntityType="Self.DatingMethods" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Feedback" EntityType="Self.Feedback" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FeedbackRecipients" EntityType="Self.FeedbackRecipients" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Glossary" EntityType="Self.Glossary" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HullMaterials" EntityType="Self.HullMaterials" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="IDAccuracy" EntityType="Self.IDAccuracy" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Links" EntityType="Self.Links" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LocationPotential" EntityType="Self.LocationPotential" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NationalRegisterStatus" EntityType="Self.NationalRegisterStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NewsArticles" EntityType="Self.NewsArticles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Newspapers" EntityType="Self.Newspapers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OwnerManagerAgencies" EntityType="Self.OwnerManagerAgencies" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PercentVesselPresent" EntityType="Self.PercentVesselPresent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PhotoSources" EntityType="Self.PhotoSources" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PhotoTypes" EntityType="Self.PhotoTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PropulsionTypes" EntityType="Self.PropulsionTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RigTypes" EntityType="Self.RigTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SturgeonBayStone" EntityType="Self.SturgeonBayStone" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TechnicalFieldReports" EntityType="Self.TechnicalFieldReports" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TimeFrames" EntityType="Self.TimeFrames" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Trails" EntityType="Self.Trails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Vessel_Contributors" EntityType="Self.Vessel_Contributors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VesselHistory" EntityType="Self.VesselHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VesselPhotos" EntityType="Self.VesselPhotos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Vessels" EntityType="Self.Vessels" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VesselTypes" EntityType="Self.VesselTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VesselVideos" EntityType="Self.VesselVideos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VideoSources" EntityType="Self.VideoSources" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VideoTypes" EntityType="Self.VideoTypes" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_NewsArticles_Newspapers" Association="Self.FK_NewsArticles_Newspapers">
+            <End Role="Newspapers" EntitySet="Newspapers" />
+            <End Role="NewsArticles" EntitySet="NewsArticles" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="WIShipwrecksModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AttractionContact">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AttractionID" Type="Int32" Nullable="false" />
+          <Property Name="ContactName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ContactPhone" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ContactPhoneAlt" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Attraction" Relationship="Self.FK_AttractionContacts_Attractions" FromRole="AttractionContacts" ToRole="Attractions" />
+          <Property Name="Email" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Website" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="AttractionLink">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AttractionID" Type="Int32" Nullable="false" />
+          <Property Name="Link" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Attraction" Relationship="Self.FK_AttractionLinks_Attractions" FromRole="AttractionLinks" ToRole="Attractions" />
+          <Property Name="Title" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="AttractionPhoto">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AttractionID" Type="Int32" Nullable="false" />
+          <Property Name="Image" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Attraction" Relationship="Self.FK_AttractionPhotos_Attractions" FromRole="AttractionPhotos" ToRole="Attractions" />
+          <Property Name="Thumb" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Caption" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhotoSourceID" Type="Int32" />
+          <Property Name="PhotoTypeID" Type="Int32" />
+          <Property Name="DateOfPhoto" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="PhotoSource" Relationship="WIShipwrecksModel.PhotoSourceAttractionPhoto" FromRole="AttractionPhoto" ToRole="PhotoSource" />
+          <NavigationProperty Name="PhotoType" Relationship="WIShipwrecksModel.PhotoTypeAttractionPhoto" FromRole="AttractionPhoto" ToRole="PhotoType" />
+        </EntityType>
+        <EntityType Name="Attraction">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AttractionName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="AttractionTypeID" Type="Int32" />
+          <Property Name="BodyOfWaterID" Type="Int32" />
+          <Property Name="TrailID" Type="Int32" />
+          <Property Name="YearBuilt" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NearestAddress" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="County" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ZipCode" Type="Int32" />
+          <Property Name="OpenToPublic" Type="Boolean" Nullable="false" />
+          <Property Name="HasWHSMooringBuoy" Type="Boolean" Nullable="false" />
+          <Property Name="IsSnorkelable" Type="Boolean" Nullable="false" />
+          <Property Name="HasWHSDiveGuide" Type="Boolean" Nullable="false" />
+          <Property Name="HasTrailsSign" Type="Boolean" Nullable="false" />
+          <Property Name="HasTrailsExhibit" Type="Boolean" Nullable="false" />
+          <Property Name="IsNationalRegisterListed" Type="Boolean" Nullable="false" />
+          <Property Name="Latitude" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Longitude" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AttractionContacts" Relationship="Self.FK_AttractionContacts_Attractions" FromRole="Attractions" ToRole="AttractionContacts" />
+          <NavigationProperty Name="AttractionLinks" Relationship="Self.FK_AttractionLinks_Attractions" FromRole="Attractions" ToRole="AttractionLinks" />
+          <NavigationProperty Name="AttractionPhotos" Relationship="Self.FK_AttractionPhotos_Attractions" FromRole="Attractions" ToRole="AttractionPhotos" />
+          <Property Name="HideRecord" Type="Boolean" Nullable="false" />
+          <Property Name="LastModifiedBy" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="LastModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="MooringBuoyInPlace" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="AttractionType" Relationship="WIShipwrecksModel.AttractionTypeAttraction" FromRole="Attraction" ToRole="AttractionType" />
+          <NavigationProperty Name="Trail" Relationship="WIShipwrecksModel.TrailAttraction" FromRole="Attraction" ToRole="Trail" />
+          <Property Name="LatitudeDecimal" Type="Double" />
+          <Property Name="LongitudeDecimal" Type="Double" />
+          <NavigationProperty Name="BodiesOfWater" Relationship="WIShipwrecksModel.AttractionBodiesOfWater" FromRole="Attraction" ToRole="BodiesOfWater" />
+        </EntityType>
+        <EntityType Name="AttractionType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AttractionType1" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="DisplayOrder" Type="Int32" />
+          <NavigationProperty Name="Attractions" Relationship="WIShipwrecksModel.AttractionTypeAttraction" FromRole="AttractionType" ToRole="Attraction" />
+          <Property Name="Image" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="BodiesOfWater">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BodyOfWater" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Vessels" Relationship="WIShipwrecksModel.BodiesOfWaterVessel" FromRole="BodiesOfWater" ToRole="Vessel" />
+          <NavigationProperty Name="Attractions" Relationship="WIShipwrecksModel.AttractionBodiesOfWater" FromRole="BodiesOfWater" ToRole="Attraction" />
+        </EntityType>
+        <EntityType Name="CasualtyType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CasualtyType1" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Vessels" Relationship="WIShipwrecksModel.CasualtyTypeVessel" FromRole="CasualtyType" ToRole="Vessel" />
+        </EntityType>
+        <EntityType Name="Contributor">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Contributor1" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="County">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="County1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="HullMaterial">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HullMaterial1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Vessels" Relationship="WIShipwrecksModel.HullMaterialVessel" FromRole="HullMaterial" ToRole="Vessel" />
+        </EntityType>
+        <EntityType Name="OwnerManagerAgency">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OwnerManagerAgency1" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="PhotoSource">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Source" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="URL" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="VesselPhotos" Relationship="Self.FK_VesselPhotos_PhotoSources" FromRole="PhotoSources" ToRole="VesselPhotos" />
+          <NavigationProperty Name="AttractionPhotos" Relationship="WIShipwrecksModel.PhotoSourceAttractionPhoto" FromRole="PhotoSource" ToRole="AttractionPhoto" />
+        </EntityType>
+        <EntityType Name="PhotoType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PhotoType1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="VesselPhotos" Relationship="Self.FK_VesselPhotos_PhotoTypes" FromRole="PhotoTypes" ToRole="VesselPhotos" />
+          <NavigationProperty Name="AttractionPhotos" Relationship="WIShipwrecksModel.PhotoTypeAttractionPhoto" FromRole="PhotoType" ToRole="AttractionPhoto" />
+        </EntityType>
+        <EntityType Name="PropulsionType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PropulsionType1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Vessels" Relationship="WIShipwrecksModel.PropulsionTypeVessel" FromRole="PropulsionType" ToRole="Vessel" />
+        </EntityType>
+        <EntityType Name="RigType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RigType1" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Vessels" Relationship="WIShipwrecksModel.RigTypeVessel" FromRole="RigType" ToRole="Vessel" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Trail">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TrailName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Attractions" Relationship="WIShipwrecksModel.TrailAttraction" FromRole="Trail" ToRole="Attraction" />
+        </EntityType>
+        <EntityType Name="Vessel_Contributors">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VesselID" Type="Int32" Nullable="false" />
+          <Property Name="ContributorID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="VesselPhoto">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VesselID" Type="Int32" Nullable="false" />
+          <Property Name="Caption" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhotoSourceID" Type="Int32" />
+          <Property Name="PhotoTypeID" Type="Int32" />
+          <Property Name="DateOfPhoto" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="PhotoSource" Relationship="Self.FK_VesselPhotos_PhotoSources" FromRole="VesselPhotos" ToRole="PhotoSources" />
+          <NavigationProperty Name="PhotoType" Relationship="Self.FK_VesselPhotos_PhotoTypes" FromRole="VesselPhotos" ToRole="PhotoTypes" />
+          <NavigationProperty Name="Vessel" Relationship="Self.FK_VesselPhotos_VesselPhotos" FromRole="VesselPhotos" ToRole="Vessels" />
+          <Property Name="Image" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Thumb" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Vessel">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VesselTypeID" Type="Int32" />
+          <Property Name="VesselName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ASINumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CasualtyTypeID" Type="Int32" />
+          <Property Name="CasualtyDate" Type="DateTime" Precision="0" />
+          <Property Name="VesselAge" Type="Int32" />
+          <Property Name="Owners" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="HomePort" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Master" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CargoDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LivesLost" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FormerNames" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RegistryNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="WhereBuilt" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Builder" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ContructionYear" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Length" Type="Decimal" Precision="18" Scale="8" />
+          <Property Name="Breadth" Type="Decimal" Precision="18" Scale="8" />
+          <Property Name="DepthOfHold" Type="Decimal" Precision="18" Scale="8" />
+          <Property Name="GrossTonnage" Type="Decimal" Precision="18" Scale="8" />
+          <Property Name="NetTonnage" Type="Decimal" Precision="18" Scale="8" />
+          <Property Name="OMTonnage" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="HullMaterialID" Type="Int32" />
+          <Property Name="PropulsionTypeID" Type="Int32" />
+          <Property Name="NumberOfMasts" Type="Int32" />
+          <Property Name="RigTypeID" Type="Int32" />
+          <Property Name="Engines" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Boilers" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Culture" Type="Int32" />
+          <Property Name="CulturalMaterial" Type="Boolean" Nullable="false" />
+          <Property Name="DatingMethods" Type="Int32" />
+          <Property Name="SurveyDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SurveyPrincipleInvestigator" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ExcavatedDate" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ExcavationPrincipleInvestigator" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="NationalRegisterStatusID" Type="Int32" />
+          <Property Name="NationalRegisterStatusNotes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="YearListedNationalRegister" Type="Int32" />
+          <Property Name="Submerged" Type="Boolean" Nullable="false" />
+          <Property Name="WaterDepth" Type="Int32" />
+          <Property Name="OnShoreline" Type="Boolean" Nullable="false" />
+          <Property Name="ConditionDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PercentVesselPresent" Type="Int32" />
+          <Property Name="WreckThreatened" Type="Boolean" Nullable="false" />
+          <Property Name="SiteName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="IDAccuracy" Type="Int32" />
+          <Property Name="CodeNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BodyOfWaterID" Type="Int32" />
+          <Property Name="TrailID" Type="Int32" />
+          <Property Name="County" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NearestCity" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PACNumber" Type="Int32" />
+          <Property Name="LocationPotential" Type="Int32" />
+          <Property Name="DiveAccessible" Type="Boolean" Nullable="false" />
+          <Property Name="NOAAChart" Type="Int32" />
+          <Property Name="TRS" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="QuarterSections" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="USGSQuad" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="OwnerManagerAgencyID" Type="Int32" />
+          <Property Name="SturgeonBayStone" Type="Int32" />
+          <Property Name="HasWHSMooringBuoy" Type="Boolean" Nullable="false" />
+          <Property Name="HideLocationalInfo" Type="Boolean" Nullable="false" />
+          <Property Name="AccessDirections" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="HasWHSDiveGuide" Type="Boolean" Nullable="false" />
+          <Property Name="ChartImageFileName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Latitude" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Longitude" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="HideRecord" Type="Boolean" Nullable="false" />
+          <Property Name="LastModifiedBy" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="LastModifiedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="VesselPhotos" Relationship="Self.FK_VesselPhotos_VesselPhotos" FromRole="Vessels" ToRole="VesselPhotos" />
+          <NavigationProperty Name="VesselType" Relationship="WIShipwrecksModel.VesselTypeVessel" FromRole="Vessel" ToRole="VesselType" />
+          <NavigationProperty Name="BodiesOfWater" Relationship="WIShipwrecksModel.BodiesOfWaterVessel" FromRole="Vessel" ToRole="BodiesOfWater" />
+          <NavigationProperty Name="NationalRegisterStatus" Relationship="WIShipwrecksModel.NationalRegisterStatusVessel" FromRole="Vessel" ToRole="NationalRegisterStatus" />
+          <NavigationProperty Name="PercentVesselPresent1" Relationship="WIShipwrecksModel.PercentVesselPresentVessel" FromRole="Vessel" ToRole="PercentVesselPresent" />
+          <NavigationProperty Name="SturgeonBayStone1" Relationship="WIShipwrecksModel.SturgeonBayStoneVessel" FromRole="Vessel" ToRole="SturgeonBayStone" />
+          <Property Name="MooringBuoyInPlace" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="CasualtyType" Relationship="WIShipwrecksModel.CasualtyTypeVessel" FromRole="Vessel" ToRole="CasualtyType" />
+          <NavigationProperty Name="HullMaterial" Relationship="WIShipwrecksModel.HullMaterialVessel" FromRole="Vessel" ToRole="HullMaterial" />
+          <NavigationProperty Name="PropulsionType" Relationship="WIShipwrecksModel.PropulsionTypeVessel" FromRole="Vessel" ToRole="PropulsionType" />
+          <NavigationProperty Name="RigType" Relationship="WIShipwrecksModel.RigTypeVessel" FromRole="Vessel" ToRole="RigType" />
+          <NavigationProperty Name="IDAccuracy1" Relationship="WIShipwrecksModel.IDAccuracyVessel" FromRole="Vessel" ToRole="IDAccuracy" />
+          <NavigationProperty Name="LocationPotential1" Relationship="WIShipwrecksModel.LocationPotentialVessel" FromRole="Vessel" ToRole="LocationPotential" />
+          <NavigationProperty Name="DatingMethod" Relationship="WIShipwrecksModel.DatingMethodVessel" FromRole="Vessel" ToRole="DatingMethod" />
+          <NavigationProperty Name="Culture1" Relationship="WIShipwrecksModel.CultureVessel" FromRole="Vessel" ToRole="Culture" />
+          <Property Name="Featured" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="VesselHistories" Relationship="WIShipwrecksModel.VesselHistoryVessel" FromRole="Vessel" ToRole="VesselHistory" />
+          <Property Name="LatitudeDecimal" Type="Double" />
+          <Property Name="LongitudeDecimal" Type="Double" />
+          <NavigationProperty Name="VesselVideos" Relationship="WIShipwrecksModel.VesselVideoVessel" FromRole="Vessel" ToRole="VesselVideo" />
+          <Property Name="FeaturedPhoto" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LocationKnown" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VesselType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VesselType1" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Vessels" Relationship="WIShipwrecksModel.VesselTypeVessel" FromRole="VesselType" ToRole="Vessel" />
+        </EntityType>
+        <Association Name="FK_AttractionContacts_Attractions">
+          <End Role="Attractions" Type="Self.Attraction" Multiplicity="1" />
+          <End Role="AttractionContacts" Type="Self.AttractionContact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Attractions">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AttractionContacts">
+              <PropertyRef Name="AttractionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AttractionLinks_Attractions">
+          <End Role="Attractions" Type="Self.Attraction" Multiplicity="1" />
+          <End Role="AttractionLinks" Type="Self.AttractionLink" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Attractions">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AttractionLinks">
+              <PropertyRef Name="AttractionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AttractionPhotos_Attractions">
+          <End Role="Attractions" Type="Self.Attraction" Multiplicity="1" />
+          <End Role="AttractionPhotos" Type="Self.AttractionPhoto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Attractions">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AttractionPhotos">
+              <PropertyRef Name="AttractionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VesselPhotos_PhotoSources">
+          <End Role="PhotoSources" Type="Self.PhotoSource" Multiplicity="0..1" />
+          <End Role="VesselPhotos" Type="Self.VesselPhoto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PhotoSources">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="VesselPhotos">
+              <PropertyRef Name="PhotoSourceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VesselPhotos_PhotoTypes">
+          <End Role="PhotoTypes" Type="Self.PhotoType" Multiplicity="0..1" />
+          <End Role="VesselPhotos" Type="Self.VesselPhoto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PhotoTypes">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="VesselPhotos">
+              <PropertyRef Name="PhotoTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VesselPhotos_VesselPhotos">
+          <End Role="Vessels" Type="Self.Vessel" Multiplicity="1" />
+          <End Role="VesselPhotos" Type="Self.VesselPhoto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vessels">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="VesselPhotos">
+              <PropertyRef Name="VesselID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="WIShipwrecksEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AttractionContacts" EntityType="Self.AttractionContact" />
+          <EntitySet Name="AttractionLinks" EntityType="Self.AttractionLink" />
+          <EntitySet Name="AttractionPhotos" EntityType="Self.AttractionPhoto" />
+          <EntitySet Name="Attractions" EntityType="Self.Attraction" />
+          <EntitySet Name="AttractionTypes" EntityType="Self.AttractionType" />
+          <EntitySet Name="BodiesOfWaters" EntityType="Self.BodiesOfWater" />
+          <EntitySet Name="CasualtyTypes" EntityType="Self.CasualtyType" />
+          <EntitySet Name="Contributors" EntityType="Self.Contributor" />
+          <EntitySet Name="Counties" EntityType="Self.County" />
+          <EntitySet Name="HullMaterials" EntityType="Self.HullMaterial" />
+          <EntitySet Name="OwnerManagerAgencies" EntityType="Self.OwnerManagerAgency" />
+          <EntitySet Name="PhotoSources" EntityType="Self.PhotoSource" />
+          <EntitySet Name="PhotoTypes" EntityType="Self.PhotoType" />
+          <EntitySet Name="PropulsionTypes" EntityType="Self.PropulsionType" />
+          <EntitySet Name="RigTypes" EntityType="Self.RigType" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="Trails" EntityType="Self.Trail" />
+          <EntitySet Name="Vessel_Contributors" EntityType="Self.Vessel_Contributors" />
+          <EntitySet Name="VesselPhotos" EntityType="Self.VesselPhoto" />
+          <EntitySet Name="Vessels" EntityType="Self.Vessel" />
+          <EntitySet Name="VesselTypes" EntityType="Self.VesselType" />
+          <AssociationSet Name="FK_AttractionContacts_Attractions" Association="Self.FK_AttractionContacts_Attractions">
+            <End Role="Attractions" EntitySet="Attractions" />
+            <End Role="AttractionContacts" EntitySet="AttractionContacts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AttractionLinks_Attractions" Association="Self.FK_AttractionLinks_Attractions">
+            <End Role="Attractions" EntitySet="Attractions" />
+            <End Role="AttractionLinks" EntitySet="AttractionLinks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AttractionPhotos_Attractions" Association="Self.FK_AttractionPhotos_Attractions">
+            <End Role="Attractions" EntitySet="Attractions" />
+            <End Role="AttractionPhotos" EntitySet="AttractionPhotos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VesselPhotos_PhotoSources" Association="Self.FK_VesselPhotos_PhotoSources">
+            <End Role="PhotoSources" EntitySet="PhotoSources" />
+            <End Role="VesselPhotos" EntitySet="VesselPhotos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VesselPhotos_PhotoTypes" Association="Self.FK_VesselPhotos_PhotoTypes">
+            <End Role="PhotoTypes" EntitySet="PhotoTypes" />
+            <End Role="VesselPhotos" EntitySet="VesselPhotos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VesselPhotos_VesselPhotos" Association="Self.FK_VesselPhotos_VesselPhotos">
+            <End Role="Vessels" EntitySet="Vessels" />
+            <End Role="VesselPhotos" EntitySet="VesselPhotos" />
+          </AssociationSet>
+          <AssociationSet Name="VesselTypeVessel" Association="WIShipwrecksModel.VesselTypeVessel">
+            <End Role="VesselType" EntitySet="VesselTypes" />
+            <End Role="Vessel" EntitySet="Vessels" />
+          </AssociationSet>
+          <AssociationSet Name="BodiesOfWaterVessel" Association="WIShipwrecksModel.BodiesOfWaterVessel">
+            <End Role="BodiesOfWater" EntitySet="BodiesOfWaters" />
+            <End Role="Vessel" EntitySet="Vessels" />
+          </AssociationSet>
+          <EntitySet Name="NewsArticles" EntityType="WIShipwrecksModel.NewsArticle" />
+          <EntitySet Name="Newspapers" EntityType="WIShipwrecksModel.Newspaper" />
+          <AssociationSet Name="FK_NewsArticles_Newspapers" Association="WIShipwrecksModel.FK_NewsArticles_Newspapers">
+            <End Role="Newspaper" EntitySet="Newspapers" />
+            <End Role="NewsArticle" EntitySet="NewsArticles" />
+          </AssociationSet>
+          <AssociationSet Name="PhotoSourceAttractionPhoto" Association="WIShipwrecksModel.PhotoSourceAttractionPhoto">
+            <End Role="PhotoSource" EntitySet="PhotoSources" />
+            <End Role="AttractionPhoto" EntitySet="AttractionPhotos" />
+          </AssociationSet>
+          <AssociationSet Name="PhotoTypeAttractionPhoto" Association="WIShipwrecksModel.PhotoTypeAttractionPhoto">
+            <End Role="PhotoType" EntitySet="PhotoTypes" />
+            <End Role="AttractionPhoto" EntitySet="AttractionPhotos" />
+          </AssociationSet>
+          <EntitySet Name="NationalRegisterStatus1" EntityType="WIShipwrecksModel.NationalRegisterStatus" />
+          <AssociationSet Name="NationalRegisterStatusVessel" Association="WIShipwrecksModel.NationalRegisterStatusVessel">
+            <End Role="NationalRegisterStatus" EntitySet="NationalRegisterStatus1" />
+            <End Role="Vessel" EntitySet="Vessels" />
+          </AssociationSet>
+          <EntitySet Name="PercentVesselPresents" EntityType="WIShipwrecksModel.PercentVesselPresent" />
+          <AssociationSet Name="PercentVesselPresentVessel" Association="WIShipwrecksModel.PercentVesselPresentVessel">
+            <End Role="PercentVesselPresent" EntitySet="PercentVesselPresents" />
+            <End Role="Vessel" EntitySet="Vessels" />
+          </AssociationSet>
+          <EntitySet Name="SturgeonBayStones" EntityType="WIShipwrecksModel.SturgeonBayStone" />
+          <AssociationSet Name="SturgeonBayStoneVessel" Association="WIShipwrecksModel.SturgeonBayStoneVessel">
+            <End Role="SturgeonBayStone" EntitySet="SturgeonBayStones" />
+            <End Role="Vessel" EntitySet="Vessels" />
+          </AssociationSet>
+          <AssociationSet Name="CasualtyTypeVessel" Association="WIShipwrecksModel.CasualtyTypeVessel">
+            <End Role="CasualtyType" EntitySet="CasualtyTypes" />
+            <End Role="Vessel" EntitySet="Vessels" />
+          </AssociationSet>
+          <AssociationSet Name="HullMaterialVessel" Association="WIShipwrecksModel.HullMaterialVessel">
+            <End Role="HullMaterial" EntitySet="HullMaterials" />
+            <End Role="Vessel" EntitySet="Vessels" />
+          </AssociationSet>
+          <AssociationSet Name="PropulsionTypeVessel" Association="WIShipwrecksModel.PropulsionTypeVessel">
+            <End Role="PropulsionType" EntitySet="PropulsionTypes" />
+            <End Role="Vessel" EntitySet="Vessels" />
+          </AssociationSet>
+          <AssociationSet Name="RigTypeVessel" Association="WIShipwrecksModel.RigTypeVessel">
+            <End Role="RigType" EntitySet="RigTypes" />
+            <End Role="Vessel" EntitySet="Vessels" />
+          </AssociationSet>
+          <AssociationSet Name="AttractionTypeAttraction" Association="WIShipwrecksModel.AttractionTypeAttraction">
+            <End Role="AttractionType" EntitySet="AttractionTypes" />
+            <End Role="Attraction" EntitySet="Attractions" />
+          </AssociationSet>
+          <AssociationSet Name="TrailAttraction" Association="WIShipwrecksModel.TrailAttraction">
+            <End Role="Trail" EntitySet="Trails" />
+            <End Role="Attraction" EntitySet="Attractions" />
+          </AssociationSet>
+          <EntitySet Name="Glossaries" EntityType="WIShipwrecksModel.Glossary" />
+          <EntitySet Name="DatingMethods" EntityType="WIShipwrecksModel.DatingMethod" />
+          <EntitySet Name="IDAccuracies" EntityType="WIShipwrecksModel.IDAccuracy" />
+          <EntitySet Name="LocationPotentials" EntityType="WIShipwrecksModel.LocationPotential" />
+          <AssociationSet Name="IDAccuracyVessel" Association="WIShipwrecksModel.IDAccuracyVessel">
+            <End Role="IDAccuracy" EntitySet="IDAccuracies" />
+            <End Role="Vessel" EntitySet="Vessels" />
+          </AssociationSet>
+          <AssociationSet Name="LocationPotentialVessel" Association="WIShipwrecksModel.LocationPotentialVessel">
+            <End Role="LocationPotential" EntitySet="LocationPotentials" />
+            <End Role="Vessel" EntitySet="Vessels" />
+          </AssociationSet>
+          <AssociationSet Name="DatingMethodVessel" Association="WIShipwrecksModel.DatingMethodVessel">
+            <End Role="DatingMethod" EntitySet="DatingMethods" />
+            <End Role="Vessel" EntitySet="Vessels" />
+          </AssociationSet>
+          <EntitySet Name="Cultures" EntityType="WIShipwrecksModel.Culture" />
+          <AssociationSet Name="CultureVessel" Association="WIShipwrecksModel.CultureVessel">
+            <End Role="Culture" EntitySet="Cultures" />
+            <End Role="Vessel" EntitySet="Vessels" />
+          </AssociationSet>
+          <EntitySet Name="TimeFrames" EntityType="WIShipwrecksModel.TimeFrame" />
+          <EntitySet Name="VesselHistories" EntityType="WIShipwrecksModel.VesselHistory" />
+          <AssociationSet Name="VesselHistoryVessel" Association="WIShipwrecksModel.VesselHistoryVessel">
+            <End Role="VesselHistory" EntitySet="VesselHistories" />
+            <End Role="Vessel" EntitySet="Vessels" />
+          </AssociationSet>
+          <AssociationSet Name="VesselHistoryTimeFrame" Association="WIShipwrecksModel.VesselHistoryTimeFrame">
+            <End Role="VesselHistory" EntitySet="VesselHistories" />
+            <End Role="TimeFrame" EntitySet="TimeFrames" />
+          </AssociationSet>
+          <EntitySet Name="VesselVideos" EntityType="WIShipwrecksModel.VesselVideo" />
+          <EntitySet Name="VideoSources" EntityType="WIShipwrecksModel.VideoSource" />
+          <EntitySet Name="VideoTypes" EntityType="WIShipwrecksModel.VideoType" />
+          <AssociationSet Name="VesselVideoVessel" Association="WIShipwrecksModel.VesselVideoVessel">
+            <End Role="VesselVideo" EntitySet="VesselVideos" />
+            <End Role="Vessel" EntitySet="Vessels" />
+          </AssociationSet>
+          <AssociationSet Name="VesselVideoVideoSource" Association="WIShipwrecksModel.VesselVideoVideoSource">
+            <End Role="VesselVideo" EntitySet="VesselVideos" />
+            <End Role="VideoSource" EntitySet="VideoSources" />
+          </AssociationSet>
+          <AssociationSet Name="VesselVideoVideoType" Association="WIShipwrecksModel.VesselVideoVideoType">
+            <End Role="VesselVideo" EntitySet="VesselVideos" />
+            <End Role="VideoType" EntitySet="VideoTypes" />
+          </AssociationSet>
+          <EntitySet Name="Feedbacks" EntityType="WIShipwrecksModel.Feedback" />
+          <EntitySet Name="FeedbackRecipients" EntityType="WIShipwrecksModel.FeedbackRecipient" />
+          <AssociationSet Name="AttractionBodiesOfWater" Association="WIShipwrecksModel.AttractionBodiesOfWater">
+            <End Role="Attraction" EntitySet="Attractions" />
+            <End Role="BodiesOfWater" EntitySet="BodiesOfWaters" />
+          </AssociationSet>
+          <EntitySet Name="CurrentResearches" EntityType="WIShipwrecksModel.CurrentResearch" />
+          <EntitySet Name="TechnicalFieldReports" EntityType="WIShipwrecksModel.TechnicalFieldReport" />
+          <EntitySet Name="Calendars" EntityType="WIShipwrecksModel.Calendar" />
+          <EntitySet Name="Links" EntityType="WIShipwrecksModel.Link" />
+          </EntityContainer>
+        <Association Name="VesselTypeVessel">
+          <End Type="WIShipwrecksModel.VesselType" Role="VesselType" Multiplicity="0..1" />
+          <End Type="WIShipwrecksModel.Vessel" Role="Vessel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VesselType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Vessel">
+              <PropertyRef Name="VesselTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="BodiesOfWaterVessel">
+          <End Type="WIShipwrecksModel.BodiesOfWater" Role="BodiesOfWater" Multiplicity="0..1" />
+          <End Type="WIShipwrecksModel.Vessel" Role="Vessel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BodiesOfWater">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Vessel">
+              <PropertyRef Name="BodyOfWaterID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="NewsArticle">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NewspaperID" Type="Int32" />
+          <Property Name="Object" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <Property Name="Page" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="OtherSpelling" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Newspaper" Relationship="WIShipwrecksModel.FK_NewsArticles_Newspapers" FromRole="NewsArticle" ToRole="Newspaper" />
+        </EntityType>
+        <EntityType Name="Newspaper">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Newspaper1" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="NewsArticles" Relationship="WIShipwrecksModel.FK_NewsArticles_Newspapers" FromRole="Newspaper" ToRole="NewsArticle" />
+        </EntityType>
+        <Association Name="FK_NewsArticles_Newspapers">
+          <End Type="WIShipwrecksModel.Newspaper" Role="Newspaper" Multiplicity="0..1" />
+          <End Type="WIShipwrecksModel.NewsArticle" Role="NewsArticle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Newspaper">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="NewsArticle">
+              <PropertyRef Name="NewspaperID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PhotoSourceAttractionPhoto">
+          <End Type="WIShipwrecksModel.PhotoSource" Role="PhotoSource" Multiplicity="0..1" />
+          <End Type="WIShipwrecksModel.AttractionPhoto" Role="AttractionPhoto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PhotoSource">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AttractionPhoto">
+              <PropertyRef Name="PhotoSourceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PhotoTypeAttractionPhoto">
+          <End Type="WIShipwrecksModel.PhotoType" Role="PhotoType" Multiplicity="0..1" />
+          <End Type="WIShipwrecksModel.AttractionPhoto" Role="AttractionPhoto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PhotoType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AttractionPhoto">
+              <PropertyRef Name="PhotoTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="NationalRegisterStatus">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Vessels" Relationship="WIShipwrecksModel.NationalRegisterStatusVessel" FromRole="NationalRegisterStatus" ToRole="Vessel" />
+        </EntityType>
+        <Association Name="NationalRegisterStatusVessel">
+          <End Type="WIShipwrecksModel.NationalRegisterStatus" Role="NationalRegisterStatus" Multiplicity="0..1" />
+          <End Type="WIShipwrecksModel.Vessel" Role="Vessel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NationalRegisterStatus">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Vessel">
+              <PropertyRef Name="NationalRegisterStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="PercentVesselPresent">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Range" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Vessels" Relationship="WIShipwrecksModel.PercentVesselPresentVessel" FromRole="PercentVesselPresent" ToRole="Vessel" />
+        </EntityType>
+        <Association Name="PercentVesselPresentVessel">
+          <End Type="WIShipwrecksModel.PercentVesselPresent" Role="PercentVesselPresent" Multiplicity="0..1" />
+          <End Type="WIShipwrecksModel.Vessel" Role="Vessel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PercentVesselPresent">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Vessel">
+              <PropertyRef Name="PercentVesselPresent" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="SturgeonBayStone">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SturgeonBayStone1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Vessels" Relationship="WIShipwrecksModel.SturgeonBayStoneVessel" FromRole="SturgeonBayStone" ToRole="Vessel" />
+        </EntityType>
+        <Association Name="SturgeonBayStoneVessel">
+          <End Type="WIShipwrecksModel.SturgeonBayStone" Role="SturgeonBayStone" Multiplicity="0..1" />
+          <End Type="WIShipwrecksModel.Vessel" Role="Vessel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SturgeonBayStone">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Vessel">
+              <PropertyRef Name="SturgeonBayStone" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CasualtyTypeVessel">
+          <End Type="WIShipwrecksModel.CasualtyType" Role="CasualtyType" Multiplicity="0..1" />
+          <End Type="WIShipwrecksModel.Vessel" Role="Vessel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CasualtyType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Vessel">
+              <PropertyRef Name="CasualtyTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="HullMaterialVessel">
+          <End Type="WIShipwrecksModel.HullMaterial" Role="HullMaterial" Multiplicity="0..1" />
+          <End Type="WIShipwrecksModel.Vessel" Role="Vessel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HullMaterial">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Vessel">
+              <PropertyRef Name="HullMaterialID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PropulsionTypeVessel">
+          <End Type="WIShipwrecksModel.PropulsionType" Role="PropulsionType" Multiplicity="0..1" />
+          <End Type="WIShipwrecksModel.Vessel" Role="Vessel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PropulsionType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Vessel">
+              <PropertyRef Name="PropulsionTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RigTypeVessel">
+          <End Type="WIShipwrecksModel.RigType" Role="RigType" Multiplicity="0..1" />
+          <End Type="WIShipwrecksModel.Vessel" Role="Vessel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RigType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Vessel">
+              <PropertyRef Name="RigTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AttractionTypeAttraction">
+          <End Type="WIShipwrecksModel.AttractionType" Role="AttractionType" Multiplicity="0..1" />
+          <End Type="WIShipwrecksModel.Attraction" Role="Attraction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AttractionType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Attraction">
+              <PropertyRef Name="AttractionTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TrailAttraction">
+          <End Type="WIShipwrecksModel.Trail" Role="Trail" Multiplicity="0..1" />
+          <End Type="WIShipwrecksModel.Attraction" Role="Attraction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Trail">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Attraction">
+              <PropertyRef Name="TrailID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Glossary">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Term" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Definition" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="DatingMethod">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DatingMethods" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Vessels" Relationship="WIShipwrecksModel.DatingMethodVessel" FromRole="DatingMethod" ToRole="Vessel" />
+        </EntityType>
+        <EntityType Name="IDAccuracy">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Accuracy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Vessels" Relationship="WIShipwrecksModel.IDAccuracyVessel" FromRole="IDAccuracy" ToRole="Vessel" />
+        </EntityType>
+        <EntityType Name="LocationPotential">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LocationPotential1" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Vessels" Relationship="WIShipwrecksModel.LocationPotentialVessel" FromRole="LocationPotential" ToRole="Vessel" />
+        </EntityType>
+        <Association Name="IDAccuracyVessel">
+          <End Type="WIShipwrecksModel.IDAccuracy" Role="IDAccuracy" Multiplicity="0..1" />
+          <End Type="WIShipwrecksModel.Vessel" Role="Vessel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IDAccuracy">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Vessel">
+              <PropertyRef Name="IDAccuracy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="LocationPotentialVessel">
+          <End Type="WIShipwrecksModel.LocationPotential" Role="LocationPotential" Multiplicity="0..1" />
+          <End Type="WIShipwrecksModel.Vessel" Role="Vessel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LocationPotential">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Vessel">
+              <PropertyRef Name="LocationPotential" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="DatingMethodVessel">
+          <End Type="WIShipwrecksModel.DatingMethod" Role="DatingMethod" Multiplicity="0..1" />
+          <End Type="WIShipwrecksModel.Vessel" Role="Vessel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DatingMethod">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Vessel">
+              <PropertyRef Name="DatingMethods" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Culture">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Culture1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Vessels" Relationship="WIShipwrecksModel.CultureVessel" FromRole="Culture" ToRole="Vessel" />
+        </EntityType>
+        <Association Name="CultureVessel">
+          <End Type="WIShipwrecksModel.Culture" Role="Culture" Multiplicity="0..1" />
+          <End Type="WIShipwrecksModel.Vessel" Role="Vessel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Culture">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Vessel">
+              <PropertyRef Name="Culture" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="TimeFrame">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TimeFrame1" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="DisplayOrder" Type="Int32" />
+          <NavigationProperty Name="VesselHistories" Relationship="WIShipwrecksModel.VesselHistoryTimeFrame" FromRole="TimeFrame" ToRole="VesselHistory" />
+        </EntityType>
+        <EntityType Name="VesselHistory">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VesselID" Type="Int32" />
+          <Property Name="TimeFrame" Type="Int32" />
+          <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Subtitle" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Vessel" Relationship="WIShipwrecksModel.VesselHistoryVessel" FromRole="VesselHistory" ToRole="Vessel" />
+          <NavigationProperty Name="TimeFrame1" Relationship="WIShipwrecksModel.VesselHistoryTimeFrame" FromRole="VesselHistory" ToRole="TimeFrame" />
+        </EntityType>
+        <Association Name="VesselHistoryVessel">
+          <End Type="WIShipwrecksModel.VesselHistory" Role="VesselHistory" Multiplicity="*" />
+          <End Type="WIShipwrecksModel.Vessel" Role="Vessel" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Vessel">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="VesselHistory">
+              <PropertyRef Name="VesselID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="VesselHistoryTimeFrame">
+          <End Type="WIShipwrecksModel.VesselHistory" Role="VesselHistory" Multiplicity="*" />
+          <End Type="WIShipwrecksModel.TimeFrame" Role="TimeFrame" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="TimeFrame">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="VesselHistory">
+              <PropertyRef Name="TimeFrame" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="VesselVideo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VesselID" Type="Int32" Nullable="false" />
+          <Property Name="YouTubeCode" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Thumb" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Caption" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="VideoSourceID" Type="Int32" />
+          <Property Name="VideoTypeID" Type="Int32" />
+          <Property Name="DateOfVideo" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Vessel" Relationship="WIShipwrecksModel.VesselVideoVessel" FromRole="VesselVideo" ToRole="Vessel" />
+          <NavigationProperty Name="VideoSource" Relationship="WIShipwrecksModel.VesselVideoVideoSource" FromRole="VesselVideo" ToRole="VideoSource" />
+          <NavigationProperty Name="VideoType" Relationship="WIShipwrecksModel.VesselVideoVideoType" FromRole="VesselVideo" ToRole="VideoType" />
+        </EntityType>
+        <EntityType Name="VideoSource">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Source" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="URL" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="VesselVideos" Relationship="WIShipwrecksModel.VesselVideoVideoSource" FromRole="VideoSource" ToRole="VesselVideo" />
+        </EntityType>
+        <EntityType Name="VideoType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VideoType1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="VesselVideos" Relationship="WIShipwrecksModel.VesselVideoVideoType" FromRole="VideoType" ToRole="VesselVideo" />
+        </EntityType>
+        <Association Name="VesselVideoVessel">
+          <End Type="WIShipwrecksModel.VesselVideo" Role="VesselVideo" Multiplicity="*" />
+          <End Type="WIShipwrecksModel.Vessel" Role="Vessel" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Vessel">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="VesselVideo">
+              <PropertyRef Name="VesselID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="VesselVideoVideoSource">
+          <End Type="WIShipwrecksModel.VesselVideo" Role="VesselVideo" Multiplicity="*" />
+          <End Type="WIShipwrecksModel.VideoSource" Role="VideoSource" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="VideoSource">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="VesselVideo">
+              <PropertyRef Name="VideoSourceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="VesselVideoVideoType">
+          <End Type="WIShipwrecksModel.VesselVideo" Role="VesselVideo" Multiplicity="*" />
+          <End Type="WIShipwrecksModel.VideoType" Role="VideoType" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="VideoType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="VesselVideo">
+              <PropertyRef Name="VideoTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Feedback">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="FeedbackRecipient">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="AttractionBodiesOfWater">
+          <End Type="WIShipwrecksModel.Attraction" Role="Attraction" Multiplicity="*" />
+          <End Type="WIShipwrecksModel.BodiesOfWater" Role="BodiesOfWater" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="BodiesOfWater">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Attraction">
+              <PropertyRef Name="BodyOfWaterID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="CurrentResearch">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Image" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="DisplayOrder" Type="Int32" />
+        </EntityType>
+        <EntityType Name="TechnicalFieldReport">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <Property Name="Filename" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DisplayOrder" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Calendar">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <Property Name="URL" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Link">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <Property Name="URL" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="WIShipwrecksModelStoreContainer" CdmEntityContainer="WIShipwrecksEntities">
+          <EntitySetMapping Name="AttractionContacts">
+            <EntityTypeMapping TypeName="WIShipwrecksModel.AttractionContact">
+              <MappingFragment StoreEntitySet="AttractionContacts">
+                <ScalarProperty Name="Website" ColumnName="Website" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="AttractionID" ColumnName="AttractionID" />
+                <ScalarProperty Name="ContactName" ColumnName="ContactName" />
+                <ScalarProperty Name="ContactPhone" ColumnName="ContactPhone" />
+                <ScalarProperty Name="ContactPhoneAlt" ColumnName="ContactPhoneAlt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AttractionLinks">
+            <EntityTypeMapping TypeName="WIShipwrecksModel.AttractionLink">
+              <MappingFragment StoreEntitySet="AttractionLinks">
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="AttractionID" ColumnName="AttractionID" />
+                <ScalarProperty Name="Link" ColumnName="Link" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AttractionPhotos">
+            <EntityTypeMapping TypeName="WIShipwrecksModel.AttractionPhoto">
+              <MappingFragment StoreEntitySet="AttractionPhotos">
+                <ScalarProperty Name="DateOfPhoto" ColumnName="DateOfPhoto" />
+                <ScalarProperty Name="PhotoTypeID" ColumnName="PhotoTypeID" />
+                <ScalarProperty Name="PhotoSourceID" ColumnName="PhotoSourceID" />
+                <ScalarProperty Name="Caption" ColumnName="Caption" />
+                <ScalarProperty Name="Thumb" ColumnName="Thumb" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="AttractionID" ColumnName="AttractionID" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Attractions">
+            <EntityTypeMapping TypeName="WIShipwrecksModel.Attraction">
+              <MappingFragment StoreEntitySet="Attractions">
+                <ScalarProperty Name="LongitudeDecimal" ColumnName="LongitudeDecimal" />
+                <ScalarProperty Name="LatitudeDecimal" ColumnName="LatitudeDecimal" />
+                <ScalarProperty Name="MooringBuoyInPlace" ColumnName="MooringBuoyInPlace" />
+                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
+                <ScalarProperty Name="HideRecord" ColumnName="HideRecord" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="AttractionName" ColumnName="AttractionName" />
+                <ScalarProperty Name="AttractionTypeID" ColumnName="AttractionTypeID" />
+                <ScalarProperty Name="BodyOfWaterID" ColumnName="BodyOfWaterID" />
+                <ScalarProperty Name="TrailID" ColumnName="TrailID" />
+                <ScalarProperty Name="YearBuilt" ColumnName="YearBuilt" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="NearestAddress" ColumnName="NearestAddress" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="County" ColumnName="County" />
+                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+                <ScalarProperty Name="OpenToPublic" ColumnName="OpenToPublic" />
+                <ScalarProperty Name="HasWHSMooringBuoy" ColumnName="HasWHSMooringBuoy" />
+                <ScalarProperty Name="IsSnorkelable" ColumnName="IsSnorkelable" />
+                <ScalarProperty Name="HasWHSDiveGuide" ColumnName="HasWHSDiveGuide" />
+                <ScalarProperty Name="HasTrailsSign" ColumnName="HasTrailsSign" />
+                <ScalarProperty Name="HasTrailsExhibit" ColumnName="HasTrailsExhibit" />
+                <ScalarProperty Name="IsNationalRegisterListed" ColumnName="IsNationalRegisterListed" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AttractionTypes">
+            <EntityTypeMapping TypeName="WIShipwrecksModel.AttractionType">
+              <MappingFragment StoreEntitySet="AttractionTypes">
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="AttractionType1" ColumnName="AttractionType" />
+                <ScalarProperty Name="DisplayOrder" ColumnName="DisplayOrder" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BodiesOfWaters">
+            <EntityTypeMapping TypeName="WIShipwrecksModel.BodiesOfWater">
+              <MappingFragment StoreEntitySet="BodiesOfWater">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="BodyOfWater" ColumnName="BodyOfWater" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CasualtyTypes">
+            <EntityTypeMapping TypeName="WIShipwrecksModel.CasualtyType">
+              <MappingFragment StoreEntitySet="CasualtyTypes">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CasualtyType1" ColumnName="CasualtyType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Contributors">
+            <EntityTypeMapping TypeName="WIShipwrecksModel.Contributor">
+              <MappingFragment StoreEntitySet="Contributors">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Contributor1" ColumnName="Contributor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Counties">
+            <EntityTypeMapping TypeName="WIShipwrecksModel.County">
+              <MappingFragment StoreEntitySet="Counties">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="County1" ColumnName="County" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HullMaterials">
+            <EntityTypeMapping TypeName="WIShipwrecksModel.HullMaterial">
+              <MappingFragment StoreEntitySet="HullMaterials">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="HullMaterial1" ColumnName="HullMaterial" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OwnerManagerAgencies">
+            <EntityTypeMapping TypeName="WIShipwrecksModel.OwnerManagerAgency">
+              <MappingFragment StoreEntitySet="OwnerManagerAgencies">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="OwnerManagerAgency1" ColumnName="OwnerManagerAgency" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PhotoSources">
+            <EntityTypeMapping TypeName="WIShipwrecksModel.PhotoSource">
+              <MappingFragment StoreEntitySet="PhotoSources">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Source" ColumnName="Source" />
+                <ScalarProperty Name="URL" ColumnName="URL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PhotoTypes">
+            <EntityTypeMapping TypeName="WIShipwrecksModel.PhotoType">
+              <MappingFragment StoreEntitySet="PhotoTypes">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="PhotoType1" ColumnName="PhotoType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PropulsionTypes">
+            <EntityTypeMapping TypeName="WIShipwrecksModel.PropulsionType">
+              <MappingFragment StoreEntitySet="PropulsionTypes">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="PropulsionType1" ColumnName="PropulsionType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RigTypes">
+            <EntityTypeMapping TypeName="WIShipwrecksModel.RigType">
+              <MappingFragment StoreEntitySet="RigTypes">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="RigType1" ColumnName="RigType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="WIShipwrecksModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Trails">
+            <EntityTypeMapping TypeName="WIShipwrecksModel.Trail">
+              <MappingFragment StoreEntitySet="Trails">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="TrailName" ColumnName="TrailName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vessel_Contributors">
+            <EntityTypeMapping TypeName="WIShipwrecksModel.Vessel_Contributors">
+              <MappingFragment StoreEntitySet="Vessel_Contributors">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="VesselID" ColumnName="VesselID" />
+                <ScalarProperty Name="ContributorID" ColumnName="ContributorID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VesselPhotos">
+            <EntityTypeMapping TypeName="WIShipwrecksModel.VesselPhoto">
+              <MappingFragment StoreEntitySet="VesselPhotos">
+                <ScalarProperty Name="Thumb" ColumnName="Thumb" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="VesselID" ColumnName="VesselID" />
+                <ScalarProperty Name="Caption" ColumnName="Caption" />
+                <ScalarProperty Name="PhotoSourceID" ColumnName="PhotoSourceID" />
+                <ScalarProperty Name="PhotoTypeID" ColumnName="PhotoTypeID" />
+                <ScalarProperty Name="DateOfPhoto" ColumnName="DateOfPhoto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vessels">
+            <EntityTypeMapping TypeName="WIShipwrecksModel.Vessel">
+              <MappingFragment StoreEntitySet="Vessels">
+                <ScalarProperty Name="LocationKnown" ColumnName="LocationKnown" />
+                <ScalarProperty Name="FeaturedPhoto" ColumnName="FeaturedPhoto" />
+                <ScalarProperty Name="LongitudeDecimal" ColumnName="LongitudeDecimal" />
+                <ScalarProperty Name="LatitudeDecimal" ColumnName="LatitudeDecimal" />
+                <ScalarProperty Name="Featured" ColumnName="Featured" />
+                <ScalarProperty Name="MooringBuoyInPlace" ColumnName="MooringBuoyInPlace" />
+                <ScalarProperty Name="NationalRegisterStatusID" ColumnName="NationalRegisterStatusID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="VesselTypeID" ColumnName="VesselTypeID" />
+                <ScalarProperty Name="VesselName" ColumnName="VesselName" />
+                <ScalarProperty Name="ASINumber" ColumnName="ASINumber" />
+                <ScalarProperty Name="CasualtyTypeID" ColumnName="CasualtyTypeID" />
+                <ScalarProperty Name="CasualtyDate" ColumnName="CasualtyDate" />
+                <ScalarProperty Name="VesselAge" ColumnName="VesselAge" />
+                <ScalarProperty Name="Owners" ColumnName="Owners" />
+                <ScalarProperty Name="HomePort" ColumnName="HomePort" />
+                <ScalarProperty Name="Master" ColumnName="Master" />
+                <ScalarProperty Name="CargoDescription" ColumnName="CargoDescription" />
+                <ScalarProperty Name="LivesLost" ColumnName="LivesLost" />
+                <ScalarProperty Name="FormerNames" ColumnName="FormerNames" />
+                <ScalarProperty Name="RegistryNumber" ColumnName="RegistryNumber" />
+                <ScalarProperty Name="WhereBuilt" ColumnName="WhereBuilt" />
+                <ScalarProperty Name="Builder" ColumnName="Builder" />
+                <ScalarProperty Name="ContructionYear" ColumnName="ContructionYear" />
+                <ScalarProperty Name="Length" ColumnName="Length" />
+                <ScalarProperty Name="Breadth" ColumnName="Breadth" />
+                <ScalarProperty Name="DepthOfHold" ColumnName="DepthOfHold" />
+                <ScalarProperty Name="GrossTonnage" ColumnName="GrossTonnage" />
+                <ScalarProperty Name="NetTonnage" ColumnName="NetTonnage" />
+                <ScalarProperty Name="OMTonnage" ColumnName="OMTonnage" />
+                <ScalarProperty Name="HullMaterialID" ColumnName="HullMaterialID" />
+                <ScalarProperty Name="PropulsionTypeID" ColumnName="PropulsionTypeID" />
+                <ScalarProperty Name="NumberOfMasts" ColumnName="NumberOfMasts" />
+                <ScalarProperty Name="RigTypeID" ColumnName="RigTypeID" />
+                <ScalarProperty Name="Engines" ColumnName="Engines" />
+                <ScalarProperty Name="Boilers" ColumnName="Boilers" />
+                <ScalarProperty Name="Culture" ColumnName="Culture" />
+                <ScalarProperty Name="CulturalMaterial" ColumnName="CulturalMaterial" />
+                <ScalarProperty Name="DatingMethods" ColumnName="DatingMethods" />
+                <ScalarProperty Name="SurveyDate" ColumnName="SurveyDate" />
+                <ScalarProperty Name="SurveyPrincipleInvestigator" ColumnName="SurveyPrincipleInvestigator" />
+                <ScalarProperty Name="ExcavatedDate" ColumnName="ExcavatedDate" />
+                <ScalarProperty Name="ExcavationPrincipleInvestigator" ColumnName="ExcavationPrincipleInvestigator" />
+                <ScalarProperty Name="NationalRegisterStatusNotes" ColumnName="NationalRegisterStatusNotes" />
+                <ScalarProperty Name="YearListedNationalRegister" ColumnName="YearListedNationalRegister" />
+                <ScalarProperty Name="Submerged" ColumnName="Submerged" />
+                <ScalarProperty Name="WaterDepth" ColumnName="WaterDepth" />
+                <ScalarProperty Name="OnShoreline" ColumnName="OnShoreline" />
+                <ScalarProperty Name="ConditionDescription" ColumnName="ConditionDescription" />
+                <ScalarProperty Name="PercentVesselPresent" ColumnName="PercentVesselPresent" />
+                <ScalarProperty Name="WreckThreatened" ColumnName="WreckThreatened" />
+                <ScalarProperty Name="SiteName" ColumnName="SiteName" />
+                <ScalarProperty Name="IDAccuracy" ColumnName="IDAccuracy" />
+                <ScalarProperty Name="CodeNumber" ColumnName="CodeNumber" />
+                <ScalarProperty Name="BodyOfWaterID" ColumnName="BodyOfWaterID" />
+                <ScalarProperty Name="TrailID" ColumnName="TrailID" />
+                <ScalarProperty Name="County" ColumnName="County" />
+                <ScalarProperty Name="NearestCity" ColumnName="NearestCity" />
+                <ScalarProperty Name="PACNumber" ColumnName="PACNumber" />
+                <ScalarProperty Name="LocationPotential" ColumnName="LocationPotential" />
+                <ScalarProperty Name="DiveAccessible" ColumnName="DiveAccessible" />
+                <ScalarProperty Name="NOAAChart" ColumnName="NOAAChart" />
+                <ScalarProperty Name="TRS" ColumnName="TRS" />
+                <ScalarProperty Name="QuarterSections" ColumnName="QuarterSections" />
+                <ScalarProperty Name="USGSQuad" ColumnName="USGSQuad" />
+                <ScalarProperty Name="OwnerManagerAgencyID" ColumnName="OwnerManagerAgencyID" />
+                <ScalarProperty Name="SturgeonBayStone" ColumnName="SturgeonBayStone" />
+                <ScalarProperty Name="HasWHSMooringBuoy" ColumnName="HasWHSMooringBuoy" />
+                <ScalarProperty Name="HideLocationalInfo" ColumnName="HideLocationalInfo" />
+                <ScalarProperty Name="AccessDirections" ColumnName="AccessDirections" />
+                <ScalarProperty Name="HasWHSDiveGuide" ColumnName="HasWHSDiveGuide" />
+                <ScalarProperty Name="ChartImageFileName" ColumnName="ChartImageFileName" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="HideRecord" ColumnName="HideRecord" />
+                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
+                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VesselTypes">
+            <EntityTypeMapping TypeName="WIShipwrecksModel.VesselType">
+              <MappingFragment StoreEntitySet="VesselTypes">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="VesselType1" ColumnName="VesselType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NewsArticles">
+            <EntityTypeMapping TypeName="WIShipwrecksModel.NewsArticle">
+              <MappingFragment StoreEntitySet="NewsArticles">
+                <ScalarProperty Name="OtherSpelling" ColumnName="OtherSpelling" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="Page" ColumnName="Page" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Object" ColumnName="Object" />
+                <ScalarProperty Name="NewspaperID" ColumnName="NewspaperID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Newspapers">
+            <EntityTypeMapping TypeName="WIShipwrecksModel.Newspaper">
+              <MappingFragment StoreEntitySet="Newspapers">
+                <ScalarProperty Name="Newspaper1" ColumnName="Newspaper" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NationalRegisterStatus1">
+            <EntityTypeMapping TypeName="WIShipwrecksModel.NationalRegisterStatus">
+              <MappingFragment StoreEntitySet="NationalRegisterStatus">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PercentVesselPresents">
+            <EntityTypeMapping TypeName="WIShipwrecksModel.PercentVesselPresent">
+              <MappingFragment StoreEntitySet="PercentVesselPresent">
+                <ScalarProperty Name="Range" ColumnName="Range" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SturgeonBayStones">
+            <EntityTypeMapping TypeName="WIShipwrecksModel.SturgeonBayStone">
+              <MappingFragment StoreEntitySet="SturgeonBayStone">
+                <ScalarProperty Name="SturgeonBayStone1" ColumnName="SturgeonBayStone" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Glossaries">
+            <EntityTypeMapping TypeName="WIShipwrecksModel.Glossary">
+              <MappingFragment StoreEntitySet="Glossary">
+                <ScalarProperty Name="Definition" ColumnName="Definition" />
+                <ScalarProperty Name="Term" ColumnName="Term" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DatingMethods">
+            <EntityTypeMapping TypeName="WIShipwrecksModel.DatingMethod">
+              <MappingFragment StoreEntitySet="DatingMethods">
+                <ScalarProperty Name="DatingMethods" ColumnName="DatingMethods" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="IDAccuracies">
+            <EntityTypeMapping TypeName="WIShipwrecksModel.IDAccuracy">
+              <MappingFragment StoreEntitySet="IDAccuracy">
+                <ScalarProperty Name="Accuracy" ColumnName="Accuracy" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LocationPotentials">
+            <EntityTypeMapping TypeName="WIShipwrecksModel.LocationPotential">
+              <MappingFragment StoreEntitySet="LocationPotential">
+                <ScalarProperty Name="LocationPotential1" ColumnName="LocationPotential" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cultures">
+            <EntityTypeMapping TypeName="WIShipwrecksModel.Culture">
+              <MappingFragment StoreEntitySet="Culture">
+                <ScalarProperty Name="Culture1" ColumnName="Culture" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TimeFrames">
+            <EntityTypeMapping TypeName="WIShipwrecksModel.TimeFrame">
+              <MappingFragment StoreEntitySet="TimeFrames">
+                <ScalarProperty Name="DisplayOrder" ColumnName="DisplayOrder" />
+                <ScalarProperty Name="TimeFrame1" ColumnName="TimeFrame" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VesselHistories">
+            <EntityTypeMapping TypeName="WIShipwrecksModel.VesselHistory">
+              <MappingFragment StoreEntitySet="VesselHistory">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Subtitle" ColumnName="Subtitle" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="TimeFrame" ColumnName="TimeFrame" />
+                <ScalarProperty Name="VesselID" ColumnName="VesselID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VesselVideos">
+            <EntityTypeMapping TypeName="WIShipwrecksModel.VesselVideo">
+              <MappingFragment StoreEntitySet="VesselVideos">
+                <ScalarProperty Name="DateOfVideo" ColumnName="DateOfVideo" />
+                <ScalarProperty Name="VideoTypeID" ColumnName="VideoTypeID" />
+                <ScalarProperty Name="VideoSourceID" ColumnName="VideoSourceID" />
+                <ScalarProperty Name="Caption" ColumnName="Caption" />
+                <ScalarProperty Name="Thumb" ColumnName="Thumb" />
+                <ScalarProperty Name="YouTubeCode" ColumnName="YouTubeCode" />
+                <ScalarProperty Name="VesselID" ColumnName="VesselID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VideoSources">
+            <EntityTypeMapping TypeName="WIShipwrecksModel.VideoSource">
+              <MappingFragment StoreEntitySet="VideoSources">
+                <ScalarProperty Name="URL" ColumnName="URL" />
+                <ScalarProperty Name="Source" ColumnName="Source" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VideoTypes">
+            <EntityTypeMapping TypeName="WIShipwrecksModel.VideoType">
+              <MappingFragment StoreEntitySet="VideoTypes">
+                <ScalarProperty Name="VideoType1" ColumnName="VideoType" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Feedbacks">
+            <EntityTypeMapping TypeName="WIShipwrecksModel.Feedback">
+              <MappingFragment StoreEntitySet="Feedback">
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FeedbackRecipients">
+            <EntityTypeMapping TypeName="WIShipwrecksModel.FeedbackRecipient">
+              <MappingFragment StoreEntitySet="FeedbackRecipients">
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CurrentResearches">
+            <EntityTypeMapping TypeName="WIShipwrecksModel.CurrentResearch">
+              <MappingFragment StoreEntitySet="CurrentResearch">
+                <ScalarProperty Name="DisplayOrder" ColumnName="DisplayOrder" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TechnicalFieldReports">
+            <EntityTypeMapping TypeName="WIShipwrecksModel.TechnicalFieldReport">
+              <MappingFragment StoreEntitySet="TechnicalFieldReports">
+                <ScalarProperty Name="DisplayOrder" ColumnName="DisplayOrder" />
+                <ScalarProperty Name="Filename" ColumnName="Filename" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Calendars">
+            <EntityTypeMapping TypeName="WIShipwrecksModel.Calendar">
+              <MappingFragment StoreEntitySet="Calendar">
+                <ScalarProperty Name="URL" ColumnName="URL" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Links">
+            <EntityTypeMapping TypeName="WIShipwrecksModel.Link">
+              <MappingFragment StoreEntitySet="Links">
+                <ScalarProperty Name="URL" ColumnName="URL" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

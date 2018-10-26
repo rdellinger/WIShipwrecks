@@ -1,0 +1,56 @@
+﻿@model WIShipwrecks.Models.VesselVideo
+
+
+@{
+    Layout = "";
+}
+
+
+<link rel="stylesheet" type="text/css" href="~/Content/solido/css/popup/magnific-popup.css" />
+
+
+<div class="img-project">
+
+    <div style="float:right;">
+        <div class="w-arrows" style="width: 65px; border: 1px solid gray; margin-bottom: -10px;">
+            <div class="close"></div>
+        </div>
+    </div>
+
+    <div class="wrapper-project">
+        <ul>
+            <li>
+
+                <!-- Begin Sublime Video Player (Live version) -->
+                <script type='text/javascript' src='http://av.aqua.wisc.edu/flashplayer/sublime/Sublime_SeaGrant.js'></script><video id='@Model.ID' class='sublime' poster='@Html.DisplayFor(model => model.Thumb)' width='1180' height='636' title='@Html.DisplayFor(model => model.Caption)' sharing-title='@Html.DisplayFor(model => model.Caption)' data-sharing-url='@string.Format("{0}://{1}{2}", Request.Url.Scheme, Request.Url.Authority, Url.Content("~"))Vessel/Details/@Model.VesselID' data-sharing-text='@Html.DisplayFor(model => model.Caption)' data-sharing-twitter-text='@Html.DisplayFor(model => model.Caption)' data-sharing-image='auto' data-uid='113' data-youtube-suggested-quality='hd' data-youtube-id='@Html.DisplayFor(model => model.YouTubeCode)' data-autoresize='fit' preload='none'></video><!-- End Sublime Video Player -->
+                
+                @*<!-- Begin Sublime Video Player (Local version) -->
+                <script type='text/javascript' src='http://av.aqua.wisc.edu/flashplayer/sublime/Sublime_local.js'></script><video id='@Model.ID' class='sublime' poster='@Html.DisplayFor(model => model.Thumb)' width='1180' height='636' title='@Html.DisplayFor(model => model.Caption)' sharing-title='@Html.DisplayFor(model => model.Caption)' data-sharing-url='@string.Format("{0}://{1}{2}", Request.Url.Scheme, Request.Url.Authority, Url.Content("~"))Vessel/Details/@Model.VesselID' data-sharing-text='@Html.DisplayFor(model => model.Caption)' data-sharing-twitter-text='@Html.DisplayFor(model => model.Caption)' data-sharing-image='auto' data-uid='113' data-youtube-suggested-quality='hd' data-youtube-id='@Html.DisplayFor(model => model.YouTubeCode)' data-autoresize='fit' preload='none'></video><!-- End Sublime Video Player -->*@
+
+            </li>
+        </ul>
+    </div>
+
+    <div class="info-project" style="border: 1px solid gray; padding: 20px 20px 20px 20px; background-color: white; margin-bottom: 20px;">
+        <div class="description" style="margin-top: 0;">
+            @Html.DisplayFor(model => model.Caption) 
+            
+            @if (Model.VideoSource != null)
+            {
+                <br /><br />
+                <span style="font-style: italic">Video by @Html.DisplayFor(model => model.VideoSource.Source)</span>
+            }
+            
+        </div>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+

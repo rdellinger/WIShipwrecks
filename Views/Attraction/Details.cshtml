@@ -1,0 +1,748 @@
+﻿@model WIShipwrecks.Models.Attraction
+
+@{
+    Layout = "~/Views/Shared/_DetailsAttractions2.cshtml";
+    ViewBag.Title = Model.AttractionName;
+}
+
+
+
+@**************************************** Google Map *****************************************************@
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="http://maps.google.com/maps/api/js?sensor=true" type="text/javascript"></script>
+
+<style>
+    #map_canvas img {
+        max-width: none;
+    }
+</style>
+<!-- This css is to create a popup "info window" when a marker is clicked on the map -->
+<style>
+    .infoDiv {
+        height: 120px;
+        width: 220px;
+        -webkit-user-select: none;
+        background-color: white;
+    }
+</style>
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        Initialize();
+    });
+
+    // Where all the fun happens
+    function Initialize() {
+
+        // Google has tweaked their interface somewhat - this tells the api to use that new UI
+        google.maps.visualRefresh = true;
+        var thisAttraction = new google.maps.LatLng(@Model.LatitudeDecimal, @Model.LongitudeDecimal);
+
+        var blue = "#00D6FF"
+        var color = blue
+        var saturation = 100
+
+        var styles = [
+			{
+			    "featureType": "landscape",
+			    "stylers": [
+					{"hue": "#000"},
+					{"saturation": -100},
+					{"lightness": 40},
+					{"gamma": 1}
+			    ]
+			},
+			{
+			    "featureType": "road.highway",
+			    "stylers": [
+					{"hue": color},
+					{"saturation": saturation},
+					{"lightness": 20},
+					{"gamma": 1}
+			    ]
+			},
+			{
+			    "featureType": "road.arterial",
+			    "stylers": [
+					{"hue": color},
+					{"saturation": saturation},
+					{"lightness": 20},
+					{"gamma": 1}
+			    ]
+			},
+			{
+			    "featureType": "road.local",
+			    "stylers": [
+					{"hue": color},
+					{"saturation": saturation},
+					{"lightness": 50},
+					{"gamma": 1}
+			    ]
+			},
+			{
+			    "featureType": "water",
+			    "stylers": [
+					{"hue": color},
+					{"saturation": 100},
+					{"lightness": 15},
+					{"gamma": 1}
+			    ]
+			},
+			{
+			    "featureType": "poi",
+			    "stylers": [
+					{"hue": "#000"},
+					{"saturation": -100},
+					{"lightness": 25},
+					{"gamma": 1}
+			    ]
+			}
+        ];
+
+        // These are options that set initial zoom level, where the map is centered globally to start, and the type of map to show
+        var mapOptions = {
+            zoom: 14,
+            scrollwheel: false,
+            center: thisAttraction,
+            mapTypeId: google.maps.MapTypeId.ROADMAP,
+            zoomControl : true,
+            mapTypeControl : false,
+            scaleControl : false,
+            streetViewControl : false,
+            panControl : false,
+            styles: styles
+        };
+
+        // This makes the div with id "map_canvas" a google map
+        var map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+
+        // Add a pin for the current vessel
+        var myLatlng = new google.maps.LatLng(@Model.LatitudeDecimal, @Model.LongitudeDecimal);
+
+        var marker = new google.maps.Marker({
+            position: myLatlng,
+            map: map,
+            title: '@Model.AttractionName'
+        });
+
+        // Set the pin for the current vessel to a unique color from those of the nearby vessels
+        marker.setIcon('../../Content/solido/img/map/pointer-blue.png')
+
+        // Create JSON data to display the nearby vessels
+        var data = [
+
+             @foreach (var item in ViewBag.allAttractionsInRegion)
+             {
+                 if (item.ID != Model.ID && item.LatitudeDecimal != null && item.LongitudeDecimal != null)
+                 {
+
+                     var attractionId = item.ID;
+                     var attractionName = "";
+                     var attractionType = "";
+                     var geoLat = item.LatitudeDecimal;
+                     var geoLong = item.LongitudeDecimal;
+
+                     if (item.AttractionName != null)
+                     {
+                         attractionName = item.AttractionName.Replace("'", "\\'"); //This escapes all the single quotes in the attraction names so they won't break the JSON string;
+                     }
+                     else
+                     {
+                         attractionName = "";
+                     }
+
+                     if (item.AttractionType != null)
+                     {
+                         attractionType = item.AttractionType.AttractionType1;
+                     }
+                     else
+                     {
+                         attractionType = "";
+                     }
+
+                     @Html.Raw("{'Id': '" + attractionId + "', 'Name': '" + attractionName + "', 'AttractionType': '" +  attractionType + "', 'GeoLat': '" + geoLat + "', 'GeoLong': '" + geoLong + "'},");
+
+                }
+
+             }
+        ];
+
+
+        // Create pins for nearby attractions
+        $.each(data, function (i, item) {
+            var marker = new google.maps.Marker({
+                'position': new google.maps.LatLng(item.GeoLat, item.GeoLong),
+                'map': map,
+                'title': item.Name
+            });
+
+            // Make the pins for nearby vessels all a different color than the selected attraction
+            marker.setIcon('../../Content/solido/img/map/pointer-black-small.png')
+
+            // Display some information about each attraction in the popup window
+            var infowindow = new google.maps.InfoWindow({
+                content: "<div class='infoDiv'><span style='font-size: 18px; font-weight: bold;'>" + item.Name + "</span><br />" + item.AttractionType + "<br /><br /><a href='" + item.Id + "'>Learn more...</a>" + "</div>"
+            });
+
+            // Hook up an "OnClick" listener to the map to create the popup window when the pin is clicked
+            google.maps.event.addListener(marker, 'click', function () {
+                infowindow.open(map, marker);
+            });
+
+        });
+    }
+</script>
+
+@**************************************** End Google Map *****************************************************@
+
+
+@*Attraction Name*@
+
+<div style="padding: 50px 0 0 0; text-align:center; background-color: white;">
+
+    <span class="title one">@Model.AttractionName</span>
+    <div class="spacer"></div>
+
+    <nav class="submenu">
+        <ul id="nav">
+            @if (Model.AttractionPhotos.Count() > 0)
+            {
+                <li><a href="#Gallery">Gallery</a></li>
+            }
+
+            <li><a href="#Details">Details</a></li>
+
+            @if (Model.LatitudeDecimal != null)
+            {
+                <li><a href="#Map">Map</a></li>
+            }
+
+            @if (ViewBag.attractionContactsCount > 0)
+            {
+                <li><a href="#Contacts">Contacts</a></li>
+            }
+
+            @if (ViewBag.attractionLinksCount > 0)
+            {
+                <li><a href="#Links">Links</a></li>
+            }
+
+            @if (ViewBag.nearbyVesselsCount > 1 || ViewBag.nearbyAttractionsCount > 0)
+            {
+                <li><a href="#Nearby">Nearby</a></li>
+            }
+
+        </ul>
+    </nav>
+
+
+</div>
+
+
+
+
+
+
+
+@*Photo Gallery*@
+
+@*If there are any photos, then show them*@
+@if (Model.AttractionPhotos.Count() > 0)
+{
+    <div id="Gallery">&nbsp;</div>
+
+    <article id="anchor5" class="content">
+
+        <div class="title one">Gallery</div>
+        <div class="spacer-orange"></div>
+        <div style="margin-top:40px;"></div>
+
+        <div id="portfolio" class="container">
+            <div class="section portfoliocontent" style="margin-top:40px;">
+
+                <div class="clear"></div>
+                <div id="project-show"></div>
+
+                <section class="project-window">
+                    <div class="project-content"></div><!-- AJAX Dynamic Content -->
+                </section>
+
+                <section id="i-portfolio" class="clear">
+                    <div class="inici"></div>
+
+                    @*Photos*@
+                    @foreach (var item in Model.AttractionPhotos)
+                    {
+                        <div class="ch-grid element photo" id="~/AttractionPhoto/DetailsForGallery/@Html.DisplayFor(modelItem => item.ID)" style="height: 245px;">
+                            <img class="ch-item" src="~/Images/Attractions/@Html.DisplayFor(modelItem => item.Image)" alt='img'>
+                            <div>
+                                <span><span class="p-category"></span>@Html.DisplayFor(modelItem => item.Caption)</span>
+                            </div>
+                        </div>
+                    }
+
+                    <div class="final"></div>
+                </section>
+            </div>
+        </div>
+
+        <div class="clear" style="height: 50px;"></div>
+    </article>
+}
+
+    @*Show a placeholder graphic if the vessel has no photos.*@
+
+else
+{
+    <img src="~/Content/solido/img/slider/placholder.jpg" width="100%" alt='Scroll Down'>
+}
+
+<div class="clear"></div>
+
+
+
+
+
+
+
+@*Details*@
+
+<div id="Details">&nbsp;</div>
+
+<article class="content dark hideme dontHide">
+
+    <footer id=anchor6 class="footer dark">
+        <div class="footer-container">
+            <div class="title one no-top">Details</div>
+            <div class="spacer-orange"></div>
+            <div style="margin-top:40px;"></div>
+
+
+            <div class="foot-third hideme dontHide">
+                <div class="f-title-one">Attraction</div>
+                <div class="f-title-two">Description</div>
+
+                @if (Model.Description != null)
+                {
+                    @Html.DisplayFor(model => model.Description)
+                }
+            </div>
+
+
+            <div class="foot-third hideme dontHide">
+                <div class="f-title-one">Attraction</div>
+                <div class="f-title-two">Location</div>
+
+                @if (Model.BodiesOfWater != null)
+                {
+                    <div class="f-data">@Html.DisplayNameFor(model => model.BodiesOfWater.BodyOfWater): <span>@Html.DisplayFor(model => model.BodiesOfWater.BodyOfWater)</span></div>
+                }
+
+                @if (Model.Trail != null)
+                {
+                    <div class="f-data">@Html.DisplayNameFor(model => model.Trail.TrailName): <span>@Html.DisplayFor(model => model.Trail.TrailName)</span></div>
+                }
+
+                @if (Model.YearBuilt != null)
+                {
+                    <div class="f-data">@Html.DisplayNameFor(model => model.YearBuilt): <span>@Html.DisplayFor(model => model.YearBuilt)</span></div>
+                }
+
+                @if (Model.NearestAddress != null)
+                {
+                    <div class="f-data">@Html.DisplayNameFor(model => model.NearestAddress): <span>@Html.DisplayFor(model => model.NearestAddress)</span></div>
+                }
+
+                @if (Model.City != null)
+                {
+                    <div class="f-data">@Html.DisplayNameFor(model => model.City): <span>@Html.DisplayFor(model => model.City)</span></div>
+                }
+
+                @if (Model.County != null)
+                {
+                    <div class="f-data">@Html.DisplayNameFor(model => model.County): <span>@Html.DisplayFor(model => model.County)</span></div>
+                }
+
+                @if (Model.ZipCode != null)
+                {
+                    <div class="f-data">@Html.DisplayNameFor(model => model.ZipCode): <span>@Html.DisplayFor(model => model.ZipCode)</span></div>
+                }
+
+                @if (Model.Latitude != null)
+                {
+                    <div class="f-data">@Html.DisplayNameFor(model => model.Latitude): <span>N @Html.Raw(Html.DisplayFor(model => model.Latitude).ToString().Replace(" ", "&deg;&nbsp;"))'</span></div>
+                }
+
+                @if (Model.Longitude != null)
+                {
+                    <div class="f-data">@Html.DisplayNameFor(model => model.Longitude): <span>W @Html.Raw(Html.DisplayFor(model => model.Longitude).ToString().Replace(" ", "&deg;&nbsp;"))'</span></div>
+                }
+
+            </div>
+
+
+            <div class="foot-third hideme dontHide">
+                <div class="f-title-one">Attraction</div>
+                <div class="f-title-two">Features</div>
+
+                @if (Model.OpenToPublic != null)
+                {
+                    <div class="f-data">@Html.DisplayNameFor(model => model.OpenToPublic): <span>@YesOrNo(Model.OpenToPublic)</span></div>
+                }
+
+                @if (Model.HasWHSMooringBuoy != null)
+                {
+                    <div class="f-data">@Html.DisplayNameFor(model => model.HasWHSMooringBuoy): <span>@YesOrNo(Model.HasWHSMooringBuoy)</span></div>
+                }
+
+                @if (Model.MooringBuoyInPlace != null)
+                {
+                    <div class="f-data">@Html.DisplayNameFor(model => model.MooringBuoyInPlace): <span>@YesOrNo(Model.MooringBuoyInPlace)</span></div>
+                }
+
+                @if (Model.IsSnorkelable != null)
+                {
+                    <div class="f-data">@Html.DisplayNameFor(model => model.IsSnorkelable): <span>@YesOrNo(Model.IsSnorkelable)</span></div>
+                }
+
+                @if (Model.HasWHSDiveGuide != null)
+                {
+                    <div class="f-data">@Html.DisplayNameFor(model => model.HasWHSDiveGuide): <span>@YesOrNo(Model.HasWHSDiveGuide)</span></div>
+                }
+
+                @if (Model.HasTrailsSign != null)
+                {
+                    <div class="f-data">@Html.DisplayNameFor(model => model.HasTrailsSign): <span>@YesOrNo(Model.HasTrailsSign)</span></div>
+                }
+
+                @if (Model.IsNationalRegisterListed != null)
+                {
+                    <div class="f-data">@Html.DisplayNameFor(model => model.IsNationalRegisterListed): <span>@YesOrNo(Model.IsNationalRegisterListed)</span></div>
+                }
+
+            </div>
+        </div>
+    </footer>
+
+</article>
+
+<div class="clear" style="height: 50px;"></div>
+
+
+
+@*Helper function to display Yes or No for boolean values above*@
+
+@helper YesOrNo(bool TrueOrFalse)
+{
+    if (TrueOrFalse == true)
+    {
+        @:Yes
+    }
+    else
+    {
+        @:No
+    }
+
+}
+
+
+
+
+
+
+@*Contacts*@
+@if (ViewBag.attractionContactsCount > 0)
+{
+
+    <div id="Contacts">&nbsp;</div>
+
+    <article class="content hideme dontHide">
+
+        <section class="full">
+
+            <div class="title one">Contacts</div>
+            <div class="spacer-orange"></div>
+
+            <div class="half-content" style="margin-top: 60px;">
+                <div class="table-responsive">
+                    <table class="table">
+                        <tr>
+                            <th>
+                                Name
+                            </th>
+                            <th>
+                                Phone
+                            </th>
+                            <th>
+                                Alt Phone
+                            </th>
+                            <th>
+                                Email
+                            </th>
+                            <th>
+                                Website
+                            </th>
+                        </tr>
+
+                        @foreach (var item in ViewBag.attractionContacts)
+                        {
+                            <tr>
+                                <td>
+                                    @item.ContactName
+                                </td>
+                                <td>
+                                    @item.ContactPhone
+                                </td>
+                                <td>
+                                    @item.ContactPhoneAlt
+                                </td>
+                                <td>
+                                    @item.Email
+                                </td>
+                                <td>
+                                    @item.Website
+                                </td>
+                            </tr>
+                        }
+
+                    </table>
+                </div>
+            </div>
+
+
+
+
+        </section>
+
+    </article>
+
+    <div class="clear" style="height: 50px;"></div>
+
+}
+
+
+
+
+
+
+    @*Links*@
+    @if (ViewBag.attractionLinksCount > 0)
+    {
+
+        <div id="Links">&nbsp;</div>
+
+        <article class="content hideme dontHide">
+
+            <section class="full">
+
+                <div class="title one">Links</div>
+                <div class="spacer-orange"></div>
+
+                <div class="half-content" style="margin-top: 60px;">
+
+                    <table class="table">
+                        <tr>
+                            <th>
+                                Title
+                            </th>
+                        </tr>
+
+                        @foreach (var item in ViewBag.attractionLinks)
+                        {
+                            <tr>
+                                <td>
+                                    <a href="@item.Link">
+                                        @if (item.Title != null)
+                                        {
+                                            @item.Title
+                                        }
+                                        else
+                                        {
+                                            @item.Link
+                                        }
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+
+                    </table>
+                </div>
+
+
+
+
+            </section>
+
+        </article>
+
+        <div class="clear" style="height: 50px;"></div>
+
+    }
+
+
+
+
+
+
+    @*Map*@
+        @*If there are any results, then show them*@
+        @if (Model.LatitudeDecimal != null)
+        {
+            <div id="Map">&nbsp;</div>
+
+            <article class="content hideme dontHide">
+
+                <div class="title one">Map</div>
+                <div class="spacer-orange"></div>
+
+                <div style="margin-top: 20px;">
+                    <div id="map_canvas" style="height: 600px;">
+                    </div>
+                </div>
+
+            </article>
+
+            <div class="clear" style="height: 50px;"></div>
+        }
+
+
+
+
+
+
+
+        @*Nearby Attractions*@
+        @if (ViewBag.nearbyVesselsCount > 1 || ViewBag.nearbyAttractionsCount > 0)
+        {
+
+            <div id="Nearby">&nbsp;</div>
+
+            <article class="content hideme dontHide">
+
+                <section class="full">
+
+                    <div class="title one">Nearby</div>
+                    <div class="spacer-orange"></div>
+
+
+                    @*Nearby Attractions*@
+
+                    <div class="half-content" style="margin-top: 60px;">
+                        @*If there are any results, then show them*@
+                        @if (ViewBag.nearbyAttractionsCount > 0)
+                        {
+
+                            <table class="table">
+                                <tr>
+                                    <th>
+                                        Attractions
+                                    </th>
+                                </tr>
+
+                                @foreach (var item in ViewBag.nearbyAttractions)
+                                {
+                                    <tr>
+                                        <td>
+                                            <a href="@Url.Action("Details", "Attraction" , new { id=item.ID, region=Request.QueryString["region"] })">
+                                                @item.AttractionName
+                                            </a>
+                                        </td>
+                                    </tr>
+                                }
+
+                            </table>
+
+                        }
+                    </div>
+
+
+
+
+                    @*Nearby Shipwrecks*@
+
+                    <div class="half-content" style="margin-top: 60px;">
+                        @*If there are any results, then show them; there will always be at least one result for the vessel itself, so look for more than one*@
+                        @if (ViewBag.nearbyVesselsCount > 1)
+                        {
+
+                            @*The first 10 Nearby Shipwrecks, displayed by default*@
+                            <table class="table first10NearbyVessels">
+                                <tr>
+                                    <th>
+                                        Shipwrecks
+                                    </th>
+                                </tr>
+
+                                @foreach (var item in ViewBag.first10NearbyVessels)
+                                {
+                                    <tr>
+                                        <td>
+                                            <a href="@Url.Action("Details", "Vessel" , new { id=item.ID, region=Request.QueryString["region"] })">
+                                                @item.VesselName
+                                            </a>
+                                        </td>
+                                    </tr>
+                                }
+                            </table>
+
+                            @*Show to option to display more vessels if there are more than 10*@
+                            if (ViewBag.nearbyVesselsCount >= 10)
+                            {
+                                <span class="viewMore btn btn-default">View @ViewBag.nearbyVesselsCountMinus10 more <span class="glyphicon glyphicon-chevron-down"></span></span>
+                            }
+
+
+                            @*All Nearby Shipwrecks, displayed when requested by the user*@
+                            <table class="table allNearbyVessels">
+                                <tr>
+                                    <th>
+                                        Shipwrecks
+                                    </th>
+                                </tr>
+
+                                @foreach (var item in ViewBag.allNearbyVessels)
+                                {
+                                    <tr>
+                                        <td>
+                                            <a href="@Url.Action("Details", "Vessel" , new { id=item.ID, region=Request.QueryString["region"] })">
+                                                @item.VesselName
+                                            </a>
+                                        </td>
+                                    </tr>
+                                }
+                            </table>
+
+
+                            <span class="viewFewer btn btn-default">View fewer <span class="glyphicon glyphicon-chevron-up"></span></span>
+                        }
+                    </div>
+
+
+                </section>
+
+            </article>
+
+        }
+
+
+
+        <div class="clear" style="margin-bottom: 500px;"></div>
+
+
+
+
+
+
+
+
+        <a href="#" class="scrollup">^</a>
+
+
+
+
+        @section Scripts {
+            @Scripts.Render("~/Scripts/attraction.js")
+        }

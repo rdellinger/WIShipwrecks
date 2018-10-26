@@ -1,0 +1,71 @@
+﻿@model WIShipwrecks.Models.VesselVideo
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Vessel Video</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            YouTube Video
+        </dt>
+
+        <dd>
+            @*<!-- Begin Sublime Video Player (Live version) -->
+            <script type='text/javascript' src='http://av.aqua.wisc.edu/flashplayer/sublime/Sublime_SeaGrant.js'></script><video id='@Model.ID' class='sublime' poster='@Html.DisplayFor(model => model.Thumb)' width='560' height='318' title='@Html.DisplayFor(model => model.Caption)' sharing-title='@Html.DisplayFor(model => model.Caption)' data-sharing-url='@string.Format("{0}://{1}{2}", Request.Url.Scheme, Request.Url.Authority, Url.Content("~"))Vessel/Details/@Model.VesselID' data-sharing-text='@Html.DisplayFor(model => model.Caption)' data-sharing-twitter-text='@Html.DisplayFor(model => model.Caption)' data-sharing-image='auto' data-uid='113' data-youtube-suggested-quality='hd' data-youtube-id='@Html.DisplayFor(model => model.YouTubeCode)' data-autoresize='fit' preload='none'></video><!-- End Sublime Video Player -->*@
+
+            <!-- Begin Sublime Video Player (Local version) -->
+            <script type='text/javascript' src='http://av.aqua.wisc.edu/flashplayer/sublime/Sublime_local.js'></script><video id='@Model.ID' class='sublime' poster='@Html.DisplayFor(model => model.Thumb)' width='560' height='318' title='@Html.DisplayFor(model => model.Caption)' sharing-title='@Html.DisplayFor(model => model.Caption)' data-sharing-url='@string.Format("{0}://{1}{2}", Request.Url.Scheme, Request.Url.Authority, Url.Content("~"))Vessel/Details/@Model.VesselID' data-sharing-text='@Html.DisplayFor(model => model.Caption)' data-sharing-twitter-text='@Html.DisplayFor(model => model.Caption)' data-sharing-image='auto' data-uid='113' data-youtube-suggested-quality='hd' data-youtube-id='@Html.DisplayFor(model => model.YouTubeCode)' data-autoresize='fit' preload='none'></video><!-- End Sublime Video Player -->
+
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Caption)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Caption)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateOfVideo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateOfVideo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Vessel.VesselName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Vessel.VesselName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VideoSource.Source)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VideoSource.Source)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VideoType.VideoType1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VideoType.VideoType1)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID, vesselId = Model.VesselID })&nbsp; |
+    @Html.ActionLink("Back to List", "Edit", "Vessel", null, null, "videos", new { id = Model.VesselID }, null)
+</p>

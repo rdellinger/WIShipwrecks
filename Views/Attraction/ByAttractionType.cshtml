@@ -1,0 +1,62 @@
+﻿@model IEnumerable<WIShipwrecks.Models.Attraction>
+@using WIShipwrecks.Models
+
+
+@{
+    Layout = "~/Views/Shared/_List.cshtml";
+    ViewBag.Title = "Attractions - " + Request.QueryString["attractionType"];
+}
+
+
+<header class="title one"><span style="color:#fd853f;">Attractions</span> @Request.QueryString["attractionType"]</header>
+<div class="spacer"></div>
+
+<div style="margin-top:30px;"></div>
+
+
+    @*If there are any results, then show them*@
+    @if (Model.Count() > 0)
+    {
+
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.AttractionName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Description)
+                </th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td width="250px">
+                        <a href="@Url.Action("Details", "Attraction", new { id = item.ID, region = "ByAttractionType" })">
+                            @Html.DisplayFor(modelItem => item.AttractionName)
+                        </a>      
+                    </td>
+                    <td>
+                        @*Truncate the text*@
+                        @Html.Raw((item.Description).TrimIfLongerThan(300))
+                    </td>
+                </tr>
+            }
+
+        </table>
+
+    }
+
+    @*Otherwise, show the 'no records' message*@
+    else
+    {
+        <div style="margin: 40px 0 0 0;">Sorry, we couldn't find an attraction called <em>@Request.QueryString["SearchString"]</em> in Wisconsin's <strong>Inland Waterways</strong> that matches your search criteria.  Do you want to search <a href="~/attraction?SearchString=@Request.QueryString["SearchString"]">all of the attractions</a>?</div>
+    }
+
+
+
+
+
+@section Scripts {
+    @Scripts.Render("~/Scripts/attraction.js")
+}

@@ -1,0 +1,34 @@
+﻿@model WIShipwrecks.Models.AttractionContact
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Delete this contact?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ContactName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ContactName)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+
+            @Html.ActionLink("Cancel", "Edit", "Attraction", null, null, "contacts", new { id = Request.QueryString["attractionId"] }, null)
+
+        </div>
+    }
+</div>

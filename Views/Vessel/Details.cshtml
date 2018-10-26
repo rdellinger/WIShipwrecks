@@ -1,0 +1,853 @@
+﻿@model WIShipwrecks.Models.Vessel
+
+@{
+    Layout = "~/Views/Shared/_Details2.cshtml";
+    ViewBag.Title = Model.VesselName;
+}
+
+
+@**************************************** Google Map *****************************************************@
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="http://maps.google.com/maps/api/js?sensor=true" type="text/javascript"></script>
+
+<style>
+    #map_canvas img {
+        max-width: none;
+    }
+</style>
+<!-- This css is to create a popup "info window" when a marker is clicked on the map -->
+<style>
+    .infoDiv {
+        height: 120px;
+        width: 220px;
+        -webkit-user-select: none;
+        background-color: white;
+    }
+</style>
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        Initialize();
+    });
+
+    // Where all the fun happens
+    function Initialize() {
+
+        // Google has tweaked their interface somewhat - this tells the api to use that new UI
+        google.maps.visualRefresh = true;
+        var thisVessel = new google.maps.LatLng(@Model.LatitudeDecimal, @Model.LongitudeDecimal);
+
+        var blue = "#00D6FF"
+        var color = blue
+        var saturation = 100
+
+        var styles = [
+			{
+			    "featureType": "landscape",
+			    "stylers": [
+					{"hue": "#000"},
+					{"saturation": -100},
+					{"lightness": 40},
+					{"gamma": 1}
+			    ]
+			},
+			{
+			    "featureType": "road.highway",
+			    "stylers": [
+					{"hue": color},
+					{"saturation": saturation},
+					{"lightness": 20},
+					{"gamma": 1}
+			    ]
+			},
+			{
+			    "featureType": "road.arterial",
+			    "stylers": [
+					{"hue": color},
+					{"saturation": saturation},
+					{"lightness": 20},
+					{"gamma": 1}
+			    ]
+			},
+			{
+			    "featureType": "road.local",
+			    "stylers": [
+					{"hue": color},
+					{"saturation": saturation},
+					{"lightness": 50},
+					{"gamma": 1}
+			    ]
+			},
+			{
+			    "featureType": "water",
+			    "stylers": [
+					{"hue": color},
+					{"saturation": 100},
+					{"lightness": 15},
+					{"gamma": 1}
+			    ]
+			},
+			{
+			    "featureType": "poi",
+			    "stylers": [
+					{"hue": "#000"},
+					{"saturation": -100},
+					{"lightness": 25},
+					{"gamma": 1}
+			    ]
+			}
+        ];
+
+        // These are options that set initial zoom level, where the map is centered globally to start, and the type of map to show
+        var mapOptions = {
+            zoom: 14,
+            scrollwheel: false,
+            center: thisVessel,
+            mapTypeId: google.maps.MapTypeId.ROADMAP,
+            zoomControl : true,
+            mapTypeControl : false,
+            scaleControl : false,
+            streetViewControl : false,
+            panControl : false,
+            styles: styles
+        };
+
+        // This makes the div with id "map_canvas" a google map
+        var map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+
+        // Add a pin for the current vessel
+        var myLatlng = new google.maps.LatLng(@Model.LatitudeDecimal, @Model.LongitudeDecimal);
+
+        var marker = new google.maps.Marker({
+            position: myLatlng,
+            map: map,
+            title: '@Model.VesselName'
+        });
+
+        // Set the pin for the current vessel to a unique color from those of the nearby vessels
+        //marker.setIcon('../../Content/solido/img/map/pointer-blue.png')
+        @if(Model.LocationKnown == true)
+        {
+            @: marker.setIcon('../../Content/solido/img/map/pointer-green.png')
+        }
+        else
+        {
+            @: marker.setIcon('../../Content/solido/img/map/pointer-red.png')
+        }
+        
+
+        // Create JSON data to display the nearby vessels
+        var data = [
+
+             @foreach (var item in ViewBag.allVesselsInRegion)
+             {
+                 if (item.ID != Model.ID && item.LatitudeDecimal != null && item.LongitudeDecimal != null)
+                 {
+
+                     var vesselId = item.ID;
+                     var vesselName = "";
+                     var vesselType = "";
+                     var casualtyType = "";
+                     var casualtyDate = "";
+                     var geoLat = item.LatitudeDecimal;
+                     var geoLong = item.LongitudeDecimal;
+                     var icon = "";
+
+                     if (item.VesselName != null)
+                     {
+                         vesselName = item.VesselName.Replace("'", "\\'"); //This escapes all the single quotes in the vessel names so they won't break the JSON string;
+                     }
+                     else
+                     {
+                         vesselName = "";
+                     }
+
+                     if (item.VesselType != null)
+                     {
+                         vesselType = item.VesselType.VesselType1;
+                     }
+                     else
+                     {
+                         vesselType = "";
+                     }
+
+                     if (item.CasualtyType != null)
+                     {
+                         casualtyType = item.CasualtyType.CasualtyType1 + " ";
+                     }
+                     else
+                     {
+                         casualtyType = "";
+                     }
+
+                     if (item.CasualtyDate != null)
+                     {
+                         casualtyDate = item.CasualtyDate.ToShortDateString();
+                     }
+                     else
+                     {
+                         casualtyDate = "";
+                     }
+
+                     if (item.LocationKnown == true)
+                     {
+                         icon = "../../Content/solido/img/map/pointer-green-small.png";
+                     }
+                     else 
+                     {
+                         icon = "../../Content/solido/img/map/pointer-red-small.png";
+                     }
+
+
+                     //@Html.Raw("{'Id': '" + vesselId + "', 'Name': '" + vesselName + "', 'VesselType': '" +  vesselType + "', 'CasualtyType': '" + casualtyType + "', 'CasualtyDate': '" + casualtyDate + "', 'GeoLat': '" + geoLat + "', 'GeoLong': '" + geoLong + "'},");
+                     @Html.Raw("{'Id': '" + vesselId + "', 'Name': '" + vesselName + "', 'VesselType': '" + vesselType + "', 'CasualtyType': '" + casualtyType + "', 'CasualtyDate': '" + casualtyDate + "', 'GeoLat': '" + geoLat + "', 'GeoLong': '" + geoLong + "', 'icon': '" + icon + "'},");
+
+                }
+
+             }
+        ];
+
+
+        // Create pins for nearby vessels
+        $.each(data, function (i, item) {
+            var marker = new google.maps.Marker({
+                'position': new google.maps.LatLng(item.GeoLat, item.GeoLong),
+                'map': map,
+                'title': item.Name
+            });
+
+
+            // Make the pins for nearby vessels all a different color than the selected vessel
+            //marker.setIcon('../../Content/solido/img/map/pointer-black-small.png')
+            marker.setIcon(item.icon)
+
+            // Display some information about each vessel in the popup window
+            var infowindow = new google.maps.InfoWindow({
+                content: "<div class='infoDiv'><span style='font-size: 18px; font-weight: bold;'>" + item.Name + "</span><br />" + item.VesselType + "<br />" + item.CasualtyType + item.CasualtyDate + "<br /><br /><a href='" + item.Id + "'>Learn more...</a>" + "</div>"
+            });
+
+            // Hook up an "OnClick" listener to the map to create the popup window when the pin is clicked
+            google.maps.event.addListener(marker, 'click', function () {
+                infowindow.open(map, marker);
+            });
+
+        });
+    }
+</script>
+
+@**************************************** End Google Map *****************************************************@
+
+
+
+
+@*Redirect to special page explaining why the Edmund Fitzgerald is not on this site*@
+@if(Model.VesselName == "SS Edmund Fitzgerald"){
+    Response.Redirect("~/EdmundFitzgerald");
+}
+
+
+
+
+@*Vessel Name*@
+
+<div style="padding: 50px 0 0 0; text-align:center; background-color: white;">
+
+    <span class="title one">@Model.VesselName</span>
+    <div class="spacer"></div>
+
+    <nav class="submenu">
+        <ul id="nav" style="width: 1000px;">
+            @if (Model.VesselPhotos.Count() > 0)
+            {
+                <li>
+                    <a href="#Gallery">Gallery</a>
+                </li>
+            }
+
+            <li><a href="#ByTheNumbers">By The Numbers</a></li>
+            <li><a href="#Details">Details</a></li>
+
+            @if (Model.VesselHistories.Count() > 0)
+            {
+                <li><a href="#ServiceHistory">Service History</a></li>
+            }
+
+            @if (Model.HideLocationalInfo == false && Model.LatitudeDecimal != null)
+            {
+                <li><a href="#Map">Map</a></li>
+            }
+
+            @if (Model.HideLocationalInfo == false && ViewBag.nearbyVesselsCount > 1 || ViewBag.nearbyAttractionsCount > 0)
+            {
+                <li><a href="#Nearby">Nearby</a></li>
+            }
+
+        </ul>
+    </nav>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+@*Photo Gallery*@
+
+@*If there are any photos, then show them*@
+@if (Model.VesselPhotos.Count() > 0 || Model.VesselVideos.Count() > 0)
+{
+    <div id="Gallery">&nbsp;</div>
+
+    <article id="anchor5" class="content dark">
+
+        <div class="title one">Gallery</div>
+        <div class="spacer-orange"></div>
+        <div style="margin-top:40px;"></div>
+
+        <div id="portfolio" class="container">
+
+            <div class="section portfoliocontent">
+
+                <div class="clear"></div>
+                <div id="project-show"></div>
+
+                <section class="project-window">
+                    <div class="project-content"></div><!-- AJAX Dynamic Content -->
+                </section>
+
+
+
+                @*If there are both photos and videos, show the filter selector*@
+                @if (Model.VesselPhotos.Count() > 0 && Model.VesselVideos.Count() > 0)
+                {
+                    <section id="options" class="clear">
+                        <div id="filters" class="option-set clearfix foliomenu" data-option-key="filter">
+                            <a href="#filter" data-option-value="*" class="p-selected folio-btn"><div class="portfolio-btn">All</div></a>
+                            <a href="#filter" data-option-value=".photo" class="folio-btn"><div class="portfolio-btn">Photos</div></a>
+                            <a href="#filter" data-option-value=".video" class="folio-btn"><div class="portfolio-btn">Videos</div></a>
+                        </div>
+                    </section>
+                }
+
+
+
+
+                <section id="i-portfolio" class="clear">
+                    <div class="inici"></div>
+
+                    @*Photos*@
+                    @foreach (var item in Model.VesselPhotos)
+                    {
+                        <div class="ch-grid element photo" id="~/VesselPhoto/DetailsForGallery/@Html.DisplayFor(modelItem => item.ID)" style="height: 245px;">
+                            <img class="ch-item" src="~/Images/@Html.DisplayFor(modelItem => item.Image)" alt='img'>
+                            <div>
+                                <span><span class="p-category"></span>@Html.DisplayFor(modelItem => item.Caption)</span>
+                            </div>
+                        </div>
+                    }
+
+                    @*Videos*@
+                    @foreach (var item in Model.VesselVideos)
+                    {
+                        <div class="ch-grid element video" id="~/VesselVideo/DetailsForGallery/@Html.DisplayFor(modelItem => item.ID)" style="height: 245px;">
+                            <img class="ch-item" src="~/Images/@Html.DisplayFor(modelItem => item.Thumb)" alt='img'>
+                            <div>
+                                <span><span class="p-category"></span>@Html.DisplayFor(modelItem => item.Caption)</span>
+                            </div>
+                        </div>
+                    }
+
+                    <div class="final"></div>
+                </section>
+            </div>
+        </div>
+
+        <div class="clear" style="height: 50px;"></div>
+    </article>
+}
+
+    @*Show a placeholder graphic if the vessel has no photos.*@
+
+else
+{
+    <img src="~/Content/solido/img/slider/placholder.jpg" width="100%" alt='Scroll Down'>
+}
+
+<div class="clear" style="margin-bottom: 100px;"></div>
+
+
+
+
+
+
+
+
+@*By the Numbers*@
+
+<div id="ByTheNumbers"></div>
+
+<article class="content light hideme dontHide">
+    <section class="full">
+        <div class="clear"></div>
+        <div class="title one">By The Numbers</div>
+        <div class="spacer-orange"></div>
+        <div style="margin-top:40px;"></div>
+        <div class="f-container">
+            <div class="f-element">
+                <div class="f-ico s-one"></div>
+                <div class="milestone-counter" data-perc="@Model.ContructionYear">
+                    @if (Model.ContructionYear != null && Model.ContructionYear.IsInt())
+                    {
+                        <span class="milestone-count highlight">0</span> <!-- Initial Value = 0 -->
+                    }
+                    else if (Model.ContructionYear != null)
+                    {
+                        <span class="highlight">@Model.ContructionYear</span>
+                    }
+                    else
+                    {
+                        <span class="highlight">?</span>
+                    }
+
+                    <div class="milestone-details">Built</div>
+                </div>
+            </div>
+
+            <div class="f-element">
+                <div class="f-ico s-two"></div>
+                <div class="milestone-counter" data-perc="@Model.CasualtyYear">
+                    @if (Model.CasualtyYear != null && Model.CasualtyYear.IsInt())
+                    {
+                        <span class="milestone-count highlight">0</span> <!-- Initial Value = 0 -->
+                    }
+                    else if (Model.CasualtyYear != null)
+                    {
+                        <span class="highlight">@Model.CasualtyYear</span>
+                    }
+                    else
+                    {
+                        <span class="highlight">?</span>
+                    }
+
+                    <div class="milestone-details">Sank</div>
+                </div>
+            </div>
+
+            <div class="f-element">
+                <div class="f-ico s-three"></div>
+                <div class="milestone-counter" data-perc="@Model.LivesLost">
+                    @if (Model.LivesLost != null && Model.LivesLost.IsInt())
+                    {
+                        <span class="milestone-count highlight">0</span> <!-- Initial Value = 0 -->
+                    }
+                    else if (Model.LivesLost != null)
+                    {
+                        <span class="highlight">@Model.LivesLost</span>
+                    }
+                    else
+                    {
+                        <span class="highlight">?</span>
+                    }
+
+                    <div class="milestone-details">Lives Lost</div>
+                </div>
+            </div>
+
+            <div class="f-element">
+                <div class="f-ico s-four"></div>
+                <div class="milestone-counter" data-perc="@Model.WaterDepth">
+                    @if (Model.WaterDepth != null)
+                    {
+                        <span class="milestone-count highlight">0</span> <!-- Initial Value = 0 -->
+                    }
+                    else
+                    {
+                        <span class="highlight">?</span>
+                    }
+                    <div class="milestone-details">Depth (ft)</div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+</article>
+
+<div class="clear" style="margin-bottom: 100px;"></div>
+
+
+
+
+
+
+@*Details*@
+
+<div id="Details">&nbsp;</div>
+
+<article class="content dark hideme dontHide">
+
+    <footer id=anchor6 class="footer dark">
+        <div class="footer-container">
+            <div class="title one no-top">Details</div>
+            <div class="spacer-orange"></div>
+            <div style="margin-top:40px;"></div>
+
+
+            <div class="foot-third hideme dontHide">
+                <div class="f-title-one">Vessel</div>
+                <div class="f-title-two">Construction</div>
+
+                @if (Model.VesselType != null)
+                {
+                    <div class="f-data">@Html.DisplayNameFor(model => model.VesselType.VesselType1): <span>@Html.DisplayFor(model => model.VesselType.VesselType1)</span></div>
+                }
+
+                @if (Model.CargoDescription != null)
+                {
+                    <div class="f-data">@Html.DisplayNameFor(model => model.CargoDescription): <span>@Html.DisplayFor(model => model.CargoDescription)</span></div>
+                }
+
+                @if (Model.Length != null)
+                {
+                    <div class="f-data">@Html.DisplayNameFor(model => model.Length): <span>@Html.DisplayFor(model => model.Length)</span></div>
+                }
+
+                @if (Model.Breadth != null)
+                {
+                    <div class="f-data">@Html.DisplayNameFor(model => model.Breadth): <span>@Html.DisplayFor(model => model.Breadth)</span></div>
+                }
+
+                @if (Model.DepthOfHold != null)
+                {
+                    <div class="f-data">@Html.DisplayNameFor(model => model.DepthOfHold): <span>@Html.DisplayFor(model => model.DepthOfHold)</span></div>
+                }
+
+                @if (Model.HullMaterial != null)
+                {
+                    <div class="f-data">@Html.DisplayNameFor(model => model.HullMaterial.HullMaterial1): <span>@Html.DisplayFor(model => model.HullMaterial.HullMaterial1)</span></div>
+                }
+
+                @if (Model.GrossTonnage != null)
+                {
+                    <div class="f-data">@Html.DisplayNameFor(model => model.GrossTonnage): <span>@Html.DisplayFor(model => model.GrossTonnage)</span></div>
+                }
+
+                @if (Model.PropulsionType != null)
+                {
+                    <div class="f-data">@Html.DisplayNameFor(model => model.PropulsionType.PropulsionType1): <span>@Html.DisplayFor(model => model.PropulsionType.PropulsionType1)</span></div>
+                }
+
+                @if (Model.RigType != null)
+                {
+                    <div class="f-data">@Html.DisplayNameFor(model => model.RigType.RigType1): <span>@Html.DisplayFor(model => model.RigType.RigType1)</span></div>
+                }
+            </div>
+
+
+            <div class="foot-third hideme dontHide">
+                <div class="f-title-one">Vessel</div>
+                <div class="f-title-two">Location</div>
+
+                @if (Model.BodiesOfWater != null)
+                {
+                    <div class="f-data">@Html.DisplayNameFor(model => model.BodiesOfWater.BodyOfWater): <span>@Html.DisplayFor(model => model.BodiesOfWater.BodyOfWater)</span></div>
+                }
+
+                @if (Model.County != null)
+                {
+                    <div class="f-data">@Html.DisplayNameFor(model => model.County): <span>@Html.DisplayFor(model => model.County)</span></div>
+                }
+
+                @if (Model.NearestCity != null)
+                {
+                    <div class="f-data">@Html.DisplayNameFor(model => model.NearestCity): <span>@Html.DisplayFor(model => model.NearestCity)</span></div>
+                }
+
+                @if (Model.HideLocationalInfo == false && Model.Latitude != null)
+                {
+                    <div class="f-data">@Html.DisplayNameFor(model => model.Latitude): <span>N @Html.Raw(Html.DisplayFor(model => model.Latitude).ToString().Replace(" ", "&deg;&nbsp;"))'</span></div>
+                }
+
+                @if (Model.HideLocationalInfo == false && Model.Longitude != null)
+                {
+                    <div class="f-data">@Html.DisplayNameFor(model => model.Longitude): <span>W @Html.Raw(Html.DisplayFor(model => model.Longitude).ToString().Replace(" ", "&deg;&nbsp;"))'</span></div>
+                }
+
+            </div>
+
+
+            <div class="foot-third hideme dontHide">
+                <div class="f-title-one">Vessel</div>
+                <div class="f-title-two">Builder</div>
+
+                @if (Model.NationalRegisterStatus != null)
+                {
+                    <div class="f-data">@Html.DisplayNameFor(model => model.NationalRegisterStatus): <span>@Html.DisplayFor(model => model.NationalRegisterStatus.Status)</span></div>
+                }
+
+                @if (Model.RegistryNumber != null)
+                {
+                    <div class="f-data">@Html.DisplayNameFor(model => model.RegistryNumber): <span>@Html.DisplayFor(model => model.RegistryNumber)</span></div>
+                }
+
+                @if (Model.Builder != null)
+                {
+                    <div class="f-data">@Html.DisplayNameFor(model => model.Builder): <span>@Html.DisplayFor(model => model.Builder)</span></div>
+                }
+
+                @if (Model.ContructionYear != null)
+                {
+                    <div class="f-data">@Html.DisplayNameFor(model => model.ContructionYear): <span>@Html.DisplayFor(model => model.ContructionYear)</span></div>
+                }
+
+                @if (Model.WhereBuilt != null)
+                {
+                    <div class="f-data">@Html.DisplayNameFor(model => model.WhereBuilt): <span>@Html.DisplayFor(model => model.WhereBuilt)</span></div>
+                }
+
+                @if (Model.Owners != null)
+                {
+                    <div class="f-data">@Html.DisplayNameFor(model => model.Owners): <span>@Html.DisplayFor(model => model.Owners)</span></div>
+                }
+
+                @if (Model.HomePort != null)
+                {
+                    <div class="f-data">@Html.DisplayNameFor(model => model.HomePort): <span>@Html.DisplayFor(model => model.HomePort)</span></div>
+                }
+            </div>
+        </div>
+    </footer>
+
+</article>
+
+<div class="clear" style="margin-bottom: 100px;"></div>
+
+
+
+
+
+@*Service History*@
+@*If there are any results, then show them*@
+@if (Model.VesselHistories.Count() > 0)
+{
+    <div id="ServiceHistory">&nbsp;</div>
+
+    <article class="content hideme dontHide">
+
+        <div class="content full" style="max-width: 840px; padding: 0 20px 0 20px;">
+            @foreach (var item in Model.VesselHistories)
+            {
+
+                if (item.TimeFrame1.TimeFrame1 != null)
+                {
+                    <div class="title one">@Html.DisplayFor(modelItem => item.TimeFrame1.TimeFrame1)</div>
+                    <div class="spacer-orange"></div>
+                }
+
+                if (item.Title != null)
+                {
+                    <br /><br />@Html.DisplayFor(modelItem => item.Title)
+
+                    if (item.Subtitle != null)
+                    {
+                        <br />@Html.DisplayFor(modelItem => item.Subtitle)
+                    }
+                }
+
+                if (item.Description != null)
+                {
+                    <br /><br />@Html.Raw(item.Description)
+                }
+
+            }
+        </div>
+
+    </article>
+
+    <div class="clear" style="margin-bottom: 100px;"></div>
+
+}
+
+
+
+
+
+
+
+
+
+    @*Map*@
+    @*If there are any results, then show them*@
+    @if (Model.HideLocationalInfo == false && Model.LatitudeDecimal != null)
+    {
+        <div id="Map">&nbsp;</div>
+
+        <article class="content hideme dontHide">
+
+            <div class="title one">Map</div>
+            <div class="spacer-orange"></div>
+
+            <div style="margin-left: 20px;">
+                <img src="~/Content/solido/img/map/pointer-green-small.png" /> Confirmed Location &nbsp;&nbsp;&nbsp;
+                <img src="~/Content/solido/img/map/pointer-red-small.png" /> Unconfirmed location
+            </div>
+
+            <div style="margin-top: 20px;">
+                <div id="map_canvas" style="height: 600px;">
+                </div>
+            </div>
+
+        </article>
+
+        <div class="clear" style="margin-bottom: 100px;"></div>
+    }
+
+
+
+
+
+
+
+    @*Nearby Shipwrecks*@
+    @if (Model.HideLocationalInfo == false && ViewBag.nearbyVesselsCount > 1 || ViewBag.nearbyAttractionsCount > 0)
+    {
+
+        <div id="Nearby">&nbsp;</div>
+
+        <article class="content hideme dontHide">
+
+            <section class="full">
+
+                <div class="title one">Nearby</div>
+                <div class="spacer-orange"></div>
+
+
+                <div class="half-content" style="margin-top: 60px;">
+                    @*If there are any results, then show them; there will always be at least one result for the vessel itself, so look for more than one*@
+                    @if (ViewBag.nearbyVesselsCount > 1)
+                    {
+
+                        @*The first 10 Nearby Shipwrecks, displayed by default*@
+                        <table class="table first10NearbyVessels">
+                            <tr>
+                                <th>
+                                    Shipwrecks
+                                </th>
+                            </tr>
+
+                            @foreach (var item in ViewBag.first10NearbyVessels)
+                            {
+                                <tr>
+                                    <td>
+                                        <a href="@Url.Action("Details", "Vessel" , new { id=item.ID, region=Request.QueryString["region"] })">
+                                            @item.VesselName
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        </table>
+
+                        @*Show to option to display more vessels if there are more than 10*@
+                        if (ViewBag.nearbyVesselsCount >= 10)
+                        {
+                            <span class="viewMore btn btn-default">View @ViewBag.nearbyVesselsCountMinus10 more <span class="glyphicon glyphicon-chevron-down"></span></span>
+                        }
+
+
+                        @*All Nearby Shipwrecks, displayed when requested by the user*@
+                        <table class="table allNearbyVessels">
+                            <tr>
+                                <th>
+                                    Shipwrecks
+                                </th>
+                            </tr>
+
+                            @foreach (var item in ViewBag.allNearbyVessels)
+                            {
+                                <tr>
+                                    <td>
+                                        <a href="@Url.Action("Details", "Vessel" , new { id=item.ID, region=Request.QueryString["region"] })">
+                                            @item.VesselName
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        </table>
+
+
+                        <span class="viewFewer btn btn-default">View fewer <span class="glyphicon glyphicon-chevron-up"></span></span>
+                    }
+                </div>
+
+
+
+
+
+
+
+                @*Nearby Attractions*@
+
+                <div class="half-content" style="margin-top: 60px;">
+                    @*If there are any results, then show them*@
+                    @if (ViewBag.nearbyAttractionsCount > 0)
+                    {
+
+                        <table class="table">
+                            <tr>
+                                <th>
+                                    Attractions
+                                </th>
+                            </tr>
+
+                            @foreach (var item in ViewBag.nearbyAttractions)
+                            {
+                                <tr>
+                                    <td>
+                                        <a href="@Url.Action("Details", "Attraction" , new { id=item.ID, region=Request.QueryString["region"] })">
+                                            @item.AttractionName
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+
+                        </table>
+
+                    }
+                </div>
+
+
+
+
+            </section>
+
+        </article>
+
+    }
+
+
+
+    <div class="clear" style="margin-bottom: 500px;"></div>
+
+
+
+
+
+
+
+
+    <a href="#" class="scrollup">^</a>
+
+
+
+
+
+
+@Scripts.Render("~/Scripts/vessel.js")

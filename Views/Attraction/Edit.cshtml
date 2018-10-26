@@ -1,0 +1,528 @@
+﻿@model WIShipwrecks.Models.Attraction
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+
+<h4>Attraction</h4>
+<hr />
+
+@Html.ActionLink("< Back to List", "Index")
+
+<br /><br />
+
+
+@* --- Nav tabs --- *@
+<ul class="nav nav-tabs">
+    <li class="active"><a href="#description" data-toggle="tab">Description</a></li>
+    <li><a href="#contacts" data-toggle="tab">Contacts</a></li>
+    <li><a href="#links" data-toggle="tab">Links</a></li>
+    <li><a href="#images" data-toggle="tab">Images</a></li>
+</ul>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    @* --- Content --- *@
+    <div class="tab-content">
+
+        @* --- Description --- *@
+        <div class="tab-pane active" id="description">
+
+            <div class="form-horizontal">
+                <br /><br />
+
+                @Html.ValidationSummary(true)
+                @Html.HiddenFor(model => model.ID)
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.AttractionName, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(model => model.AttractionName, new { @class = "smalltextarea" })
+                        @Html.ValidationMessageFor(model => model.AttractionName)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.AttractionTypeID, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("AttractionTypeID", "-- Select --")
+                        @Html.ValidationMessageFor(model => model.AttractionTypeID)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.BodyOfWaterID, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("BodyOfWaterID", "-- Select --")
+                        @Html.ValidationMessageFor(model => model.BodyOfWaterID)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.TrailID, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("TrailID", "-- Select --")
+                        @Html.ValidationMessageFor(model => model.TrailID)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.YearBuilt, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.YearBuilt)
+                        @Html.ValidationMessageFor(model => model.YearBuilt)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Description, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(model => model.Description, new { @class = "largetextarea" })
+                        @Html.ValidationMessageFor(model => model.Description)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.NearestAddress, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(model => model.NearestAddress, new { @class = "smalltextarea" })
+                        @Html.ValidationMessageFor(model => model.NearestAddress)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.City, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.City)
+                        @Html.ValidationMessageFor(model => model.City)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.County, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.County)
+                        @Html.ValidationMessageFor(model => model.County)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ZipCode, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.ZipCode)
+                        @Html.ValidationMessageFor(model => model.ZipCode)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.OpenToPublic, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.CheckBoxFor(model => model.OpenToPublic)
+                        @Html.ValidationMessageFor(model => model.OpenToPublic)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.HasWHSMooringBuoy, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.HasWHSMooringBuoy)
+                        @Html.ValidationMessageFor(model => model.HasWHSMooringBuoy)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.MooringBuoyInPlace, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.MooringBuoyInPlace)
+                        @Html.ValidationMessageFor(model => model.MooringBuoyInPlace)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.IsSnorkelable, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.IsSnorkelable)
+                        @Html.ValidationMessageFor(model => model.IsSnorkelable)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.HasWHSDiveGuide, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.HasWHSDiveGuide)
+                        @Html.ValidationMessageFor(model => model.HasWHSDiveGuide)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.HasTrailsSign, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.HasTrailsSign)
+                        @Html.ValidationMessageFor(model => model.HasTrailsSign)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.HasTrailsExhibit, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.HasTrailsExhibit)
+                        @Html.ValidationMessageFor(model => model.HasTrailsExhibit)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.IsNationalRegisterListed, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.IsNationalRegisterListed)
+                        @Html.ValidationMessageFor(model => model.IsNationalRegisterListed)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Latitude, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Latitude)
+                        @Html.ValidationMessageFor(model => model.Latitude)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.LatitudeDecimal, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.LatitudeDecimal)
+                        @Html.ValidationMessageFor(model => model.LatitudeDecimal)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Longitude, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Longitude)
+                        @Html.ValidationMessageFor(model => model.Longitude)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.LongitudeDecimal, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.LongitudeDecimal)
+                        @Html.ValidationMessageFor(model => model.LongitudeDecimal)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.LastModifiedBy, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DisplayTextFor(model => model.LastModifiedBy)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.LastModifiedDate, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DisplayTextFor(model => model.LastModifiedDate)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.HideRecord, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.HideRecord)
+                        @Html.ValidationMessageFor(model => model.HideRecord)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Save" class="btn btn-default" /> &nbsp;| @Html.ActionLink("Cancel", "Index")
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        @* --- Contacts --- *@
+        <div class="tab-pane" id="contacts">
+            
+            <br /><br />
+
+            @Html.ActionLink(
+                            linkText: "Create New Contact",
+                            actionName: "Create",
+                            controllerName: "AttractionContact",
+                            routeValues: new
+                            {
+                                attractionId = Model.ID
+                            },
+                            htmlAttributes: null
+                            )
+            <br /><br />
+
+            @*If there are any results, then show them*@
+            @if (Model.AttractionContacts.Count() > 0)
+            {
+
+                <table class="table">
+                    <tr>
+                        <th>
+                            Name
+                        </th>
+                        <th>
+                            Phone Number
+                        </th>
+                        <th>
+                            Email
+                        </th>
+                        <th></th>
+                    </tr>
+
+                    @foreach (var item in Model.AttractionContacts)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ContactName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ContactPhone)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Email)
+                            </td>
+                            <td>
+                                @Html.ActionLink(
+                                            linkText: "Edit",
+                                            actionName: "Edit",
+                                            controllerName: "AttractionContact",
+                                            routeValues: new
+                                            {
+                                                id = item.ID,
+                                                attractionId = item.Attraction.ID
+                                            },
+                                            htmlAttributes: null
+                                            )
+                                
+                                &nbsp;|&nbsp;
+
+                                @Html.ActionLink(
+                                            linkText: "Delete",
+                                            actionName: "Delete",
+                                            controllerName: "AttractionContact",
+                                            routeValues: new
+                                            {
+                                                id = item.ID,
+                                                attractionId = item.Attraction.ID
+                                            },
+                                            htmlAttributes: null
+                                            )
+                            </td>
+                        </tr>
+                    }
+                </table>
+            }
+
+            else
+            {
+                <div>There are no contacts for this attraction.</div>
+            }
+
+        </div>
+
+
+
+
+        @* --- Links --- *@
+        <div class="tab-pane" id="links">
+
+            <br /><br />
+
+            @Html.ActionLink(
+                            linkText: "Create New Link",
+                            actionName: "Create",
+                            controllerName: "AttractionLink",
+                            routeValues: new
+                            {
+                                attractionId = Model.ID
+                            },
+                            htmlAttributes: null
+                            )
+            
+            <br /><br />
+
+            @*If there are any results, then show them*@
+            @if (Model.AttractionLinks.Count() > 0)
+            {
+
+                <table class="table">
+
+                    <tr>
+                        <th>
+                            Title
+                        </th>
+                        <th>
+                            Link
+                        </th>
+                        <th></th>
+                    </tr>
+
+                    @foreach (var item in Model.AttractionLinks)
+                    {
+                        <tr>
+                            <td>
+                                <a href='@item.Link'>
+                                    @Html.DisplayFor(modelItem => item.Title)
+                                </a>
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Link)
+                                &nbsp;&nbsp;&nbsp;
+                            </td>
+                            <td>
+                                @Html.ActionLink(
+                                            linkText: "Edit",
+                                            actionName: "Edit",
+                                            controllerName: "AttractionLink",
+                                            routeValues: new
+                                            {
+                                                id = item.ID,
+                                                attractionId = item.Attraction.ID
+                                            },
+                                            htmlAttributes: null
+                                            )
+
+                                &nbsp;|&nbsp;
+
+                                @Html.ActionLink(
+                                            linkText: "Delete",
+                                            actionName: "Delete",
+                                            controllerName: "AttractionLink",
+                                            routeValues: new
+                                            {
+                                                id = item.ID,
+                                                attractionId = item.Attraction.ID
+                                            },
+                                            htmlAttributes: null
+                                            )
+                            </td>
+                        </tr>
+                    }
+                </table>
+            }
+
+            else
+            {
+                <div>There are no links for this attraction.</div>
+            }
+
+        </div>
+
+
+
+
+
+        @* --- Images --- *@
+        <div class="tab-pane" id="images">
+            <br /><br />
+
+            @Html.ActionLink(
+                            linkText: "Upload New Image",
+                            actionName: "Create",
+                            controllerName: "AttractionPhoto",
+                            routeValues: new
+                            {
+                                attractionId = Model.ID
+                            },
+                            htmlAttributes: null
+                            )
+            <br /><br />
+
+            @*If there are any results, then show them*@
+            @if (Model.AttractionPhotos.Count() > 0)
+            {
+
+                <table class="table">
+
+                    <tr>
+                        <th>
+                            Image
+                        </th>
+                        <th>
+                            Caption
+                        </th>
+                        <th>
+                            Source
+                        </th>
+                        <th></th>
+                    </tr>
+
+                    @foreach (var item in Model.AttractionPhotos)
+                    {
+                        <tr>
+                            <td>
+                                <a href="~/Images/Attractions/@Html.DisplayFor(modelItem => item.Image)">
+                                    <img src="~/Images/Attractions/@Html.DisplayFor(modelItem => item.Image)" width="150" />
+                                </a>
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Caption)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.PhotoSource.Source)
+                            </td>
+                            <td>
+                                @Html.ActionLink(
+                                            linkText: "Edit",
+                                            actionName: "Edit",
+                                            controllerName: "AttractionPhoto",
+                                            routeValues: new
+                                            {
+                                                id = item.ID,
+                                                attractionId = item.Attraction.ID
+                                            },
+                                            htmlAttributes: null
+                                            )
+
+                                &nbsp;|&nbsp;
+
+                                @Html.ActionLink(
+                                            linkText: "Delete",
+                                            actionName: "Delete",
+                                            controllerName: "AttractionPhoto",
+                                            routeValues: new
+                                            {
+                                                id = item.ID,
+                                                attractionId = item.Attraction.ID
+                                            },
+                                            htmlAttributes: null
+                                            )
+                            </td>
+                        </tr>
+                    }
+                </table>
+            }
+
+            else
+            {
+                <div>There are no images for this attraction.</div>
+            }
+        </div>
+
+    </div>
+
+
+
+
+
+}
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/WIShipwrecks")
+}

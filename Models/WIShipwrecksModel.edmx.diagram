@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="51ef14ad40bd49aea2bef13f230c75de" Name="Diagram1" ZoomLevel="100">
+        <EntityTypeShape EntityType="WIShipwrecksModel.AttractionContact" Width="1.5" PointX="5" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="WIShipwrecksModel.AttractionLink" Width="1.5" PointX="5" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="WIShipwrecksModel.AttractionPhoto" Width="1.5" PointX="5" PointY="14.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="WIShipwrecksModel.Attraction" Width="1.5" PointX="2.75" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="WIShipwrecksModel.AttractionType" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WIShipwrecksModel.BodiesOfWater" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WIShipwrecksModel.CasualtyType" Width="1.5" PointX="7.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WIShipwrecksModel.Contributor" Width="1.5" PointX="7.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WIShipwrecksModel.County" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WIShipwrecksModel.HullMaterial" Width="1.5" PointX="9.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WIShipwrecksModel.OwnerManagerAgency" Width="1.5" PointX="9.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WIShipwrecksModel.PhotoSource" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="WIShipwrecksModel.PhotoType" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WIShipwrecksModel.PropulsionType" Width="1.5" PointX="7.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WIShipwrecksModel.RigType" Width="1.5" PointX="9.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WIShipwrecksModel.sysdiagram" Width="1.5" PointX="11.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WIShipwrecksModel.Trail" Width="1.5" PointX="11.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WIShipwrecksModel.Vessel_Contributors" Width="1.5" PointX="11.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WIShipwrecksModel.VesselPhoto" Width="1.5" PointX="3.125" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="WIShipwrecksModel.Vessel" Width="1.5" PointX="0.75" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="WIShipwrecksModel.VesselType" Width="1.5" PointX="11.75" PointY="9.75" IsExpanded="true" />
+        <AssociationConnector Association="WIShipwrecksModel.FK_AttractionContacts_Attractions" ManuallyRouted="false" />
+        <AssociationConnector Association="WIShipwrecksModel.FK_AttractionLinks_Attractions" ManuallyRouted="false" />
+        <AssociationConnector Association="WIShipwrecksModel.FK_AttractionPhotos_Attractions" ManuallyRouted="false" />
+        <AssociationConnector Association="WIShipwrecksModel.FK_VesselPhotos_PhotoSources" ManuallyRouted="false" />
+        <AssociationConnector Association="WIShipwrecksModel.FK_VesselPhotos_PhotoTypes" ManuallyRouted="false" />
+        <AssociationConnector Association="WIShipwrecksModel.FK_VesselPhotos_VesselPhotos" ManuallyRouted="false" />
+        <AssociationConnector Association="WIShipwrecksModel.VesselTypeVessel" />
+        <AssociationConnector Association="WIShipwrecksModel.BodiesOfWaterVessel" />
+        <EntityTypeShape EntityType="WIShipwrecksModel.NewsArticle" Width="1.5" PointX="7.375" PointY="12.75" />
+        <EntityTypeShape EntityType="WIShipwrecksModel.Newspaper" Width="1.5" PointX="9.375" PointY="12.75" />
+        <AssociationConnector Association="WIShipwrecksModel.FK_NewsArticles_Newspapers" />
+        <AssociationConnector Association="WIShipwrecksModel.PhotoSourceAttractionPhoto" />
+        <AssociationConnector Association="WIShipwrecksModel.PhotoTypeAttractionPhoto" />
+        <EntityTypeShape EntityType="WIShipwrecksModel.NationalRegisterStatus" Width="1.5" PointX="11.375" PointY="12.75" />
+        <AssociationConnector Association="WIShipwrecksModel.NationalRegisterStatusVessel" />
+        <EntityTypeShape EntityType="WIShipwrecksModel.PercentVesselPresent" Width="1.5" PointX="13.375" PointY="12.75" />
+        <AssociationConnector Association="WIShipwrecksModel.PercentVesselPresentVessel" />
+        <EntityTypeShape EntityType="WIShipwrecksModel.SturgeonBayStone" Width="1.5" PointX="14.375" PointY="0.75" />
+        <AssociationConnector Association="WIShipwrecksModel.SturgeonBayStoneVessel" />
+        <AssociationConnector Association="WIShipwrecksModel.CasualtyTypeVessel" />
+        <AssociationConnector Association="WIShipwrecksModel.HullMaterialVessel" />
+        <AssociationConnector Association="WIShipwrecksModel.PropulsionTypeVessel" />
+        <AssociationConnector Association="WIShipwrecksModel.RigTypeVessel" />
+        <AssociationConnector Association="WIShipwrecksModel.AttractionTypeAttraction" />
+        <AssociationConnector Association="WIShipwrecksModel.TrailAttraction" />
+        <EntityTypeShape EntityType="WIShipwrecksModel.Glossary" Width="1.5" PointX="14.375" PointY="3.75" />
+        <EntityTypeShape EntityType="WIShipwrecksModel.DatingMethod" Width="1.5" PointX="14.375" PointY="9.75" />
+        <EntityTypeShape EntityType="WIShipwrecksModel.IDAccuracy" Width="1.5" PointX="9.375" PointY="15.75" />
+        <EntityTypeShape EntityType="WIShipwrecksModel.LocationPotential" Width="1.5" PointX="11.375" PointY="15.75" />
+        <AssociationConnector Association="WIShipwrecksModel.IDAccuracyVessel" />
+        <AssociationConnector Association="WIShipwrecksModel.LocationPotentialVessel" />
+        <AssociationConnector Association="WIShipwrecksModel.DatingMethodVessel" />
+        <EntityTypeShape EntityType="WIShipwrecksModel.Culture" Width="1.5" PointX="14.875" PointY="6.75" />
+        <AssociationConnector Association="WIShipwrecksModel.CultureVessel" />
+        <EntityTypeShape EntityType="WIShipwrecksModel.TimeFrame" Width="1.5" PointX="15.875" PointY="12.75" />
+        <EntityTypeShape EntityType="WIShipwrecksModel.VesselHistory" Width="1.5" PointX="13.875" PointY="15.75" />
+        <AssociationConnector Association="WIShipwrecksModel.VesselHistoryVessel" />
+        <AssociationConnector Association="WIShipwrecksModel.VesselHistoryTimeFrame" />
+        <EntityTypeShape EntityType="WIShipwrecksModel.VesselVideo" Width="1.5" PointX="16.375" PointY="0.75" />
+        <EntityTypeShape EntityType="WIShipwrecksModel.VideoSource" Width="1.5" PointX="16.375" PointY="9.75" />
+        <EntityTypeShape EntityType="WIShipwrecksModel.VideoType" Width="1.5" PointX="16.375" PointY="15.75" />
+        <AssociationConnector Association="WIShipwrecksModel.VesselVideoVessel" />
+        <AssociationConnector Association="WIShipwrecksModel.VesselVideoVideoSource" />
+        <AssociationConnector Association="WIShipwrecksModel.VesselVideoVideoType" />
+        <EntityTypeShape EntityType="WIShipwrecksModel.Feedback" Width="1.5" PointX="17.375" PointY="4.75" />
+        <EntityTypeShape EntityType="WIShipwrecksModel.FeedbackRecipient" Width="1.5" PointX="18.375" PointY="0.75" />
+        <AssociationConnector Association="WIShipwrecksModel.AttractionBodiesOfWater" />
+        <EntityTypeShape EntityType="WIShipwrecksModel.CurrentResearch" Width="1.5" PointX="16.375" PointY="18.375" />
+        <EntityTypeShape EntityType="WIShipwrecksModel.TechnicalFieldReport" Width="1.5" PointX="16.375" PointY="20.75" />
+        <EntityTypeShape EntityType="WIShipwrecksModel.Calendar" Width="1.5" PointX="16.375" PointY="22.875" />
+        <EntityTypeShape EntityType="WIShipwrecksModel.Link" Width="1.5" PointX="16.375" PointY="25.125" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

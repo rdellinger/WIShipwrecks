@@ -1,0 +1,45 @@
+﻿@model WIShipwrecks.Models.VesselPhoto
+
+@{
+    Layout = "";
+}
+
+
+<link rel="stylesheet" type="text/css" href="~/Content/solido/css/popup/magnific-popup.css" />
+
+
+<div class="img-project">
+
+    <a id="topOfImage"></a>
+
+    <div style="float:right;">
+        <div class="w-arrows" style="width: 65px; border: 1px solid gray; margin-bottom: -10px;">
+            <div class="close"></div>
+        </div>
+    </div>
+
+    <div class="wrapper-project">
+        <ul>
+            <li class="close"><img src="~/Images/@Html.DisplayFor(model => model.Image)" /></li>
+        </ul>
+    </div>
+
+
+    <div class="info-project" style="border: 1px solid gray; padding: 20px 20px 20px 20px; background-color: white; margin-bottom: 20px;">
+
+
+        <div class="description" style="margin-top: 0;">
+
+            @Html.DisplayFor(model => model.Caption)
+
+            @if (Model.PhotoSource != null)
+            {
+                <br /><br />
+                <span style="font-style: italic">Photo by @Html.DisplayFor(model => model.PhotoSource.Source)</span>
+            }
+
+        </div>
+
+    </div>
+
+</div>

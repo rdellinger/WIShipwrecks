@@ -1,0 +1,26 @@
+﻿@model WIShipwrecks.Models.CasualtyType
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Casualty Type</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CasualtyType1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CasualtyType1)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

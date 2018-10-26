@@ -1,0 +1,58 @@
+﻿@{
+    Layout = "~/Views/Shared/_Topic.cshtml";
+    ViewBag.Title = "Calendar";
+}
+
+
+<article class="content">
+
+    <div class="title one">@ViewBag.Title</div>
+    <div class="spacer-orange"></div>
+    <br /><br />
+
+    <div class="content full" style="max-width: 800px;">
+
+        @if (ViewBag.CalendarCount > 0)
+        {
+            foreach (var item in ViewBag.Calendar)
+            {
+                <div style="margin-bottom: 50px;">
+
+                    @if (item.Date != null)
+                    {
+                        <div style="margin-bottom: 10px;">@item.Date.ToString("MM/dd/yyyy")</div>
+                    }
+                    
+                    @if (item.Title != null)
+                    {
+                        <div style="font-weight:bold; font-size: 16px; margin-bottom: 10px;">@item.Title</div>
+                    }
+                    
+                    @if (item.Description != null)
+                    {
+                        <div style="margin-bottom: 10px;">@Html.Raw(Html.Encode(item.Description).Replace("\n", "<br />"))</div>
+                    }
+                    
+                    @if (item.URL != null)
+                    {
+                        <div style="margin-bottom: 10px;">
+                            <a href="@item.URL">@item.URL</a>
+                        </div>
+                    }
+                    
+                </div>
+
+            }
+        }
+
+        else
+        {
+
+            @: There are no upcoming events on the calendar.
+        }
+
+        
+
+    </div>
+
+</article>

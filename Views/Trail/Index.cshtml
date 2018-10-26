@@ -1,0 +1,38 @@
+﻿@model IEnumerable<WIShipwrecks.Models.Trail>
+
+@{
+    ViewBag.Title = "Trails";
+}
+
+<h2>Trails</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TrailName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+			<a href="@Url.Action("Details", "Trail", new { id = item.ID })">
+				@Html.DisplayFor(modelItem => item.TrailName)
+			</a>
+        </td>
+        <td width="70px">
+			<a href="@Url.Action("Edit", "Trail", new { id = item.ID })" class="btn btn-info btn-xs">
+				<span class="glyphicon glyphicon-pencil"></span>
+            </a>
+            <a href="@Url.Action("Delete", "Trail", new { id = item.ID })" class="btn btn-danger btn-xs">
+				<span class="glyphicon glyphicon-trash"></span>
+            </a>
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,44 @@
+﻿@model IEnumerable<WIShipwrecks.Models.PhotoSource>
+
+@{
+    ViewBag.Title = "Photo Sources";
+}
+
+<h2>Photo Sources</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Source)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.URL)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+			<a href="@Url.Action("Details", "PhotoSource", new { id = item.ID })">
+				@Html.DisplayFor(modelItem => item.Source)
+			</a>
+        </td>
+        <td>
+				@Html.DisplayFor(modelItem => item.URL)
+        </td>
+        <td width="70px">
+			<a href="@Url.Action("Edit", "PhotoSource", new { id = item.ID })" class="btn btn-info btn-xs">
+				<span class="glyphicon glyphicon-pencil"></span>
+            </a>
+            <a href="@Url.Action("Delete", "PhotoSource", new { id = item.ID })" class="btn btn-danger btn-xs">
+				<span class="glyphicon glyphicon-trash"></span>
+            </a>
+        </td>
+    </tr>
+}
+
+</table>

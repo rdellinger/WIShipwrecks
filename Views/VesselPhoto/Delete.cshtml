@@ -1,0 +1,67 @@
+﻿@model WIShipwrecks.Models.VesselPhoto
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Delete this image?</h3>
+<div>
+    <h4>Vessel Image</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Image)
+        </dt>
+
+        <dd style="margin-bottom:10px;">
+            <img src="~/Images/@Html.DisplayFor(model => model.Image)" width="150px" />
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Caption)
+        </dt>
+
+        <dd style="margin-bottom:10px;">
+            @Html.DisplayFor(model => model.Caption)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PhotoSource.Source)
+        </dt>
+
+        <dd style="margin-bottom:10px;">
+            @Html.DisplayFor(model => model.PhotoSource.Source)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PhotoType.PhotoType1)
+        </dt>
+
+        <dd style="margin-bottom:10px;">
+            @Html.DisplayFor(model => model.PhotoType.PhotoType1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateOfPhoto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateOfPhoto)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" />&nbsp; |
+
+            @Html.ActionLink("Cancel", "Edit", "Vessel", null, null, "images", new { id = Request.QueryString["VesselId"] }, null)
+
+        </div>
+    }
+</div>

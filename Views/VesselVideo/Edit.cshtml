@@ -1,0 +1,96 @@
+﻿@model WIShipwrecks.Models.VesselVideo
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+
+@using (Html.BeginForm("Edit", "VesselVideo", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Vessel Video</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.ID)
+        @Html.HiddenFor(model => model.Thumb)
+        @Html.HiddenFor(model => model.VesselID)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.YouTubeCode, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.YouTubeCode, new { @class = "mediumtextbox" })
+                @Html.ValidationMessageFor(model => model.YouTubeCode)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Thumb, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <img src="~/Images/@Html.DisplayFor(model => model.Thumb)" width="150" />
+            </div>
+        </div>
+
+        <div class="form-group imageUpload">
+            <label class="control-label col-md-2" for="Image"></label>
+            <div class="col-md-10">
+                <input type="file" name="file" />
+                @Html.ValidationMessage("uploadError")
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Caption, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.Caption, new { @class = "mediumtextarea" })
+                @Html.ValidationMessageFor(model => model.Caption)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.VideoSourceID, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("VideoSourceID", "-- Select --")
+                @Html.ValidationMessageFor(model => model.VideoSourceID)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.VideoTypeID, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("VideoTypeID", "-- Select --")
+                @Html.ValidationMessageFor(model => model.VideoTypeID)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DateOfVideo, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DateOfVideo)
+                @Html.ValidationMessageFor(model => model.DateOfVideo)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />&nbsp; |
+                @if (Request.QueryString["vesselId"] != null){
+                    @Html.ActionLink("Cancel", "Edit", "Vessel", null, null, "videos", new { id = Request.QueryString["vesselId"] }, null)
+                }
+                else
+                {
+                    @Html.ActionLink("Cancel", "Edit", "Vessel", null, null, "videos", new { id = ViewBag.VesselID }, null)
+                }
+            </div>
+        </div>
+    </div>
+}
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
